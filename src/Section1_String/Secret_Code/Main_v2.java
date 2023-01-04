@@ -6,25 +6,15 @@ public class Main_v2 {
 
     public String solution(int n, String str) {
 
-        String[] arr = new String[n];
-        StringBuilder answer = new StringBuilder();
-
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            arr[i] = str.substring(i * 7, (i + 1) * 7);
-
-            int num = 0;
-            int digit;
-            for (char c : arr[i].toCharArray()) {
-                if (c == '#') {
-                    digit = 1;
-                } else {
-                    digit = 0;
-                }
-                num = num * 2 + digit;
-            }
-            answer.append((char) num);
+            String binary = str.substring(0, 7).replace('#', '1').replace('*', '0');
+            int decimal = Integer.parseInt(binary, 2);
+            char c = (char) decimal;
+            sb.append(c);
+            str = str.substring(7);
         }
-        return answer.toString();
+        return sb.toString();
     }
 
     public static void main(String[] args) {
