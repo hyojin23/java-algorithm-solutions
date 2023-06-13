@@ -8,30 +8,26 @@ public class Main_v2 {
 
     public int solution(int n, int m, int[][] arr) {
 
-        StringBuilder sb = new StringBuilder();
-        Map<String, Integer> map = new HashMap<>();
+        int cnt;
         int answer = 0;
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                for (int k = j + 1; k <= n - 1; k++) {
-                    sb.setLength(0);
-                    sb.append(arr[i][j]);
-                    sb.append("_");
-                    sb.append(arr[i][k]);
-                    String key = sb.toString();
-
-                    if (map.containsKey(key))
-                        map.put(key, map.get(key) + 1);
-                    else
-                        map.put(key, 1);
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                cnt = 0;
+                for (int k = 0; k < m; k++) {
+                    int pi = 0, pj = 0;
+                    for (int s = 0; s < n; s++) {
+                        if (arr[k][s] == i)
+                            pi = s;
+                        if (arr[k][s] == j)
+                            pj = s;
+                    }
+                    if (pi < pj)
+                        cnt++;
                 }
+                if (cnt == m)
+                    answer++;
             }
-        }
-
-        for (Map.Entry<String, Integer> e : map.entrySet()) {
-            if (e.getValue() == m)
-                answer++;
         }
 
         return answer;
