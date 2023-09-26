@@ -2,31 +2,26 @@ package Section2_Array.Prime_Number;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_1st {
 
     public int solution(int n) {
-
-        int[] ch = new int[n + 1];
         int answer = 0;
-
+        int[] ch = new int[n + 1];
         for (int i = 2; i <= n; i++) {
             if (ch[i] == 0) {
+                answer++;
                 for (int j = i; j <= n; j = j + i) {
                     ch[j] = 1;
                 }
-                answer++;
             }
         }
         return answer;
     }
 
     public static void main(String[] args) {
-
-        Main T = new Main();
+        Main_1st T = new Main_1st();
         Scanner sc = new Scanner(System.in);
-
         int n = sc.nextInt();
-
         System.out.println(T.solution(n));
     }
 }

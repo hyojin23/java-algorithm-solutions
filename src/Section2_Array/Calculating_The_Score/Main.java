@@ -4,28 +4,33 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n, int[] arr) {
-        int answer = 0;
+    public int solution(int[] arr) {
+
         int cnt = 0;
-        for (int i=0; i<n; i++) {
-            if (arr[i] == 1) {
+        int sum = 0;
+
+        for (int x : arr) {
+            if (x == 1) {
                 cnt++;
-                answer+=cnt;
-            } else {
+                sum += cnt;
+            }
+            else {
                 cnt = 0;
             }
         }
-
-        return answer;
+        return sum;
     }
-    public static void main(String args[]) {
+
+    public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
         int[] arr = new int[n];
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        System.out.println(T.solution(n, arr));
+        System.out.println(T.solution(arr));
     }
 }

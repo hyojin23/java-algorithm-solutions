@@ -1,29 +1,36 @@
 package Section1_String.Word_In_Sentence;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 
-    public String Solution(String str) {
-        String answer = "";
-        int m = Integer.MIN_VALUE;
-        String[] arr = str.split(" ");
+    public String solution(String str) {
 
-        for (String s : arr) {
-            int len = s.length();
-            if (len > m) {
-                m = len;
+        int max = Integer.MIN_VALUE;
+        int pos;
+        String answer = "";
+
+        while((pos = str.indexOf(" ")) != -1) {
+            String  s = str.substring(0, pos);
+            if (s.length() > max) {
                 answer = s;
+                max = s.length();
             }
+            str = str.substring(pos + 1);
+        }
+        if (str.length() > max) {
+            answer = str;
         }
         return answer;
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        System.out.println(T.Solution(str));
-    }
 
+        String str = sc.nextLine();
+
+        System.out.println(T.solution(str));
+    }
 }

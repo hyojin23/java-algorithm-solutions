@@ -4,40 +4,52 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n, int[][] grid) {
+    public int solution(int[][] arr, int n) {
+
         int answer = Integer.MIN_VALUE;
-        // width, height
-        for (int i=0; i<n; i++) {
-            int wsum = 0, hsum = 0;
-            for (int j=0; j<n; j++) {
-                wsum += grid[i][j];
-                hsum += grid[j][i];
+        int hSum, vSum;
+
+        int cSum = 0;
+        int dSum = 0;
+
+        for (int i = 0; i < n; i++) {
+            hSum = 0;
+            vSum = 0;
+
+            for (int j = 0; j < n; j++) {
+                hSum += arr[i][j];
+                vSum += arr[j][i];
+
+                if (i == j) {
+                    cSum += arr[i][j];
+                }
+
+                if (i + j == n - 1) {
+                    dSum += arr[i][j];
+                }
             }
-            answer = Math.max(answer, wsum);
-            answer = Math.max(answer, hsum);
+            answer = Math.max(answer, hSum);
+            answer = Math.max(answer, vSum);
         }
-        // diagonal
-        int tdsum = 0, bdsum = 0;
-        for (int i=0; i<n; i++) {
-            tdsum += grid[i][i];
-            bdsum += grid[n-i-1][i];
-        }
-        // final comparison
-        answer = Math.max(answer, tdsum);
-        answer = Math.max(answer, bdsum);
+        answer = Math.max(answer, cSum);
+        answer = Math.max(answer, dSum);
+
         return answer;
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
-        int[][] grid = new int[n][n];
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) {
-                grid[i][j] = sc.nextInt();
+        int[][] arr = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = sc.nextInt();
             }
         }
-        System.out.println(T.solution(n, grid));
+        System.out.println(T.solution(arr, n));
     }
 }
