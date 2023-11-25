@@ -1,41 +1,56 @@
 package Section9_Greedy_Algorithm.Schedule_Of_Maximum_Income;
 
-import java.util.*;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Collections;
 
 class Lecture implements Comparable<Lecture> {
 
-    int m, t;
+    int money, day;
 
-    public Lecture(int m, int t) {
-        this.m = m;
-        this.t = t;
+    public Lecture(int time, int day) {
+        this.money = time;
+        this.day = day;
     }
 
     @Override
-    public int compareTo(Lecture l) {
-        return l.t - this.t;
+    public int compareTo(Lecture o) {
+        return o.day - this.day;
     }
 }
+
 public class Main {
 
-    int answer = 0;
-    static int max = Integer.MIN_VALUE;
     static int n;
+    static int max = Integer.MIN_VALUE;
     public int solution(List<Lecture> list) {
 
-        PriorityQueue<Integer> pQ = new PriorityQueue<>(Collections.reverseOrder());
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
         Collections.sort(list);
+
+        int answer = 0;
+
         int j = 0;
-        for (int i = max; i >= 1; i--) {
-            for ( ; j < n; j++) {
-                if (list.get(j).t < i) break;
-                pQ.offer(list.get(j).m);
+        for (int i = max; i > 0; i--) {
+
+            for (; j < n; j++) {
+                if (list.get(j).day < i) break;
+
+                pq.offer(list.get(j).money);
             }
-            if (!pQ.isEmpty())
-                answer += pQ.poll();
+
+            if (!pq.isEmpty()) {
+                answer += pq.poll();
+            }
         }
+
         return answer;
     }
+
     public static void main(String[] args) {
 
         Main T = new Main();
@@ -45,13 +60,14 @@ public class Main {
         List<Lecture> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-
             int m = sc.nextInt();
-            int t = sc.nextInt();
+            int d = sc.nextInt();
 
-            list.add(new Lecture(m, t));
+            list.add(new Lecture(m, d));
 
-            if (t > max) max = t;
+            if (d > max) {
+                max = d;
+            }
         }
 
         System.out.println(T.solution(list));

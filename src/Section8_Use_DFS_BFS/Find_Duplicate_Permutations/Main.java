@@ -1,26 +1,23 @@
 package Section8_Use_DFS_BFS.Find_Duplicate_Permutations;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     static int n, m;
-    static int[] pm;
 
-    public void DFS(int L) {
+    public void DFS(int L, int[] arr) {
 
         if (L == m) {
-            for (int x : pm) {
-                System.out.print(x + " ");
+            for (int i : arr) {
+                System.out.print(i + " ");
             }
             System.out.println();
         }
         else {
-            for (int i = 0; i < n; i++) {
-                pm[L] = i + 1;
-                DFS(L + 1);
+            for (int i = 1; i <= n; i++) {
+                arr[L] = i;
+                DFS(L + 1, arr);
             }
         }
     }
@@ -32,9 +29,8 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
+        int[] arr = new int[m];
 
-        pm = new int[m];
-
-        T.DFS(0);
+        T.DFS(0, arr);
     }
 }

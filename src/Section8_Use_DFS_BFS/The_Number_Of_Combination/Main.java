@@ -8,10 +8,10 @@ public class Main {
 
     public int DFS(int n, int r) {
 
-        if (dy[n][r] > 0)
-            return dy[n][r];
+        if (dy[n][r] > 0) return dy[n][r];
 
         if (n == r || r == 0) {
+
             return 1;
         }
         else {

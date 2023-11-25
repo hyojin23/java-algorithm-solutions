@@ -6,23 +6,29 @@ import java.util.Stack;
 public class Main {
 
     public Stack<Character> solution(String str) {
-        Stack<Character> answer = new Stack<>();
-        for (char x : str.toCharArray()) {
-            if (x == ')') {
-                while (answer.pop() != '(');
-            } else {
-                answer.push(x);
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : str.toCharArray()) {
+            if (c == ')') {
+                while (stack.pop() != '(');
+            }
+            else {
+                stack.push(c);
             }
         }
-        return answer;
+
+        return stack;
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        for (char x : T.solution(str)) {
-            System.out.print(x);
+
+        String str = sc.next();
+        for (char c : T.solution(str)) {
+            System.out.print(c);
         }
     }
 }

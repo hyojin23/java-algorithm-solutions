@@ -4,29 +4,26 @@ import java.util.Scanner;
 
 public class Main {
 
-    public void solution(int n) {
-
-        print(n);
-    }
-
-    public void print(int n) {
+    public void DFS(int n) {
 
         if (n == 0) {
             return;
         }
         else {
-            print(n / 2);
-            System.out.print(n % 2);
+            int a = n / 2;
+            int b = n % 2;
+            DFS(a);
+            System.out.print(b);
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
 
-        T.solution(n);
+        T.DFS(n);
     }
 }

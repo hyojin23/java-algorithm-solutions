@@ -4,30 +4,39 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n, int k, int[] arr) {
-        int answer = 0, sum = 0;
-        for (int i=0; i<k; i++) {
+    public int solution(int[] arr, int n, int k) {
+
+        int sum = 0;
+        int answer;
+
+        for (int i = 0; i < k; i++) {
             sum += arr[i];
         }
+
         answer = sum;
-        for (int i=k; i<n; i++) {
-            sum = sum + arr[i] - arr[i-k];
-            if (sum > answer) {
-                answer = sum;
-            }
+
+        for (int i = k; i < n; i++) {
+            sum += (arr[i] - arr[i - k]);
+            answer = Math.max(answer, sum);
         }
+
         return answer;
     }
 
+
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
         int k = sc.nextInt();
         int[] arr = new int[n];
-        for (int i=0; i<n; i++) {
+
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        System.out.println(T.solution(n, k, arr));
+
+        System.out.println(T.solution(arr, n, k));
     }
 }

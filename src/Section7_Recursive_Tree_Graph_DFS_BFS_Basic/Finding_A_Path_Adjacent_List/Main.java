@@ -1,13 +1,15 @@
 package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Finding_A_Path_Adjacent_List;
 
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
 
-    static int n, m, answer = 0;
-    static ArrayList<ArrayList<Integer>> graph;
+    static int n;
+    static List<List<Integer>> list;
     static int[] ch;
+    static int answer;
 
     public void DFS(int v) {
 
@@ -15,11 +17,13 @@ public class Main {
             answer++;
         }
         else {
-            for (int nv : graph.get(v)) {
-                if (ch[nv] == 0) {
-                    ch[nv] = 1;
-                    DFS(nv);
-                    ch[nv] = 0;
+            List<Integer> in = list.get(v);
+
+            for (int j : in) {
+                if (ch[j] == 0) {
+                    ch[j] = 1;
+                    DFS(j);
+                    ch[j] = 0;
                 }
             }
         }
@@ -31,21 +35,22 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        m = sc.nextInt();
+        int m = sc.nextInt();
 
-        graph = new ArrayList<ArrayList<Integer>>();
-
-        for (int i = 0; i <= n; i++) {
-            graph.add(new ArrayList<Integer>());
-        }
         ch = new int[n + 1];
+        list = new ArrayList<>();
+
+        for (int i = 0; i < n + 1; i++) {
+            List<Integer> in = new ArrayList<>();
+            list.add(in);
+        }
 
         for (int i = 0; i < m; i++) {
 
             int a = sc.nextInt();
             int b = sc.nextInt();
 
-            graph.get(a).add(b);
+            list.get(a).add(b);
         }
 
         ch[1] = 1;

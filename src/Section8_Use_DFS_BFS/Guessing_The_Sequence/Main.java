@@ -5,16 +5,17 @@ import java.util.Scanner;
 public class Main {
 
     static int[] b, p, ch;
+    static int[][] dy = new int[15][15];
     static int n, f;
-    int[][] dy = new int[35][35];
-    boolean flag = false;
+    static boolean flag;
 
     public int combi(int n, int r) {
 
-        if (dy[n][r] > 0)
+        if (dy[n][r] > 0) {
             return dy[n][r];
+        }
 
-        if (n == r || r ==0) {
+        if (n == r || r == 0) {
             return 1;
         }
         else {
@@ -30,8 +31,8 @@ public class Main {
             if (sum == f) {
                 for (int x : p) {
                     System.out.print(x + " ");
+                    flag = true;
                 }
-                flag = true;
             }
         }
         else {
@@ -39,7 +40,7 @@ public class Main {
                 if (ch[i] == 0) {
                     ch[i] = 1;
                     p[L] = i;
-                    DFS(L + 1, sum + b[L] * p[L]);
+                    DFS(L + 1, sum + (p[L] * b[L]));
                     ch[i] = 0;
                 }
             }

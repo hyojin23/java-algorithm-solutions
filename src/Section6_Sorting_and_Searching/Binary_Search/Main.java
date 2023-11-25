@@ -1,32 +1,32 @@
 package Section6_Sorting_and_Searching.Binary_Search;
 
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
     public int solution(int n, int m, int[] arr) {
 
-        int answer;
-        int lt = 0;
-        int rt = n - 1;
+        int lt = 0, rt = n - 1;
+        int answer = 0;
 
         Arrays.sort(arr);
 
-        while (true) {
+        while (lt <= rt) {
             int mid = (lt + rt) / 2;
 
-            if (m == arr[mid]) {
-                answer = mid + 1;
+            if (arr[mid] == m) {
+                answer =  mid + 1;
                 break;
             }
-            else if (m > arr[mid]) {
-                lt = mid + 1;
-            }
-            else if (m < arr[mid]) {
+            else if (arr[mid] > m) {
                 rt = mid - 1;
             }
+            else {
+                lt = mid + 1;
+            }
         }
+
         return answer;
     }
 
@@ -42,7 +42,6 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-
         System.out.println(T.solution(n, m, arr));
     }
 }

@@ -4,21 +4,21 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int[] cb;
     static int n, m;
+    static int[] arr;
 
     public void DFS(int L, int s) {
 
         if (L == m) {
-            for (int x : cb) {
+            for (int x : arr) {
                 System.out.print(x + " ");
             }
             System.out.println();
         }
         else {
             for (int i = s; i <= n; i++) {
-                    cb[L] = i;
-                    DFS(L + 1, i + 1);
+                arr[L] = i;
+                DFS(L + 1, i + 1);
             }
         }
     }
@@ -30,9 +30,10 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-
-        cb = new int[m];
+        arr = new int[m];
 
         T.DFS(0, 1);
     }
 }
+
+

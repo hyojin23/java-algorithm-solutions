@@ -6,33 +6,44 @@ import java.util.Stack;
 public class Main {
 
     public int solution(String str) {
-        int answer;
+
         Stack<Integer> stack = new Stack<>();
-        for (char x : str.toCharArray()) {
-            if (Character.isDigit(x)) {
-                stack.push(x-48);
-            } else {
+
+        for (char c : str.toCharArray()) {
+
+            if (Character.isDigit(c)) {
+                stack.push(c - 48);
+            }
+            else {
+
                 int rt = stack.pop();
                 int lt = stack.pop();
-                if (x == '+')  {
-                    stack.push(lt+rt);
-                } else if (x == '-') {
-                    stack.push(lt-rt);
-                } else if (x == '*') {
-                    stack.push(lt*rt);
-                } else {
-                    stack.push(lt/rt);
+
+                if (c == '+') {
+                    stack.push(lt + rt);
+                }
+                else if (c == '-') {
+                    stack.push(lt - rt);
+                }
+                else if (c == '*') {
+                    stack.push(lt * rt);
+                }
+                else if (c == '/') {
+                    stack.push(lt / rt);
                 }
             }
         }
-        answer = stack.get(0);
-        return answer;
+
+        return stack.get(0);
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
+
+        String str = sc.next();
+
         System.out.println(T.solution(str));
     }
 }

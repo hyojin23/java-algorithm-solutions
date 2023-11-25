@@ -4,20 +4,13 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n) {
-
-        int answer = factorial(n);
-
-        return answer;
-    }
-
-    public int factorial(int n) {
+    public int DFS(int n) {
 
         if (n == 1) {
             return 1;
         }
         else {
-            return n * factorial(n - 1);
+            return n * DFS(n - 1);
         }
     }
 
@@ -28,6 +21,6 @@ public class Main {
 
         int n = sc.nextInt();
 
-        System.out.println(T.solution(n));
+        System.out.println(T.DFS(n));
     }
 }

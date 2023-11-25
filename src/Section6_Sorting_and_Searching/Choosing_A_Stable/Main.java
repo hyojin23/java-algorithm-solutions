@@ -1,44 +1,43 @@
 package Section6_Sorting_and_Searching.Choosing_A_Stable;
 
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
     public int solution(int n, int c, int[] arr) {
 
+        int lt = 1;
+        int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
+
         Arrays.sort(arr);
 
+        int mid;
         int answer = 0;
-        int lt = 1;
-        int rt = arr[n - 1];
 
         while (lt <= rt) {
 
-            int mid = (lt + rt) / 2;
-            if (count(arr, mid) >= c) {
+            mid = (lt + rt) / 2;
+
+            int cnt = 1;
+            int std = arr[0];
+            for (int x : arr) {
+                if (x >= std + mid) {
+                    cnt++;
+                    std = x;
+                }
+            }
+
+            if (cnt < c) {
+                rt = mid - 1;
+            }
+            else {
                 answer = mid;
                 lt = mid + 1;
             }
-            else {
-                rt = mid - 1;
-            }
         }
+
         return answer;
-    }
-
-    public int count(int[] arr, int dist) {
-
-        int cnt = 1;
-        int ep = arr[0];
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] - ep >= dist) {
-                cnt++;
-                ep = arr[i];
-            }
-        }
-        return cnt;
     }
 
     public static void main(String[] args) {

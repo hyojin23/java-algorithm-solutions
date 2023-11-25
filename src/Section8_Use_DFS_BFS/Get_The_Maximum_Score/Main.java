@@ -4,20 +4,21 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int n, m;
     static int answer = Integer.MIN_VALUE;
+    static int n, m;
+    static int[] score, time;
 
+    public void DFS(int L, int s, int t) {
 
-    public void DFS(int L, int sum, int time, int[] arrScore, int[] arrTime) {
-
-        if (time > m) return;
+        if (t > m) return;
 
         if (L == n) {
-            answer = Math.max(answer, sum);
+            answer = Math.max(answer, s);
+            return;
         }
         else {
-            DFS(L + 1, sum + arrScore[L], time + arrTime[L], arrScore, arrTime);
-            DFS(L + 1, sum, time, arrScore, arrTime);
+            DFS(L + 1, s + score[L], t + time[L]);
+            DFS(L + 1, s, t);
         }
     }
 
@@ -28,16 +29,15 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-
-        int[] arrScore = new int[n];
-        int[] arrTime = new int[n];
+        score = new int[n];
+        time = new int[n];
 
         for (int i = 0; i < n; i++) {
-            arrScore[i] = sc.nextInt();
-            arrTime[i] = sc.nextInt();
+            score[i] = sc.nextInt();
+            time[i] = sc.nextInt();
         }
 
-        T.DFS(0, 0, 0, arrScore, arrTime);
+        T.DFS(0, 0, 0);
         System.out.println(answer);
     }
 }

@@ -1,11 +1,11 @@
 package Section9_Greedy_Algorithm.Wrestler;
 
+import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
 
-class Wrestler implements Comparable<Wrestler>{
+class Wrestler implements Comparable<Wrestler> {
 
     int h, w;
 
@@ -15,39 +15,48 @@ class Wrestler implements Comparable<Wrestler>{
     }
 
     @Override
-    public int compareTo(Wrestler w) {
-        return w.h - this.h;
+    public int compareTo(Wrestler o) {
+        return o.h - this.h;
     }
 }
+
 public class Main {
 
-    public int solution(List<Wrestler> wList) {
+    static int n;
+    public int solution(List<Wrestler> list) {
 
-        int max = Integer.MIN_VALUE;
         int answer = 0;
+        int max = Integer.MIN_VALUE;
 
-        for (Wrestler w : wList) {
+        Collections.sort(list);
+
+        for (Wrestler w : list) {
             if (w.w > max) {
                 max = w.w;
                 answer++;
             }
         }
+
         return answer;
     }
+
 
     public static void main(String[] args) {
 
         Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        Scanner sc  = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        List<Wrestler> wList = new ArrayList<>();
+        n = sc.nextInt();
+        List<Wrestler> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            Wrestler w = new Wrestler(sc.nextInt(), sc.nextInt());
-            wList.add(w);
+
+            int h = sc.nextInt();
+            int w = sc.nextInt();
+
+            list.add(new Wrestler(h, w));
         }
-        Collections.sort(wList);
-        System.out.println(T.solution(wList));
+
+        System.out.println(T.solution(list));
     }
 }

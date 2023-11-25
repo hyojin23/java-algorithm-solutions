@@ -1,38 +1,45 @@
 package Section10_Dynamic_Programming.Maximum_Partial_Incremental_Sequence;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
-    public int solution(int[] arr, int[] dy, int n) {
+    static int[] arr;
 
-        dy[0] = 1;
+    public int solution(int n) {
+
         int answer = 0;
 
+        int[] dy = new int[n];
+        Arrays.fill(dy, 1);
+
+        dy[0] = 1;
+
         for (int i = 1; i < n; i++) {
-            int max = 0;
-            for (int j = 0; j < i; j++) {
-                if (arr[j] < arr[i] && dy[j] > max) {
-                    max = dy[j];
+            for (int j = i; j >= 0; j--) {
+                if (arr[i] > arr[j]) {
+                    dy[i] = Math.max(dy[i], dy[j] + 1);
                 }
-                dy[i] = max + 1;
             }
             answer = Math.max(answer, dy[i]);
         }
+
         return answer;
     }
+
     public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] arr = new int[n];
-        int[] dy = new int[n];
+        arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        System.out.println(T.solution(arr, dy, n));
+
+        System.out.println(T.solution(n));
     }
 }

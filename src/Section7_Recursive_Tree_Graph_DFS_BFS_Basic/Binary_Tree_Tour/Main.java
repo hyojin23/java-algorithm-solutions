@@ -1,24 +1,34 @@
 package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Binary_Tree_Tour;
 
 class Node {
+
     int data;
     Node lt, rt;
 
     public Node(int val) {
         data = val;
-        lt = rt = null;
+        lt = null;
+        rt = null;
     }
 }
+
 public class Main {
 
     Node root;
+
     public void DFS(Node root) {
+
         if (root == null) {
             return;
         }
         else {
+            // 전위순회
+            // System.out.print(root.data + " ");
             DFS(root.lt);
+            // 중위순회
+            // System.out.print(root.data + " ");
             DFS(root.rt);
+            // 후위순회
             System.out.print(root.data + " ");
         }
     }
@@ -33,8 +43,7 @@ public class Main {
         tree.root.lt.rt = new Node(5);
         tree.root.rt.lt = new Node(6);
         tree.root.rt.rt = new Node(7);
+
         tree.DFS(tree.root);
     }
 }
-
-

@@ -1,51 +1,49 @@
 package Section6_Sorting_and_Searching.Music_Video;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
-    public int solution(int n, int m, int allTime, int[] arr) {
+    public int count(int[] arr, int capacity) {
 
+        int sum = 0;
+        int cnt = 1;
+
+        for (int x : arr) {
+            if (sum + x > capacity) {
+                cnt++;
+                sum = x;
+            }
+            else {
+                sum += x;
+            }
+        }
+
+        return cnt;
+    }
+
+    public int solution(int n, int m, int[] arr) {
+
+        int lt = Arrays.stream(arr).max().getAsInt();
+        int rt = Arrays.stream(arr).sum();
+
+        int mid;
         int answer = 0;
-        int lt = 1;
-        int rt = allTime;
-        int mid = (lt + rt) / 2;
 
-        while (lt < rt) {
+        while (lt <= rt) {
 
-            boolean isRecordable = enoughRecord(arr, mid, m);
+            mid = (lt + rt) / 2;
 
-            if (isRecordable) {
-                rt = mid;
+            if (count(arr, mid) <= m) {
+                answer = mid;
+                rt = mid - 1;
             }
             else {
                 lt = mid + 1;
             }
-
-            mid = (lt + rt) / 2;
         }
-
-        answer = mid;
-
         return answer;
-    }
-
-    private boolean enoughRecord(int[] arr, int mid, int videoCnt) {
-
-        int sum = 0;
-        int cnt = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-            if (sum > mid) {
-                i--;
-                sum = 0;
-                cnt++;
-            }
-        }
-        cnt++;
-
-        return cnt <= videoCnt;
     }
 
     public static void main(String[] args) {
@@ -55,14 +53,11 @@ public class Main {
 
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int allTime = 0;
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            allTime += arr[i];
         }
-
-        System.out.println(T.solution(n, m, allTime, arr));
+        System.out.println(T.solution(n, m, arr));
     }
 }

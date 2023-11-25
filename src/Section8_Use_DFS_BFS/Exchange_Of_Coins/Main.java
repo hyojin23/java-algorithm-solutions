@@ -1,17 +1,18 @@
 package Section8_Use_DFS_BFS.Exchange_Of_Coins;
 
+import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class Main {
 
-    static int n, m;
     static int answer = Integer.MAX_VALUE;
+    static int n, m;
 
     public void DFS(int L, int sum, Integer[] arr) {
 
         if (sum > m) return;
+
         if (L >= answer) return;
 
         if (sum == m) {
@@ -35,8 +36,10 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        Arrays.sort(arr, Collections.reverseOrder());
+
         m = sc.nextInt();
+
+        Arrays.sort(arr, Collections.reverseOrder());
         T.DFS(0, 0, arr);
         System.out.println(answer);
     }

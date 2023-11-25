@@ -2,30 +2,41 @@ package Section5_Stack_and_Queue.Correct_Bracket;
 
 import java.util.Scanner;
 import java.util.Stack;
+
 public class Main {
 
     public String solution(String str) {
-        String answer = "YES";
+
+        String answer = "NO";
         Stack<Character> stack = new Stack<>();
-        for (char x : str.toCharArray()) {
-            if (x == '(') {
-                stack.push(x);
-            } else if (stack.isEmpty()) {
-                return "NO";
-            } else {
-                stack.pop();
+
+        for (char c : str.toCharArray()) {
+            if (c == '(') {
+                stack.push(c);
+            }
+            else {
+                if (stack.isEmpty()) {
+                    return "NO";
+                }
+                else {
+                    stack.pop();
+                }
             }
         }
-        if (!stack.isEmpty()) {
-            answer = "NO";
+
+        if (stack.isEmpty()) {
+            answer = "YES";
         }
+
         return answer;
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
+
+        String str = sc.next();
         System.out.println(T.solution(str));
     }
 }

@@ -1,8 +1,8 @@
 package Section10_Dynamic_Programming.Get_The_Maximum_Score;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 class Problem {
 
@@ -13,6 +13,7 @@ class Problem {
         this.t = t;
     }
 }
+
 public class Main {
 
     public int solution(int m, List<Problem> list) {
@@ -20,12 +21,14 @@ public class Main {
         int[] dy = new int[m + 1];
 
         for (Problem p : list) {
-            for (int i = m; i >= p.t; i--) {
-                dy[i] = Math.max(dy[i], dy[i - p.t] + p.s);
+            for (int j = m; j >= p.t; j--) {
+                dy[j] = Math.max(dy[j], dy[j - p.t] + p.s);
             }
         }
         return dy[m];
+
     }
+
     public static void main(String[] args) {
 
         Main T = new Main();
@@ -36,7 +39,6 @@ public class Main {
         List<Problem> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-
             int a = sc.nextInt();
             int b = sc.nextInt();
 
@@ -46,3 +48,4 @@ public class Main {
         System.out.println(T.solution(m, list));
     }
 }
+

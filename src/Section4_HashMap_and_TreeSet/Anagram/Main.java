@@ -1,31 +1,38 @@
 package Section4_HashMap_and_TreeSet.Anagram;
 
 import java.util.Scanner;
+import java.util.Map;
 import java.util.HashMap;
 
 public class Main {
 
-    public String solution(String w1, String w2) {
+    public String solution(String str1, String str2) {
+
         String answer = "YES";
-        HashMap<Character, Integer> map1 = new HashMap<>();
-        for (char x : w1.toCharArray()) {
-            map1.put(x, map1.getOrDefault(x, 0)+1);
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (char x : str1.toCharArray()) {
+            map.put(x, map.getOrDefault(x, 0) + 1);
         }
-        for (char x : w2.toCharArray()) {
-            if (!map1.containsKey(x) || map1.get(x) == 0) {
-                return "NO";
-            } else {
-                map1.put(x, map1.get(x)-1);
+
+        for (char x : str2.toCharArray()) {
+            if (!map.containsKey(x) || map.get(x) == 0) {
+                answer = "NO";
             }
-    }
+            map.put(x, map.getOrDefault(x, 0) - 1);
+        }
+
         return answer;
-}
+    }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-        String w1 = sc.nextLine();
-        String w2 = sc.nextLine();
-        System.out.println(T.solution(w1, w2));
+
+        String str1 = sc.next();
+        String str2 = sc.next();
+
+        System.out.println(T.solution(str1, str2));
     }
 }

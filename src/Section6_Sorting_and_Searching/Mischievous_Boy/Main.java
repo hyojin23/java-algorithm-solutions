@@ -1,36 +1,37 @@
 package Section6_Sorting_and_Searching.Mischievous_Boy;
 
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
-    public ArrayList<Integer> solution(int n, int[] arr) {
-        ArrayList<Integer> answer = new ArrayList<>();
-        int[] tmp = arr.clone();
-        for (int i=0; i<n-1; i++) {
-           int idx = i, j;
-           for (j=i+1; j<n; j++) {
-               if (arr[idx] > arr[j]) {
-                   idx = j;
-               }
+    public List<Integer> solution(int n, int[] arr) {
+
+        List<Integer> answer = new ArrayList<>();
+
+        int[] arrCopy = Arrays.copyOfRange(arr, 0, n);
+        Arrays.sort(arr);
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != arrCopy[i]) {
+                answer.add(i + 1);
             }
-           int t = arr[i];
-           arr[i] = arr[idx];
-           arr[idx] = t;
         }
-        for (int i=0; i<n; i++) {
-            if (arr[i] != tmp[i]) answer.add(i+1);
-        }
+
         return answer;
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
         int[] arr = new int[n];
-        for (int i=0; i<n; i++) {
+
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
         for (int x : T.solution(n, arr)) {

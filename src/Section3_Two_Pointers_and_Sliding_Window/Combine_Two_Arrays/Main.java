@@ -1,43 +1,52 @@
 package Section3_Two_Pointers_and_Sliding_Window.Combine_Two_Arrays;
 
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Main {
 
-    public ArrayList<Integer> solution(int n, int[] narr, int m, int[] marr) {
-        ArrayList<Integer> answer = new ArrayList<>();
-        int np = 0, mp = 0;
-        while (np<n && mp<m) {
-            if (narr[np]<marr[mp]) {
-                answer.add(narr[np++]);
-            } else {
-                answer.add(marr[mp++]);
+    public List<Integer> solution(int[] arr1, int[] arr2, int n, int m) {
+
+        int p1 = 0, p2 = 0;
+        List <Integer> answer = new ArrayList<>();
+
+        while (p1 < n && p2 < m) {
+
+            if (arr1[p1] < arr2[p2]) {
+                answer.add(arr1[p1++]);
+            }
+            else {
+                answer.add(arr2[p2++]);
             }
         }
-        while (np<n) {
-            answer.add(narr[np++]);
-        }
-        while (mp<m) {
-        answer.add(marr[mp++]);
-        }
+
+        while (p1 < n) answer.add(arr1[p1++]);
+        while (p2 < m) answer.add(arr2[p2++]);
+
         return answer;
     }
 
     public static void main(String[] args) {
+
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+
         int n = sc.nextInt();
-        int[] narr = new int[n];
-        for (int i=0; i<n; i++) {
-            narr[i] = sc.nextInt();
+        int[] arr1 = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            arr1[i] = sc.nextInt();
         }
+
         int m = sc.nextInt();
-        int[] marr = new int[m];
-        for (int i=0; i<m; i++) {
-            marr[i] = sc.nextInt();
+        int[] arr2 = new int[m];
+
+        for (int i = 0; i < m; i++) {
+            arr2[i] = sc.nextInt();
         }
-        for (int x : T.solution(n, narr, m, marr)) {
+
+        for (int x : T.solution(arr1, arr2, n, m)) {
             System.out.print(x + " ");
         }
     }

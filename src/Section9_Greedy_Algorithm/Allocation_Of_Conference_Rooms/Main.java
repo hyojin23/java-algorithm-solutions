@@ -1,9 +1,9 @@
 package Section9_Greedy_Algorithm.Allocation_Of_Conference_Rooms;
 
+import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
 
 class Time implements Comparable<Time> {
 
@@ -16,6 +16,7 @@ class Time implements Comparable<Time> {
 
     @Override
     public int compareTo(Time t) {
+
         if (this.e == t.e) {
             return this.s - t.s;
         }
@@ -27,20 +28,24 @@ class Time implements Comparable<Time> {
 
 public class Main {
 
-    public int solution(List<Time> list, int n) {
+    public int solution(List<Time> list) {
 
         int answer = 0;
-        int endTime = 0;
+        int endTime = Integer.MIN_VALUE;
 
-        for (int i = 0; i < n; i++) {
+        Collections.sort(list);
 
-            if (list.get(i).s >= endTime) {
+        for (Time t : list) {
+
+            if (t.s >= endTime) {
+                endTime = t.e;
                 answer++;
-                endTime = list.get(i).e;
             }
         }
+
         return answer;
     }
+
     public static void main(String[] args) {
 
         Main T = new Main();
@@ -50,10 +55,12 @@ public class Main {
         List<Time> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            list.add(new Time(sc.nextInt(), sc.nextInt()));
-        }
-        Collections.sort(list);
+            int a = sc.nextInt();
+            int b = sc.nextInt();
 
-        System.out.println(T.solution(list, n));
+            list.add(new Time(a, b));
+        }
+
+        System.out.println(T.solution(list));
     }
 }
