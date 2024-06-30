@@ -5,36 +5,43 @@ import java.util.LinkedList;
 
 class Node {
 
-    Node lt, rt;
     int data;
+    Node lt, rt;
 
-    public Node(int val) {
-        this.data = val;
-        this.lt = null;
-        this.rt = null;
+    public Node(int data) {
+        this.data = data;
+        lt = null;
+        rt = null;
     }
 }
+
 public class Main {
 
     Node root;
 
     public void BFS(Node root) {
+
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
-
         int L = 0;
-        while (!q.isEmpty()) {
-            int len = q.size();
-            System.out.print(L + ": ");
-            for (int i = 0; i < len; i++) {
-                Node cur = q.poll();
-                System.out.print(cur.data + " ");
 
-                if (cur.lt != null) q.offer(cur.lt);
-                if (cur.rt != null) q.offer(cur.rt);
+        while (!q.isEmpty()) {
+
+            int len = q.size();
+
+            for (int i = 0 ; i < len; i++) {
+                Node node = q.poll();
+
+                if (node.lt != null) {
+                    q.offer(node.lt);
+                }
+
+                if (node.rt != null) {
+                    q.offer(node.rt);
+                }
+
+                System.out.print(node.data + " ");
             }
-            L++;
-            System.out.println();
         }
     }
 
@@ -50,6 +57,6 @@ public class Main {
         tree.root.rt.lt = new Node(6);
         tree.root.rt.rt = new Node(7);
 
-       tree.BFS(tree.root);
+        tree.BFS(tree.root);
     }
 }

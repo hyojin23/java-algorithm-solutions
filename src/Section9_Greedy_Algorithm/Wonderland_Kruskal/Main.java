@@ -9,7 +9,7 @@ class Edge implements Comparable<Edge> {
 
     int v1, v2, cost;
 
-    public Edge(int v1, int v2, int cost) {
+    Edge(int v1, int v2, int cost) {
         this.v1 = v1;
         this.v2 = v2;
         this.cost = cost;
@@ -20,12 +20,12 @@ class Edge implements Comparable<Edge> {
         return this.cost - ob.cost;
     }
 }
+
 public class Main {
 
-    static int[] unf;
+    public static int[] unf;
 
-    static int Find(int v) {
-
+    public int Find(int v) {
         if (v == unf[v]) {
             return v;
         }
@@ -34,13 +34,31 @@ public class Main {
         }
     }
 
-    static void Union(int a, int b) {
-        int s1 = Find(a);
-        int s2 = Find(b);
+    public void Union(int a, int b) {
+        int fa = Find(a);
+        int fb = Find(b);
 
-        if (s1 != s2) {
-            unf[s1] = s2;
+        if (fa != fb) {
+            unf[fa] = fb;
         }
+    }
+
+    public int solution(int v, int e, List<Edge> list) {
+
+        int answer = 0;
+        Collections.sort(list);
+
+        for (Edge edge : list) {
+            int fa = Find(edge.v1);
+            int fb = Find(edge.v2);
+
+            if (fa != fb) {
+                Union(edge.v1, edge.v2);
+                answer += edge.cost;
+            }
+        }
+
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -50,38 +68,20 @@ public class Main {
 
         int v = sc.nextInt();
         int e = sc.nextInt();
-
-        unf = new int[v + 1];
-
         List<Edge> list = new ArrayList<>();
-        for (int i = 1; i <= v; i++) {
+        unf = new int[v + 1];   
+
+        for (int i = 1; i < v + 1; i++) {
             unf[i] = i;
         }
 
         for (int i = 0; i < e; i++) {
-
             int a = sc.nextInt();
             int b = sc.nextInt();
             int c = sc.nextInt();
-
             list.add(new Edge(a, b, c));
         }
 
-        int answer = 0;
-
-        Collections.sort(list);
-
-        for (Edge edge : list) {
-            int s1 = Find(edge.v1);
-            int s2 = Find(edge.v2);
-
-            if (s1 != s2) {
-                Union(edge.v1, edge.v2);
-                answer += edge.cost;
-            }
-        }
-
-        System.out.println(answer);
+        System.out.println(T.solution(v, e, list));
     }
 }
-

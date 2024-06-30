@@ -2,29 +2,29 @@ package Section3_Two_Pointers_and_Sliding_Window.Finding_Common_Elements;
 
 import java.util.Scanner;
 import java.util.List;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Main {
 
-    public List<Integer> solution(int[] a, int[] b, int n, int m) {
+    public List<Integer> solution(int n, int m, int[] arr1, int[] arr2) {
 
-        int p1 = 0, p2 = 0;
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        int p1 = 0;
+        int p2 = 0;
         List<Integer> answer = new ArrayList<>();
 
-        Arrays.sort(a);
-        Arrays.sort(b);
-
         while (p1 < n && p2 < m) {
-            if (a[p1] < b[p2]) {
-                p1++;
-            }
-            else if (b[p2] < a[p1]) {
+            if (arr1[p1] == arr2[p2]) {
+                answer.add(arr1[p1++]);
                 p2++;
             }
-            else {
-                answer.add(a[p1]);
+            else if (arr1[p1] < arr2[p2]){
                 p1++;
+            }
+            else {
                 p2++;
             }
         }
@@ -38,22 +38,21 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] a = new int[n];
+        int[] arr1 = new int[n];
 
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
+            arr1[i] = sc.nextInt();
         }
 
         int m = sc.nextInt();
-        int[] b= new int[m];
+        int[] arr2 = new int[m];
 
         for (int i = 0; i < m; i++) {
-            b[i] = sc.nextInt();
+            arr2[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(a, b, n, m)) {
+        for (int x : T.solution(n, m, arr1, arr2)) {
             System.out.print(x + " ");
         }
-
     }
 }

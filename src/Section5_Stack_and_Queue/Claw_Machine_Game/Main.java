@@ -5,23 +5,28 @@ import java.util.Stack;
 
 public class Main {
 
-    public int solution(int n, int[][] board, int[] moves) {
+    public int solution(int n, int[][] board, int m, int[] moves) {
 
         int answer = 0;
         Stack<Integer> stack = new Stack<>();
 
         for (int j : moves) {
             for (int i = 0; i < n; i++) {
-                int pick = board[i][j - 1];
-                board[i][j - 1] = 0;
-                if (pick != 0) {
-                    if (!stack.isEmpty() && stack.peek() == pick) {
-                        stack.pop();
-                        answer = answer + 2;
+                int doll = board[i][j - 1];
+                if (doll != 0) {
+                    if (!stack.isEmpty()) {
+                        if (stack.peek() == doll) {
+                            answer = answer + 2;
+                            stack.pop();
+                        }
+                        else {
+                            stack.push(doll);
+                        }
                     }
                     else {
-                        stack.push(pick);
+                        stack.push(doll);
                     }
+                    board[i][j - 1] = 0;
                     break;
                 }
             }
@@ -51,6 +56,6 @@ public class Main {
             moves[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(n, board, moves));
+        System.out.println(T.solution(n, board, m, moves));
     }
 }

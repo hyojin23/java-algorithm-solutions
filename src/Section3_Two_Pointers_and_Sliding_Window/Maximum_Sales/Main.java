@@ -4,25 +4,26 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int[] arr, int n, int k) {
+    public int solution(int n, int k, int[] arr) {
 
         int sum = 0;
-        int answer;
 
-        for (int i = 0; i < k; i++) {
+        for (int i = 0 ; i < k; i++) {
             sum += arr[i];
         }
 
-        answer = sum;
+        int answer = sum;
 
         for (int i = k; i < n; i++) {
-            sum += (arr[i] - arr[i - k]);
+
+            sum += arr[i];
+            sum -= arr[i - k];
+
             answer = Math.max(answer, sum);
         }
 
         return answer;
     }
-
 
     public static void main(String[] args) {
 
@@ -37,6 +38,6 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(arr, n, k));
+        System.out.println(T.solution(n, k, arr));
     }
 }

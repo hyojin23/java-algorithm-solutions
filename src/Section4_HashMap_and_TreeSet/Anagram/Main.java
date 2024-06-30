@@ -8,21 +8,23 @@ public class Main {
 
     public String solution(String str1, String str2) {
 
-        String answer = "YES";
         Map<Character, Integer> map = new HashMap<>();
 
-        for (char x : str1.toCharArray()) {
-            map.put(x, map.getOrDefault(x, 0) + 1);
+        for (char c : str1.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        for (char x : str2.toCharArray()) {
-            if (!map.containsKey(x) || map.get(x) == 0) {
-                answer = "NO";
+        for (char c : str2.toCharArray()) {
+
+            if (!map.containsKey(c) || map.get(c) == 0) {
+                return "NO";
             }
-            map.put(x, map.getOrDefault(x, 0) - 1);
+            else {
+                map.put(c, map.get(c) - 1);
+            }
         }
 
-        return answer;
+        return "YES";
     }
 
     public static void main(String[] args) {

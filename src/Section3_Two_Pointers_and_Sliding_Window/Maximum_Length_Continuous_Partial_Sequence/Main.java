@@ -4,24 +4,26 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int[] arr, int n, int k) {
+    public int solution(int n, int k, int[] arr) {
 
-        int answer = Integer.MIN_VALUE;
         int lt = 0;
+        int answer = 0;
         int cnt = 0;
 
-        for (int rt = 0; rt < n; rt++) {
+        for (int rt = 0; rt < arr.length; rt++) {
+
             if (arr[rt] == 0) {
                 cnt++;
-            }
-            while (cnt > k) {
-                if (arr[lt] == 0) {
-                    cnt--;
+
+                while (cnt > k) {
+
+                    if (arr[lt++] == 0) {
+                        cnt--;
+                    }
                 }
-                lt++;
             }
-            int len = rt - lt + 1;
-            answer = Math.max(answer, len);
+
+            answer = Math.max(answer, rt - lt + 1);
         }
 
         return answer;
@@ -37,9 +39,10 @@ public class Main {
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
+
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(arr, n, k));
+        System.out.println(T.solution(n, k, arr));
     }
 }

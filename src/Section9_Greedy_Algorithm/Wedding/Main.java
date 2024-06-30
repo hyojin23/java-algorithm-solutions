@@ -5,25 +5,23 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 class Time implements Comparable<Time> {
 
     int t;
     char s;
 
     public Time(int t, char s) {
-        this.t = t;
         this.s = s;
+        this.t = t;
     }
 
     @Override
     public int compareTo(Time o) {
-
-        if (this.t == o.t) {
-            return this.s - o.s;
+        if (t != o.t) {
+            return this.t - o.t;
         }
         else {
-            return this.t - o.t;
+            return this.s - o.s;
         }
     }
 }
@@ -32,18 +30,19 @@ public class Main {
 
     public int solution(List<Time> list) {
 
-        Collections.sort(list);
-
-        int answer = 0;
+        int answer = Integer.MIN_VALUE;
         int cnt = 0;
 
-        for (Time t : list) {
-            if (t.s == 's') {
+        Collections.sort(list);
+
+        for (Time o : list) {
+            if (o.s == 's') {
                 cnt++;
             }
-            else if (t.s == 'e') {
+            else if (o.s == 'e') {
                 cnt--;
             }
+
             answer = Math.max(answer, cnt);
         }
 
@@ -61,12 +60,11 @@ public class Main {
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int e = sc.nextInt();
-            list.add(new Time(s, 's'));
-            list.add(new Time(e, 'e'));
+
+            list.add(new Time(s, 's')); // start time
+            list.add(new Time(e, 'e')); // end time
         }
 
         System.out.println(T.solution(list));
-
     }
-
 }

@@ -12,29 +12,34 @@ public class Main {
         for (char c : str.toCharArray()) {
 
             if (Character.isDigit(c)) {
-                stack.push(c - 48);
+                stack.add(c - 48);
             }
             else {
+                int s2 = stack.pop();
+                int s1 = stack.pop();
 
-                int rt = stack.pop();
-                int lt = stack.pop();
+                switch (c) {
 
-                if (c == '+') {
-                    stack.push(lt + rt);
-                }
-                else if (c == '-') {
-                    stack.push(lt - rt);
-                }
-                else if (c == '*') {
-                    stack.push(lt * rt);
-                }
-                else if (c == '/') {
-                    stack.push(lt / rt);
+                    case '+':
+                        stack.add(s1 + s2);
+                        break;
+
+                    case '-':
+                        stack.add(s1 - s2);
+                        break;
+
+                    case '*':
+                        stack.add(s1 * s2);
+                        break;
+
+                    case '/':
+                        stack.add(s1 / s2);
+                        break;
                 }
             }
         }
 
-        return stack.get(0);
+        return stack.pop();
     }
 
     public static void main(String[] args) {

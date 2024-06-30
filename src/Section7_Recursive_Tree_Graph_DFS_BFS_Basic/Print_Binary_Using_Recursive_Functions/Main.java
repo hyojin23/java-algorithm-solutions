@@ -10,10 +10,8 @@ public class Main {
             return;
         }
         else {
-            int a = n / 2;
-            int b = n % 2;
-            DFS(a);
-            System.out.print(b);
+            DFS(n / 2);
+            System.out.print(n % 2);
         }
     }
 

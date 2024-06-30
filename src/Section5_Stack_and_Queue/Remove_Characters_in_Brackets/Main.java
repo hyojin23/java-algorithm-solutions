@@ -10,6 +10,7 @@ public class Main {
         Stack<Character> stack = new Stack<>();
 
         for (char c : str.toCharArray()) {
+
             if (c == ')') {
                 while (stack.pop() != '(');
             }
@@ -27,6 +28,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
+
         for (char c : T.solution(str)) {
             System.out.print(c);
         }

@@ -6,45 +6,42 @@ import java.util.LinkedList;
 
 class Person {
 
-    int id;
-    int priority;
+    int priority;  // 위험도
+    int id;        // 순서
 
-    public Person(int id, int priority) {
-        this.id = id;
+    public Person(int priority, int id) {
         this.priority = priority;
+        this.id = id;
     }
 }
-
 public class Main {
 
-    public int solution(int n, int m, int[] arr) {
+    public int solution(int n, int m, Queue<Person> q) {
 
         int answer = 0;
-        Queue<Person> q = new LinkedList<>();
-
-        for (int i = 0; i < n; i++) {
-            q.offer(new Person(i, arr[i]));
-        }
 
         while (!q.isEmpty()) {
 
-            Person a = q.poll();
-            for (Person p : q) {
-                if (a.priority < p.priority) {
-                    q.offer(a);
-                    a = null;
+            Person p = q.poll();
+            boolean isContains = false;
+
+            for (Person other : q) {
+                if (p.priority < other.priority) {
+                    q.offer(p);
+                    isContains = true;
                     break;
                 }
             }
 
-            if (a != null) {
+            if (!isContains) {
                 answer++;
-                if (a.id == m) {
+
+                if (p.id == m) {
                     return answer;
                 }
             }
-
         }
+
         return answer;
     }
 
@@ -55,12 +52,14 @@ public class Main {
 
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int[] arr = new int[n];
+
+        Queue<Person> q = new LinkedList<>();
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            int priority = sc.nextInt();
+            q.offer(new Person(priority, i));
         }
 
-        System.out.println(T.solution(n, m, arr));
+        System.out.println(T.solution(n, m, q));
     }
 }

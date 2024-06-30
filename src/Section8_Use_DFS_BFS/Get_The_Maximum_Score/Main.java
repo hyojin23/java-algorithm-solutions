@@ -1,24 +1,36 @@
 package Section8_Use_DFS_BFS.Get_The_Maximum_Score;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+class Problem {
+
+    int s;
+    int t;
+
+    public Problem(int s, int t) {
+        this.s = s;
+        this.t = t;
+    }
+}
 
 public class Main {
 
-    static int answer = Integer.MIN_VALUE;
+    static List<Problem> list;
     static int n, m;
-    static int[] score, time;
+    static int max = Integer.MIN_VALUE;
 
-    public void DFS(int L, int s, int t) {
+    public void DFS(int L, int totTime, int totScore) {
 
-        if (t > m) return;
+        if (totTime > m) return;
 
         if (L == n) {
-            answer = Math.max(answer, s);
-            return;
+            max = Math.max(max, totScore);
         }
         else {
-            DFS(L + 1, s + score[L], t + time[L]);
-            DFS(L + 1, s, t);
+            DFS(L + 1, totTime + list.get(L).t, totScore + list.get(L).s);
+            DFS(L + 1, totTime, totScore);
         }
     }
 
@@ -29,15 +41,16 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-        score = new int[n];
-        time = new int[n];
+        list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            score[i] = sc.nextInt();
-            time[i] = sc.nextInt();
+            int s = sc.nextInt();
+            int t = sc.nextInt();
+
+            list.add(new Problem(s, t));
         }
 
         T.DFS(0, 0, 0);
-        System.out.println(answer);
+        System.out.println(max);
     }
 }

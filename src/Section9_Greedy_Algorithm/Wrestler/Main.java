@@ -1,9 +1,7 @@
 package Section9_Greedy_Algorithm.Wrestler;
 
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
+
 
 class Wrestler implements Comparable<Wrestler> {
 
@@ -22,7 +20,6 @@ class Wrestler implements Comparable<Wrestler> {
 
 public class Main {
 
-    static int n;
     public int solution(List<Wrestler> list) {
 
         int answer = 0;
@@ -31,12 +28,12 @@ public class Main {
         Collections.sort(list);
 
         for (Wrestler w : list) {
+
             if (w.w > max) {
-                max = w.w;
                 answer++;
             }
+            max = Math.max(max, w.w);
         }
-
         return answer;
     }
 
@@ -44,13 +41,12 @@ public class Main {
     public static void main(String[] args) {
 
         Main T = new Main();
-        Scanner sc  = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
+        int n = sc.nextInt();
         List<Wrestler> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-
             int h = sc.nextInt();
             int w = sc.nextInt();
 

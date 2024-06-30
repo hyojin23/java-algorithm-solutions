@@ -7,33 +7,33 @@ public class Main {
 
     public int solution(int n, int c, int[] arr) {
 
-        int lt = 1;
-        int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
-
         Arrays.sort(arr);
 
-        int mid;
+        int lt = 1;
+        int rt = arr[n -1];
         int answer = 0;
 
         while (lt <= rt) {
 
-            mid = (lt + rt) / 2;
-
+            int mid = (lt + rt) / 2;
+            int ep = arr[0];
             int cnt = 1;
-            int std = arr[0];
+
             for (int x : arr) {
-                if (x >= std + mid) {
+                if (x - ep >= mid) {
+                    ep = x;
                     cnt++;
-                    std = x;
                 }
+
+                if (cnt == c) break;
             }
 
-            if (cnt < c) {
-                rt = mid - 1;
-            }
-            else {
+            if (cnt == c) {
                 answer = mid;
                 lt = mid + 1;
+            }
+            else {
+                rt = mid - 1;
             }
         }
 

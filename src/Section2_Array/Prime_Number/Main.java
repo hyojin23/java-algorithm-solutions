@@ -11,12 +11,13 @@ public class Main {
 
         for (int i = 2; i <= n; i++) {
             if (ch[i] == 0) {
+                answer++;
                 for (int j = i; j <= n; j = j + i) {
                     ch[j] = 1;
                 }
-                answer++;
             }
         }
+
         return answer;
     }
 

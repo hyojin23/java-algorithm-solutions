@@ -4,15 +4,16 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int[] arr) {
+    public int solution(int n, int[] arr) {
 
-        int tallest = 0;
+        int max = Integer.MIN_VALUE;
         int cnt = 0;
 
-        for (int i : arr) {
-            if (i > tallest) {
+        for (int x : arr) {
+
+            if (x > max) {
+                max = x;
                 cnt++;
-                tallest = i;
             }
         }
 
@@ -22,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
 
         Main T = new Main();
-        Scanner sc =  new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int[] arr = new int[n];
@@ -31,6 +32,6 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(arr));
+        System.out.println(T.solution(n, arr));
     }
 }

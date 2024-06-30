@@ -8,23 +8,28 @@ public class Main {
 
     public int solution(int n, int k) {
 
-        int answer = 0;
         Queue<Integer> q = new LinkedList<>();
 
-        for (int i = 1; i <= n; i++) {
-            q.offer(i);
+        for (int i = 0; i < n; i++) {
+            q.offer(i + 1);
         }
 
-        while (!q.isEmpty()) {
-            for (int i = 1; i < k; i++) {
-                q.offer(q.poll());
-            }
-            q.poll();
-            if (q.size() == 1) {
-                answer = q.poll();
+        while (q.size() != 1) {
+
+            for (int i = 1; i <= k; i++) {
+
+                int p = 0;
+                if (!q.isEmpty()) {
+                    p = q.poll();
+                }
+
+                if (i != k) {
+                    q.offer(p);
+                }
             }
         }
-        return answer;
+
+        return q.poll();
     }
 
     public static void main(String[] args) {

@@ -5,17 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-class Time_2nd implements Comparable<Time_2nd> {
+class Time_1st implements Comparable<Time_1st> {
 
     int s, e;
 
-    public Time_2nd(int s, int e) {
+    public Time_1st(int s, int e) {
         this.s = s;
         this.e = e;
     }
 
     @Override
-    public int compareTo(Time_2nd t) {
+    public int compareTo(Time_1st t) {
         if (this.e == t.e) {
             return this.s - t.s;
         }
@@ -27,7 +27,7 @@ class Time_2nd implements Comparable<Time_2nd> {
 
 public class Main_1st {
 
-    public int solution(List<Time_2nd> list, int n) {
+    public int solution(List<Time_1st> list, int n) {
 
         int answer = 0;
         int endTime = 0;
@@ -47,10 +47,10 @@ public class Main_1st {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Time_2nd> list = new ArrayList<>();
+        List<Time_1st> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            list.add(new Time_2nd(sc.nextInt(), sc.nextInt()));
+            list.add(new Time_1st(sc.nextInt(), sc.nextInt()));
         }
         Collections.sort(list);
 

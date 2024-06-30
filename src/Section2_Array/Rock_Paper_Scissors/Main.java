@@ -1,29 +1,35 @@
 package Section2_Array.Rock_Paper_Scissors;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
 
-    public List<Character> solution(int[] A, int[] B, int n) {
-
-        List<Character> answer = new ArrayList<>();
+    public void solution(int n, int[] a, int[] b) {
 
         for (int i = 0; i < n; i++) {
-            if (A[i] == B[i]) {
-                answer.add('D');
-            } else if (A[i] == 1 && B[i] == 3) {
-                answer.add('A');
-            } else if (A[i] == 2 && B[i] == 1) {
-                answer.add('A');
-            } else if (A[i] == 3 && B[i] == 2) {
-                answer.add('A');
-            } else {
-                answer.add('B');
+
+            if (a[i] == b[i]) {
+                System.out.println("D");
+            }
+            else {
+                if (Math.abs(a[i] - b[i]) == 1) {
+                    if (a[i] > b[i]) {
+                        System.out.println("A");
+                    }
+                    else {
+                        System.out.println("B");
+                    }
+                }
+                else {
+                    if (a[i] > b[i]) {
+                        System.out.println("B");
+                    }
+                    else {
+                        System.out.println("A");
+                    }
+                }
             }
         }
-        return answer;
     }
 
     public static void main(String[] args) {
@@ -32,19 +38,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] A = new int[n];
-        int[] B = new int[n];
+        int[] a = new int[n];
+        int[] b = new int[n];
 
         for (int i = 0; i < n; i++) {
-            A[i] = sc.nextInt();
+            a[i] = sc.nextInt();
         }
 
         for (int i = 0; i < n; i++) {
-            B[i] = sc.nextInt();
+            b[i] = sc.nextInt();
         }
 
-        for (char c : T.solution(A, B, n)) {
-            System.out.println(c);
-        }
+        T.solution(n, a, b);
     }
 }

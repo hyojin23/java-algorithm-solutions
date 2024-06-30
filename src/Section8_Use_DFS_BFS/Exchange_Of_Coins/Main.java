@@ -6,13 +6,13 @@ import java.util.Collections;
 
 public class Main {
 
-    static int answer = Integer.MAX_VALUE;
     static int n, m;
+    static Integer[] arr;
+    static int answer = Integer.MAX_VALUE;
 
-    public void DFS(int L, int sum, Integer[] arr) {
+    public void DFS(int L, int sum) {
 
         if (sum > m) return;
-
         if (L >= answer) return;
 
         if (sum == m) {
@@ -20,7 +20,7 @@ public class Main {
         }
         else {
             for (int i = 0; i < n; i++) {
-                DFS(L + 1, sum + arr[i], arr);
+                DFS(L + 1, sum + arr[i]);
             }
         }
     }
@@ -31,7 +31,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        Integer[] arr = new Integer[n];
+        arr = new Integer[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
@@ -40,7 +40,8 @@ public class Main {
         m = sc.nextInt();
 
         Arrays.sort(arr, Collections.reverseOrder());
-        T.DFS(0, 0, arr);
+
+        T.DFS(0, 0);
         System.out.println(answer);
     }
 }

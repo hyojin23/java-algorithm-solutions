@@ -8,7 +8,7 @@ class Island {
 
     int x, y;
 
-    public Island(int x, int y) {
+    Island(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -17,39 +17,37 @@ class Island {
 public class Main {
 
     static int n, answer = 0;
-    static int[][] ch, board;
-
+    static int[][] arr;
     int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
     int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
 
     public void BFS(int x, int y) {
 
         Queue<Island> q = new LinkedList<>();
+
         q.offer(new Island(x, y));
-        int cnt = 0;
+        answer++;
 
         while (!q.isEmpty()) {
 
             int len = q.size();
+
             for (int i = 0; i < len; i++) {
 
-                Island cur = q.poll();
+                Island is = q.poll();
 
                 for (int j = 0; j < 8; j++) {
 
-                    int nx = cur.x + dx[j];
-                    int ny = cur.y + dy[j];
+                    int nx = is.x + dx[j];
+                    int ny = is.y + dy[j];
 
-                    if (nx >= 0 && nx <= n - 1 && ny >= 0 && ny <= n - 1 && ch[nx][ny] == 0 && board[nx][ny] == 1) {
-                        ch[nx][ny] = 1;
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] == 1) {
+                        arr[nx][ny] = 0;
                         q.offer(new Island(nx, ny));
                     }
                 }
             }
         }
-        cnt++;
-
-        answer += cnt;
     }
 
     public static void main(String[] args) {
@@ -58,20 +56,18 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        board = new int[n][n];
-        ch = new int[n][n];
+        arr = new int[n][n];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                board[i][j] = sc.nextInt();
+                arr[i][j] = sc.nextInt();
             }
         }
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-
-                if (ch[i][j] == 0 && board[i][j] == 1){
-                    ch[i][j] = 1;
+            for (int j = 0; j< n; j++) {
+                if (arr[i][j] == 1) {
+                    arr[i][j] = 0;
                     T.BFS(i, j);
                 }
             }

@@ -6,41 +6,41 @@ import java.util.LinkedList;
 class Node {
 
     int data;
-    Node lt, rt;
+    Node lt;
+    Node rt;
 
-    public Node(int val) {
-        this.data = val;
-        lt = rt = null;
+    public Node(int data) {
+        this.data = data;
+        lt = null;
+        rt = null;
     }
 }
 public class Main {
 
     Node root;
 
-    public int BFS(Node node) {
+    public int BFS(Node root) {
 
         Queue<Node> q = new LinkedList<>();
-        q.offer(node);
+        q.offer(root);
         int L = 0;
 
         while (!q.isEmpty()) {
-
             int len = q.size();
-
             for (int i = 0; i < len; i++) {
-
                 Node cur = q.poll();
-
-                if (cur.lt != null) {
-                    q.offer(cur.lt);
-                }
-
-                if (cur.rt != null) {
-                    q.offer(cur.rt);
-                }
 
                 if (cur.lt == null && cur.rt == null) {
                     return L;
+                }
+                else {
+                    if (cur.lt != null) {
+                        q.offer(cur.lt);
+                    }
+
+                    if (cur.rt != null) {
+                        q.offer(cur.rt);
+                    }
                 }
             }
             L++;

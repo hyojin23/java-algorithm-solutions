@@ -7,21 +7,24 @@ public class Main {
 
     public int solution(String str) {
 
-        int answer = 0;
         Stack<Character> stack = new Stack<>();
+        int answer = 0;
 
-        char[] arr = str.toCharArray();
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == '(') {
-                stack.push(arr[i]);
+        for (int i = 0; i < str.length(); i++) {
+
+            char c = str.charAt(i);
+
+            if (c == '(') {
+                stack.push(c);
             }
-            else if (arr[i] == ')') {
-                stack.pop();
-                if (arr[i - 1] == '(') {
+            else if (c == ')'){
+                if (str.charAt(i - 1) == '(') {
+                    stack.pop();
                     answer += stack.size();
                 }
-                else {
-                    answer += 1;
+                else if (str.charAt(i - 1) == ')') {
+                    stack.pop();
+                    answer++;
                 }
             }
         }
@@ -35,6 +38,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
+
         System.out.println(T.solution(str));
     }
 }

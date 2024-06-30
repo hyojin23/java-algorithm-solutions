@@ -1,36 +1,41 @@
 package Section1_String.The_Shortest_Character_Path;
 
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
-    public int[] solution(String str, char t) {
+    public int[] solution(String s, char t) {
 
-        int p = 1000;
-        int len = str.length();
-        int[] answer = new int[len];
+        int n = s.length();
+        int[] answer = new int[n];
 
-        for (int i = 0; i < len; i++) {
-            if (t == str.charAt(i)) {
-                p = 0;
-                answer[i] = p;
+        int d = 100;
+        char[] cArr = s.toCharArray();
+
+        for (int i = 0; i < n; i++) {
+
+            if (cArr[i] == t) {
+                d = 0;
             }
             else {
-                answer[i] = ++p;
+                d++;
             }
+            answer[i] = d;
         }
 
-        p = 1000;
+        d = 100;
+        for (int i = n - 1; i >= 0; i--) {
 
-        for (int i = len - 1; i >= 0; i--) {
-            if (t == str.charAt(i)) {
-                p = 0;
+            if (cArr[i] == t) {
+                d = 0;
             }
             else {
-                answer[i] = Math.min(answer[i], ++p);
+                d++;
             }
+            answer[i] = Math.min(answer[i], d);
         }
+
         return answer;
     }
 
@@ -39,10 +44,10 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.next();
+        String s = sc.next();
         char t = sc.next().charAt(0);
 
-        for (int i : T.solution(str, t)) {
+        for (int i : T.solution(s, t)) {
             System.out.print(i + " ");
         }
     }

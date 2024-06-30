@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     static int n;
-    static int ch[];
+    static int[] ch;
     public void DFS(int L) {
 
         if (L == n + 1) {

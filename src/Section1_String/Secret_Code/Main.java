@@ -4,18 +4,19 @@ import java.util.Scanner;
 
 public class Main {
 
-    public String solution(String str, int n) {
+    public String solution(int n, String str) {
 
-        String answer = "";
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
-            String s = str.substring(0, 7).replace('#', '1').replace('*', '0');
-            int num = Integer.parseInt(s, 2);
-            answer += (char) num;
+
+            String bStr = str.substring(0, 7).replace('#', '1').replace('*', '0');
             str = str.substring(7);
+
+            sb.append((char) Integer.parseInt(bStr, 2));
         }
 
-        return answer;
+        return sb.toString();
     }
 
     public static void main(String[] args) {
@@ -26,6 +27,7 @@ public class Main {
         int n = sc.nextInt();
         String str = sc.next();
 
-        System.out.println(T.solution(str, n));
+        System.out.println(T.solution(n, str));
+
     }
 }

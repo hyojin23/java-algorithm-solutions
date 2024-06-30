@@ -8,22 +8,23 @@ public class Main {
 
     public char solution(int n, String str) {
 
-        char answer = ' ';
         Map<Character, Integer> map = new HashMap<>();
         int max = Integer.MIN_VALUE;
+        char answer = ' ';
 
         for (char c : str.toCharArray()) {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-//        map.containsKey();
-//        map.remove('C');
-//        map.size();
+        // System.out.println(map.containsKey('F'));
+        // System.out.println(map.remove('A'));
+        // System.out.println(map.size());
 
-        for (char key : map.keySet()) {
-            if (map.get(key) > max) {
-                answer = key;
-                max = map.get(key);
+        for (char k : map.keySet()) {
+
+            if (map.get(k) > max) {
+                answer = k;
+                max = map.get(k);
             }
         }
 

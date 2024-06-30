@@ -6,11 +6,11 @@ public class Main {
 
     public String solution(String str) {
 
-        String original = str.toUpperCase().replaceAll("[^A-Z]", "");
+        str = str.replaceAll("[^a-z]", "");
 
-        String reverseString = new StringBuilder(original).reverse().toString();
+        StringBuilder sb = new StringBuilder(str);
 
-        if (original.equals(reverseString)) {
+        if (str.equals(sb.reverse().toString())) {
             return "YES";
         }
         else {
@@ -23,7 +23,7 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.nextLine();
+        String str = sc.nextLine().toLowerCase();
 
         System.out.println(T.solution(str));
     }

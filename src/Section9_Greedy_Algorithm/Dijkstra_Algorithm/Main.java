@@ -6,27 +6,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-class Edge implements Comparable<Edge>{
+class Edge implements Comparable<Edge> {
 
-    int vex, cost;
+    int vex;
+    int cost;
 
-    public Edge(int vex, int cost) {
+    Edge(int vex, int cost) {
         this.vex = vex;
         this.cost = cost;
     }
 
     @Override
-    public int compareTo(Edge o) {
-        return this.cost - o.cost;
+    public int compareTo(Edge ob) {
+        return this.cost - ob.cost;
     }
 }
 
-
 public class Main {
 
-    static int n, m;
     static List<List<Edge>> graph;
-    static int dis[];
+    static int[] dis;
 
     public void solution(int v) {
 
@@ -37,21 +36,17 @@ public class Main {
 
         while (!pq.isEmpty()) {
 
-            Edge e = pq.poll();
+            Edge data = pq.poll();
 
-            int nowVex = e.vex;
-            int nowCost = e.cost;
+            int now = data.vex;
+            int nowCost = data.cost;
 
-            if (nowCost > dis[nowVex]) continue;
+            if (nowCost > dis[now]) continue;
 
-            for (Edge edge : graph.get(nowVex)) {
-                if (nowCost + edge.cost < dis[edge.vex]) {
-
-                    int newCost = nowCost + edge.cost;
-
-                    dis[edge.vex] = newCost;
-
-                    pq.offer(new Edge(edge.vex, newCost));
+            for (Edge to : graph.get(now)) {
+                if (dis[to.vex] > nowCost + to.cost) {
+                    dis[to.vex] = nowCost + to.cost;
+                    pq.offer(new Edge(to.vex, nowCost + to.cost));
                 }
             }
         }
@@ -62,11 +57,11 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
-        m = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
         graph = new ArrayList<>();
 
-        for (int i = 0; i < n + 1; i++) {
+        for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
 
@@ -74,7 +69,6 @@ public class Main {
         Arrays.fill(dis, Integer.MAX_VALUE);
 
         for (int i = 0; i < m; i++) {
-
             int a = sc.nextInt();
             int b = sc.nextInt();
             int c = sc.nextInt();
@@ -84,13 +78,11 @@ public class Main {
         T.solution(1);
 
         for (int i = 2; i <= n; i++) {
-
-            if (dis[i] != Integer.MAX_VALUE) {
-
-                System.out.println(i + " : " + dis[i]);
+            if (dis[i] == Integer.MAX_VALUE) {
+                System.out.println(i + " : impossible");
             }
             else {
-                System.out.println(i + " : impossible");
+                System.out.println(i + " : " + dis[i]);
             }
         }
     }

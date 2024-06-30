@@ -6,14 +6,15 @@ public class Main {
 
     public String solution(String str) {
 
-        int len = str.length() / 2;
-        str = str.toLowerCase();
+        int n = str.length();
 
-        for (int i = 0; i < len; i++) {
-            if (str.charAt(i) != str.charAt(str.length() - 1 - i)) {
+        for (int i = 0; i < n / 2; i++) {
+
+            if (str.charAt(i) != str.charAt(n - 1 - i)) {
                 return "NO";
             }
         }
+
         return "YES";
     }
 
@@ -22,7 +23,7 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.next();
+        String str = sc.next().toLowerCase();
 
         System.out.println(T.solution(str));
     }

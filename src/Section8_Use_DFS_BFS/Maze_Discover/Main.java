@@ -4,11 +4,10 @@ import java.util.Scanner;
 
 public class Main {
 
-    int[] dx = {-1, 0 , 1, 0};
-    int[] dy = {0, 1, 0, -1};
     static int answer = 0;
-    static int[][] maze;
-    static int[][] ch;
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
+    static int[][] maze, ch;
 
     public void DFS(int x, int y) {
 
@@ -19,7 +18,6 @@ public class Main {
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
-
                 if (nx >= 1 && nx <= 7 && ny >= 1 && ny <= 7 && ch[nx][ny] == 0 && maze[nx][ny] == 0) {
                     ch[nx][ny] = 1;
                     DFS(nx, ny);
@@ -29,12 +27,10 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-
         maze = new int[8][8];
         ch = new int[8][8];
 
@@ -44,7 +40,7 @@ public class Main {
             }
         }
 
-        maze[1][1] = 1;
+        ch[1][1] = 1;
         T.DFS(1, 1);
         System.out.println(answer);
     }

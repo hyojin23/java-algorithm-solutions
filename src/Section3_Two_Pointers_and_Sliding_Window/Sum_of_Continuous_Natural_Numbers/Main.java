@@ -6,13 +6,17 @@ public class Main {
 
     public int solution(int n) {
 
-        int answer = 0, cnt = 1;
-
+        int answer = 0;
+        int cnt = 1;
         n--;
+
         while (n > 0) {
             cnt++;
-            n = n - cnt;
-            if (n % cnt == 0) answer++;
+            n = n -cnt;
+
+            if (n % cnt == 0) {
+                answer++;
+            }
         }
 
         return answer;

@@ -6,38 +6,36 @@ import java.util.LinkedList;
 
 public class Main {
 
-    int answer = 0;
-    int[] dis = {1, -1, 5};
-    int[] ch;
-    Queue<Integer> q = new LinkedList<>();
+    int[] jump = {1, -1, 5};
+    int[] ch = new int[10001];
 
     public int BFS(int s, int e) {
 
-        ch = new int[10001];
+        Queue<Integer> q = new LinkedList<>();
         ch[s] = 1;
         q.offer(s);
         int L = 0;
 
         while (!q.isEmpty()) {
-
+            L++;
             int len = q.size();
-
             for (int i = 0; i < len; i++) {
-                int cur = q.poll();
-
+                int me = q.poll();
                 for (int j = 0; j < 3; j++) {
-                    int np = cur + dis[j];
+                    int np = me + jump[j];
+
                     if (np == e) {
-                        return L + 1;
+                        return L;
                     }
+
                     if (np >= 1 && np <= 10000 && ch[np] == 0) {
                         ch[np] = 1;
                         q.offer(np);
                     }
                 }
             }
-            L++;
         }
+
         return L;
     }
 

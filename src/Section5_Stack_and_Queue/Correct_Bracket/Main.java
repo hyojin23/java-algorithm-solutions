@@ -7,14 +7,15 @@ public class Main {
 
     public String solution(String str) {
 
-        String answer = "NO";
         Stack<Character> stack = new Stack<>();
+        String answer = "NO";
 
         for (char c : str.toCharArray()) {
+
             if (c == '(') {
                 stack.push(c);
             }
-            else {
+            else if (c == ')') {
                 if (stack.isEmpty()) {
                     return "NO";
                 }

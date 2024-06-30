@@ -5,51 +5,48 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Point implements Comparable<Point> {
+class Coordinates implements Comparable<Coordinates>{
 
     int x;
     int y;
 
-    public Point(int x, int y) {
+    public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
+
     @Override
-    public int compareTo(Point o) {
-        if (this.x == o.x) {
-            return this.y - o.y;
+    public int compareTo(Coordinates c) {
+        if (this.x == c.x) {
+            return this.y - c.y;
         }
         else {
-            return this.x - o.x;
+            return this.x - c.x;
         }
     }
 }
 
 public class Main {
-    public List<Point> solution(int n, List<Point> list) {
-
-        Collections.sort(list);
-
-        return list;
-    }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_2nd T = new Main_2nd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Point> list = new ArrayList<>();
+        List<Coordinates> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
 
-            list.add(new Point(x, y));
+            list.add(new Coordinates(x, y));
         }
 
-        for (Point p : T.solution(n, list)) {
-            System.out.println(p.x + " " + p.y);
+        Collections.sort(list);
+
+        for (Coordinates c : list) {
+            System.out.println(c.x + " " + c.y);
         }
     }
 }

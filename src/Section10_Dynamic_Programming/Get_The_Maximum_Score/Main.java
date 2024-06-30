@@ -3,30 +3,41 @@ package Section10_Dynamic_Programming.Get_The_Maximum_Score;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Arrays;
 
-class Problem {
+class Problem implements Comparable<Problem> {
 
     int s, t;
 
-    public Problem(int s, int t) {
+    Problem(int s, int t) {
         this.s = s;
         this.t = t;
     }
-}
 
+    @Override
+    public int compareTo(Problem ob) {
+        return this.t - ob.t;
+    }
+}
 public class Main {
 
-    public int solution(int m, List<Problem> list) {
+    public int solution(int n, int m, List<Problem> list) {
 
+        Collections.sort(list);
         int[] dy = new int[m + 1];
+        Arrays.fill(dy, 0);
 
-        for (Problem p : list) {
+        for (int i = 0; i < n; i++) {
+            Problem p = list.get(i);
             for (int j = m; j >= p.t; j--) {
-                dy[j] = Math.max(dy[j], dy[j - p.t] + p.s);
+                if (dy[j] < dy[j - p.t] + p.s) {
+                    dy[j] = dy[j - p.t] + p.s;
+                }
             }
         }
-        return dy[m];
 
+        return dy[m];
     }
 
     public static void main(String[] args) {
@@ -39,13 +50,12 @@ public class Main {
         List<Problem> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
+            int s = sc.nextInt();
+            int t = sc.nextInt();
 
-            list.add(new Problem(a, b));
+            list.add(new Problem(s, t));
         }
 
-        System.out.println(T.solution(m, list));
+        System.out.println(T.solution(n, m, list));
     }
 }
-

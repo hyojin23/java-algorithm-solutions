@@ -6,8 +6,7 @@ public class Main {
 
     static int[] unf;
 
-    static int Find(int v) {
-
+    public static int Find(int v) {
         if (v == unf[v]) {
             return v;
         }
@@ -16,8 +15,7 @@ public class Main {
         }
     }
 
-    static void Union(int a, int b) {
-
+    public static void Union(int a, int b) {
         int fa = Find(a);
         int fb = Find(b);
 
@@ -28,7 +26,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -40,17 +37,18 @@ public class Main {
         }
 
         for (int i = 0; i < m; i++) {
-
             int a = sc.nextInt();
             int b = sc.nextInt();
-
             Union(a, b);
         }
 
         int a = sc.nextInt();
         int b = sc.nextInt();
 
-        if (Find(a) == Find(b)) {
+        int fa = Find(a);
+        int fb = Find(b);
+
+        if (fa == fb) {
             System.out.println("YES");
         }
         else {

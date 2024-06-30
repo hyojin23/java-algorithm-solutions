@@ -6,23 +6,28 @@ public class Main {
 
     public String[] solution(int n, String[] arr) {
 
-        String[] answer = new String[n];
+        String[] newArr = new String[n];
 
         for (int i = 0; i < n; i++) {
-            char[] s = arr[i].toCharArray();
-            int lt = 0, rt = s.length - 1;
+
+            char[] charArr = arr[i].toCharArray();
+            int lt = 0;
+            int rt = arr[i].length() - 1;
 
             while (lt < rt) {
-                char tmp = s[lt];
-                s[lt] = s[rt];
-                s[rt] = tmp;
+                char tmp = charArr[lt];
+                charArr[lt] = charArr[rt];
+                charArr[rt] = tmp;
                 lt++;
                 rt--;
             }
-            answer[i] = String.valueOf(s);
+
+            newArr[i] = String.valueOf(charArr);
         }
-        return answer;
+
+        return newArr;
     }
+
 
     public static void main(String[] args) {
 

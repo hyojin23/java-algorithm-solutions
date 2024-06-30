@@ -6,34 +6,39 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public List<Integer> solution(int[] arr) {
+    public boolean isPrime(int n) {
+
+        if (n == 1) return false;
+
+        for (int i = 2 ; i < n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public List<Integer> solution(int n, int[] arr) {
 
         List<Integer> list = new ArrayList<>();
 
         for (int x : arr) {
 
-            int cnt = 0;
-            int r = 0;
+            int tmp = x;
+            int res = 0;
+            while (tmp > 0) {
 
-            while (x != 0) {
-                r = r * 10 + (x % 10);
-                x = x / 10;
+                int t = tmp % 10;
+                tmp = tmp / 10;
+                res = res * 10 + t;
             }
 
-            for (int i = 1; i <= r; i++) {
-                if (r % i == 0) {
-                    cnt++;
-                }
-
-                if (cnt > 2) {
-                    break;
-                }
-            }
-
-            if (cnt == 2) {
-                list.add(r);
+            if (isPrime(res)) {
+                list.add(res);
             }
         }
+
         return list;
     }
 
@@ -49,8 +54,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(arr)) {
-            System.out.print(x + " ");
+        for (int x : T.solution(n, arr)) {
+             System.out.print(x + " ");
         }
     }
 }

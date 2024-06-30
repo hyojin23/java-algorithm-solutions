@@ -4,34 +4,36 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int[] solution(int s, int n, int[] arr) {
+    public int[] solution(int s, int n, int[] job) {
 
         int[] cache = new int[s];
-        cache[0] = arr[0];
         boolean isCacheHit;
+        int hitIndex = 0;
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             isCacheHit = false;
             for (int j = 0; j < s; j++) {
+
                 // cache hit
-                if (cache[j] == arr[i]) {
-                    int k;
-                    for (k = j - 1; k >= 0; k--) {
-                        cache[k + 1] = cache[k];
-                    }
-                    cache[k + 1] = arr[i];
+                if (job[i] == cache[j]) {
                     isCacheHit = true;
-                    break;
+                    hitIndex = j;
                 }
+
             }
-            // cache miss
-            if (!isCacheHit) {
-                int k;
-                for (k = s - 2; k >= 0; k--) {
+
+            if (isCacheHit) {
+                for (int k = hitIndex - 1; k >= 0; k--) {
                     cache[k + 1] = cache[k];
                 }
-                cache[k + 1] = arr[i];
             }
+            else {
+                for (int k = s - 2; k >= 0; k--) {
+                    cache[k + 1] = cache[k];
+                }
+            }
+
+            cache[0] = job[i];
         }
 
         return cache;
@@ -44,14 +46,14 @@ public class Main {
 
         int s = sc.nextInt();
         int n = sc.nextInt();
-        int[] arr = new int[n];
+        int[] job = new int[n];
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            job[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(s, n, arr)) {
-            System.out.print(x + " ");
+        for (int i : T.solution(s, n, job)) {
+            System.out.print(i + " ");
         }
     }
 }

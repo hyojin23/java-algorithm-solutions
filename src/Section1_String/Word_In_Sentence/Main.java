@@ -6,21 +6,23 @@ public class Main {
 
     public String solution(String str) {
 
-        int max = Integer.MIN_VALUE;
-        int pos;
         String answer = "";
+        int max = Integer.MIN_VALUE, pos;
 
-        while((pos = str.indexOf(" ")) != -1) {
-            String  s = str.substring(0, pos);
-            if (s.length() > max) {
-                answer = s;
-                max = s.length();
+        while ((pos = str.indexOf(' ')) != -1) {
+            String word = str.substring(0, pos);
+
+            if (word.length() > max) {
+                max = word.length();
+                answer = word;
             }
             str = str.substring(pos + 1);
         }
+
         if (str.length() > max) {
             answer = str;
         }
+
         return answer;
     }
 

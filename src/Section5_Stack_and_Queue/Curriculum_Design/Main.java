@@ -6,28 +6,31 @@ import java.util.LinkedList;
 
 public class Main {
 
-    public String solution(String must, String plan) {
+    public String solution(String odr, String plan) {
 
-        String answer = "YES";
         Queue<Character> q = new LinkedList<>();
 
-        for (char c : must.toCharArray()) {
-            q.offer(c);
+        for (int i = 0; i < odr.length(); i++) {
+            q.offer(odr.charAt(i));
         }
 
-        for (char c: plan.toCharArray()) {
+        for (char c : plan.toCharArray()) {
+
             if (q.contains(c)) {
-                if (q.poll() != c) {
+                if (c == q.peek()) {
+                    q.poll();
+                }
+                else {
                     return "NO";
                 }
             }
         }
 
         if (!q.isEmpty()) {
-            answer = "NO";
+            return "NO";
         }
 
-        return answer;
+        return "YES";
     }
 
     public static void main(String[] args) {
@@ -35,9 +38,9 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String must = sc.next();
+        String odr = sc.next();
         String plan = sc.next();
 
-        System.out.println(T.solution(must, plan));
+        System.out.println(T.solution(odr, plan));
     }
 }

@@ -6,17 +6,16 @@ public class Main {
 
     public int solution(String str, char c) {
 
-        int cnt = 0;
+        int answer = 0;
 
-        for (char x : str.toCharArray()) {
-            char a = Character.toLowerCase(x);
-            char b = Character.toLowerCase(c);
-            if (a == b) {
-                cnt++;
+        for (char s : str.toLowerCase().toCharArray()) {
+
+            if (s == c) {
+                answer++;
             }
         }
 
-        return cnt;
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -25,7 +24,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
-        char c = sc.next().charAt(0);
+        char c = sc.next().toLowerCase().charAt(0);
 
         System.out.println(T.solution(str, c));
     }

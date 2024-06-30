@@ -5,24 +5,24 @@ import java.util.Arrays;
 
 public class Main {
 
-    static int[] arr;
-
-    public int solution(int n) {
-
-        int answer = 0;
+    public int solution(int n, int[] arr) {
 
         int[] dy = new int[n];
         Arrays.fill(dy, 1);
+        int answer = 0;
 
-        dy[0] = 1;
-
-        for (int i = 1; i < n; i++) {
-            for (int j = i; j >= 0; j--) {
-                if (arr[i] > arr[j]) {
-                    dy[i] = Math.max(dy[i], dy[j] + 1);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] < arr[i]) {
+                    if (dy[i] < dy[j] + 1) {
+                        dy[i] = dy[j] + 1;
+                    }
                 }
             }
-            answer = Math.max(answer, dy[i]);
+        }
+
+        for (int x : dy) {
+            answer = Math.max(answer, x);
         }
 
         return answer;
@@ -34,12 +34,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        arr = new int[n];
+        int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(n));
+        System.out.println(T.solution(n, arr));
     }
 }

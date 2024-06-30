@@ -9,7 +9,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             int idx = i;
             for (int j = i + 1; j < n; j++) {
-                if (arr[idx] > arr[j]) {
+                if (arr[j] < arr[idx]) {
                     idx = j;
                 }
             }
@@ -30,11 +30,12 @@ public class Main {
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
+
             arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, arr)) {
-            System.out.print(x + " ");
+        for (int i : T.solution(n, arr)) {
+            System.out.print(i + " ");
         }
     }
 }

@@ -4,35 +4,32 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int[][] arr, int n) {
+    public int solution(int n, int[][] arr) {
 
-        int answer = Integer.MIN_VALUE;
-        int hSum, vSum;
-
-        int cSum = 0;
-        int dSum = 0;
+        int rsum;
+        int csum;
+        int answer = 0;
 
         for (int i = 0; i < n; i++) {
-            hSum = 0;
-            vSum = 0;
-
+            rsum = 0;
+            csum = 0;
             for (int j = 0; j < n; j++) {
-                hSum += arr[i][j];
-                vSum += arr[j][i];
-
-                if (i == j) {
-                    cSum += arr[i][j];
-                }
-
-                if (i + j == n - 1) {
-                    dSum += arr[i][j];
-                }
+                rsum += arr[i][j];
+                csum += arr[j][i];
             }
-            answer = Math.max(answer, hSum);
-            answer = Math.max(answer, vSum);
+            answer = Math.max(answer, rsum);
+            answer = Math.max(answer, csum);
         }
-        answer = Math.max(answer, cSum);
-        answer = Math.max(answer, dSum);
+
+        int dsum = 0;
+        int usum = 0;
+
+        for (int i = 0; i < n; i++) {
+            dsum += arr[i][i];
+            usum += arr[i][n - i - 1];
+        }
+        answer = Math.max(answer, dsum);
+        answer = Math.max(answer, usum);
 
         return answer;
     }
@@ -50,6 +47,8 @@ public class Main {
                 arr[i][j] = sc.nextInt();
             }
         }
-        System.out.println(T.solution(arr, n));
+
+        System.out.println(T.solution(n, arr));
+
     }
 }

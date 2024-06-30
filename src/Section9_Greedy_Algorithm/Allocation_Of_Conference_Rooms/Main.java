@@ -9,37 +9,35 @@ class Time implements Comparable<Time> {
 
     int s, e;
 
-    public Time(int s, int e) {
+    Time(int s, int e) {
         this.s = s;
         this.e = e;
     }
 
     @Override
-    public int compareTo(Time t) {
-
-        if (this.e == t.e) {
-            return this.s - t.s;
+    public int compareTo(Time o) {
+        if (this.e == o.e) {
+            return this.s - o.s;
         }
         else {
-            return this.e - t.e;
+            return this.e - o.e;
         }
     }
 }
-
 public class Main {
 
     public int solution(List<Time> list) {
 
         int answer = 0;
-        int endTime = Integer.MIN_VALUE;
+        int lastEndTime = Integer.MIN_VALUE;
 
         Collections.sort(list);
 
-        for (Time t : list) {
+        for (Time time : list) {
 
-            if (t.s >= endTime) {
-                endTime = t.e;
+            if (time.s >= lastEndTime) {
                 answer++;
+                lastEndTime = time.e;
             }
         }
 
@@ -55,10 +53,10 @@ public class Main {
         List<Time> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
+            int s = sc.nextInt();
+            int e = sc.nextInt();
 
-            list.add(new Time(a, b));
+            list.add(new Time(s, e));
         }
 
         System.out.println(T.solution(list));

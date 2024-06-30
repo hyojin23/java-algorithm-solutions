@@ -4,29 +4,30 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int[][] arr, int n) {
+    public int solution(int n, int[][] arr) {
 
-        int[] dx = {-1 , 0, 1, 0};
-        int[] dy = {0 , 1, 0, -1};
-        boolean isMountain;
-        int answer = 0;
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, 1, 0, -1};
+        int cnt = 0;
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n ; i++) {
             for (int j = 1; j <= n; j++) {
-                isMountain = true;
+
+                boolean isTop = true;
                 for (int k = 0; k < 4; k++) {
-                    int around = arr[i + dx[k]][j + dy[k]];
-                    if (arr[i][j] <= around) {
-                        isMountain = false;
+                    if (arr[i][j] <= arr[i + dx[k]][j + dy[k]]) {
+                        isTop = false;
                         break;
                     }
                 }
-                if (isMountain) {
-                    answer++;
+
+                if (isTop) {
+                    cnt++;
                 }
             }
         }
-        return answer;
+
+        return cnt;
     }
 
     public static void main(String[] args) {
@@ -42,6 +43,7 @@ public class Main {
                 arr[i][j] = sc.nextInt();
             }
         }
-        System.out.println(T.solution(arr, n));
+
+        System.out.println(T.solution(n, arr));
     }
 }

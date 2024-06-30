@@ -4,25 +4,28 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int n = 0;
-    static int[][] graph;
+    static int[][] arr;
     static int[] ch;
+    static int n, m;
     static int answer = 0;
 
-    public void DFS(int v) {
+    public int DFS(int node) {
 
-        if (v == n) {
+        if (node == n) {
             answer++;
         }
         else {
-            for (int i = 1; i <= n; i++) {
-                if (ch[i] == 0 && graph[v][i] == 1) {
+            for (int i = 1; i < n + 1; i++) {
+
+                if (ch[i] == 0 && arr[node][i] == 1) {
                     ch[i] = 1;
                     DFS(i);
                     ch[i] = 0;
                 }
             }
         }
+
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -31,21 +34,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        int m = sc.nextInt();
-
-        graph = new int[n + 1][n + 1];
+        m = sc.nextInt();
+        arr = new int[n + 1][n + 1];
         ch = new int[n + 1];
 
         for (int i = 0; i < m; i++) {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
 
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-
-            graph[a][b] = 1;
+            arr[x][y] = 1;
         }
-
         ch[1] = 1;
-        T.DFS(1);
-        System.out.println(answer);
+        System.out.println(T.DFS(1));
     }
 }

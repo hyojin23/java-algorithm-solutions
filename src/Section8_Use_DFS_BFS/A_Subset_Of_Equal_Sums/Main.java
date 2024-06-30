@@ -5,29 +5,29 @@ import java.util.Scanner;
 public class Main {
 
     static int n;
-    static int total = 0;
-    boolean flag = false;
+    static int[] arr;
+    static int totSum = 0;
     static String answer = "NO";
+    public void DFS(int L, int sum) {
 
-    public void DFS(int L, int sum, int[] arr) {
-
-        if (flag) return;
-
-        if (sum > total / 2) return;
-
-        if (L == n) {
-            if (total - sum == sum) {
-                answer =  "YES";
-                flag = true;
-            }
+        if ("YES".equals(answer)) {
             return;
         }
+
+        if (sum * 2 > totSum) {
+            return;
+        }
+
+        if (L == n) {
+            if (totSum == sum * 2) {
+                answer = "YES";
+            }
+        }
         else {
-            DFS(L + 1, sum + arr[L], arr);
-            DFS(L + 1, sum, arr);
+            DFS(L + 1, sum + arr[L]);
+            DFS(L + 1, sum);
         }
     }
-
 
     public static void main(String[] args) {
 
@@ -35,14 +35,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        int[] arr = new int[n];
+        arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            total += arr[i];
+            totSum += arr[i];
         }
 
-        T.DFS(0, 0, arr);
+        T.DFS(0, 0);
         System.out.println(answer);
-    }
+     }
 }

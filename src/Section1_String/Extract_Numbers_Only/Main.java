@@ -9,10 +9,12 @@ public class Main {
         int answer = 0;
 
         for (char c : str.toCharArray()) {
+
             if (c >= 48 && c <= 57) {
                 answer = answer * 10 + (c - 48);
             }
         }
+
         return answer;
     }
 
@@ -21,7 +23,7 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.next();
+        String str = sc.nextLine();
 
         System.out.println(T.solution(str));
     }

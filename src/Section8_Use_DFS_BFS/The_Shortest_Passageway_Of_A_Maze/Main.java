@@ -1,14 +1,14 @@
 package Section8_Use_DFS_BFS.The_Shortest_Passageway_Of_A_Maze;
 
-import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Scanner;
 
-class Coordinates {
+class Point {
 
     int x, y;
 
-    public Coordinates(int x, int y) {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -16,41 +16,40 @@ class Coordinates {
 
 public class Main {
 
-    static int[][] maze;
-    static int[][] ch;
-    static int[][] dis;
-
     int[] dx = {-1, 0, 1, 0};
     int[] dy = {0, 1, 0, -1};
+    static int[][] maze;
 
-    public int BFS(Coordinates co) {
+    public int BFS(int x, int y) {
 
-        Queue<Coordinates> q = new LinkedList<>();
-        q.offer(co);
-
-        dis[7][7] = -1;
+        Queue<Point> q = new LinkedList<>();
+        q.offer(new Point(x, y));
+        maze[x][y] = 1;
+        int L = 0;
 
         while (!q.isEmpty()) {
-
             int len = q.size();
-
             for (int i = 0; i < len; i++) {
-                Coordinates cur = q.poll();
+                Point p = q.poll();
+                if (p != null) {
+                    for (int j = 0; j < 4; j++) {
+                        int nx = p.x + dx[j];
+                        int ny = p.y + dy[j];
 
-                for (int j = 0; j < 4; j++) {
+                        if (nx == 7 && ny == 7) {
+                            return ++L;
+                        }
 
-                    int nx = cur.x + dx[j];
-                    int ny = cur.y + dy[j];
-
-                    if (nx >= 1 && nx <= 7 && ny >= 1 && ny <= 7 && ch[nx][ny] == 0 && maze[nx][ny] == 0)  {
-                        ch[nx][ny] = 1;
-                        dis[nx][ny] = dis[cur.x][cur.y] + 1;
-                        q.offer(new Coordinates(nx, ny));
+                        if (nx >= 1 && nx <= 7 && ny >= 1 && ny <= 7 && maze[nx][ny] == 0) {
+                            maze[nx][ny] = 1;
+                            q.offer(new Point(nx, ny));
+                        }
                     }
                 }
             }
+            L++;
         }
-        return dis[7][7];
+        return -1;
     }
 
     public static void main(String[] args) {
@@ -59,8 +58,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         maze = new int[8][8];
-        ch = new int[8][8];
-        dis = new int[8][8];
 
         for (int i = 1; i <= 7; i++) {
             for (int j = 1; j <= 7; j++) {
@@ -68,7 +65,6 @@ public class Main {
             }
         }
 
-        ch[1][1] = 1;
-        System.out.println(T.BFS(new Coordinates(1, 1)));
+        System.out.println(T.BFS(1, 1));
     }
 }

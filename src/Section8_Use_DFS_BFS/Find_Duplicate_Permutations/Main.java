@@ -9,14 +9,14 @@ public class Main {
     public void DFS(int L, int[] arr) {
 
         if (L == m) {
-            for (int i : arr) {
-                System.out.print(i + " ");
+            for (int x : arr) {
+                System.out.print(x + " ");
             }
             System.out.println();
         }
         else {
-            for (int i = 1; i <= n; i++) {
-                arr[L] = i;
+            for (int i = 0; i < n; i++) {
+                arr[L] = i + 1;
                 DFS(L + 1, arr);
             }
         }

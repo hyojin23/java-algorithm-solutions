@@ -6,10 +6,12 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public List<Integer> solution(int[] arr1, int[] arr2, int n, int m) {
+    public List<Integer> solution(int n, int m, int[] arr1, int[] arr2) {
 
-        int p1 = 0, p2 = 0;
-        List <Integer> answer = new ArrayList<>();
+        List<Integer> answer = new ArrayList<>();
+
+        int p1 = 0;
+        int p2 = 0;
 
         while (p1 < n && p2 < m) {
 
@@ -21,8 +23,13 @@ public class Main {
             }
         }
 
-        while (p1 < n) answer.add(arr1[p1++]);
-        while (p2 < m) answer.add(arr2[p2++]);
+        while (p1 < n) {
+            answer.add(arr1[p1++]);
+        }
+
+        while (p2 < m) {
+            answer.add(arr2[p2++]);
+        }
 
         return answer;
     }
@@ -46,7 +53,7 @@ public class Main {
             arr2[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(arr1, arr2, n, m)) {
+        for (int x : T.solution(n, m, arr1, arr2)) {
             System.out.print(x + " ");
         }
     }

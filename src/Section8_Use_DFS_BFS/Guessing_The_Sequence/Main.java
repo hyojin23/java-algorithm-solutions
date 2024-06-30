@@ -4,43 +4,44 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int[] b, p, ch;
-    static int[][] dy = new int[15][15];
     static int n, f;
-    static boolean flag;
+    static int[] cb;
+    static int[] pm, ch;
+    static int[][] arr;
+    boolean finish = false;
 
-    public int combi(int n, int r) {
+    public int combination(int n, int r) {
 
-        if (dy[n][r] > 0) {
-            return dy[n][r];
+        if (arr[n][r] > 0) {
+            return arr[n][r];
         }
 
-        if (n == r || r == 0) {
+        if (r == 0 || n == r) {
             return 1;
         }
         else {
-            return dy[n][r] = combi(n - 1, r - 1) + combi(n - 1, r);
+            return arr[n][r] = combination(n - 1, r - 1) + combination(n - 1, r);
         }
     }
 
     public void DFS(int L, int sum) {
 
-        if (flag) return;
+        if (finish) return;
 
         if (L == n) {
             if (sum == f) {
-                for (int x : p) {
+                for (int x : pm) {
                     System.out.print(x + " ");
-                    flag = true;
                 }
+                finish = true;
             }
         }
         else {
-            for (int i = 1; i <= n; i++) {
+            for (int i = 0; i < n; i++) {
                 if (ch[i] == 0) {
+                    pm[L] = i + 1;
                     ch[i] = 1;
-                    p[L] = i;
-                    DFS(L + 1, sum + (p[L] * b[L]));
+                    DFS(L + 1, sum + pm[L] * cb [L]);
                     ch[i] = 0;
                 }
             }
@@ -54,14 +55,15 @@ public class Main {
 
         n = sc.nextInt();
         f = sc.nextInt();
-
-        b = new int[n];
-        p = new int[n];
-        ch = new int[n + 1];
+        cb = new int[n];
+        pm = new int[n];
+        ch = new int[n];
+        arr = new int[n + 1][n + 1];
 
         for (int i = 0; i < n; i++) {
-            b[i] = T.combi(n - 1, i);
+            cb[i] = T.combination(n -1, i);
         }
+
         T.DFS(0, 0);
     }
 }

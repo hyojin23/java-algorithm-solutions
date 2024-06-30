@@ -3,19 +3,22 @@ package Section1_String.Case_Change;
 import java.util.Scanner;
 
 public class Main {
+
     public String solution(String str) {
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder answer = new StringBuilder();
 
         for (char c : str.toCharArray()) {
+
             if (Character.isLowerCase(c)) {
-                sb.append(Character.toUpperCase(c));
+                answer.append(Character.toUpperCase(c));
             }
             else {
-                sb.append(Character.toLowerCase(c));
+                answer.append(Character.toLowerCase(c));
             }
         }
-        return sb.toString();
+
+        return answer.toString();
     }
 
     public static void main(String[] args) {

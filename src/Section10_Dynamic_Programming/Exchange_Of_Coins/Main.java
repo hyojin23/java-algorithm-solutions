@@ -8,8 +8,8 @@ public class Main {
     public int solution(int n, int m, int[] coin) {
 
         int[] dy = new int[m + 1];
-
         Arrays.fill(dy, Integer.MAX_VALUE);
+
         dy[0] = 0;
 
         for (int i = 0; i < n; i++) {

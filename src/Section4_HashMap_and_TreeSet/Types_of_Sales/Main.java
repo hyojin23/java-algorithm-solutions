@@ -19,17 +19,22 @@ public class Main {
         }
 
         for (int rt = k - 1; rt < n; rt++) {
-            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
-            answer.add(map.size());
-            map.put(arr[lt], map.get(arr[lt]) - 1);
 
-            if (map.get(arr[lt]) == 0) map.remove(arr[lt]);
+            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
+
+            answer.add(map.size());
+
+            if (map.get(arr[lt]) == 1) {
+                map.remove(arr[lt]);
+            }
+            else {
+                map.put(arr[lt], map.get(arr[lt]) - 1);
+            }
             lt++;
         }
 
         return answer;
     }
-
 
     public static void main(String[] args) {
 
@@ -43,6 +48,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         for (int x : T.solution(n, k, arr)) {
             System.out.print(x + " ");
         }

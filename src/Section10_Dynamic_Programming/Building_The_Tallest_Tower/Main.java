@@ -7,16 +7,17 @@ import java.util.Collections;
 
 class Brick implements Comparable<Brick> {
 
-    int s, h, w;
+    int a, h, w;
 
-    public Brick(int s, int h, int w) {
-        this.s = s;
+    Brick (int a, int h, int w) {
+        this.a = a;
         this.h = h;
         this.w = w;
     }
+
     @Override
     public int compareTo(Brick ob) {
-        return this.s - ob.s;
+        return ob.a - this.a;
     }
 }
 
@@ -24,20 +25,24 @@ public class Main {
 
     public int solution(int n, List<Brick> list) {
 
+        int answer = 0;
         int[] dy = new int[n];
 
-        dy[0] = list.get(0).h;
-        int answer = list.get(0).h;
+        Collections.sort(list);
 
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i < n; i++) {
+            dy[i] = list.get(i).h;
+        }
+
+        for (int i = 0; i < n; i++) {
             for (int j = i - 1; j >= 0; j--) {
-                if (list.get(i).w > list.get(j).w) {
-                    dy[i] = Math.max(dy[i], dy[j] + list.get(i).h);
-                }
-            }
+                Brick my = list.get(i);
+                Brick bf = list.get(j);
 
-            if (dy[i] == 0) {
-                dy[i] = list.get(i).h;
+                if (bf.w > my.w) {
+                    int max = dy[j] + my.h;
+                    dy[i] = Math.max(max, dy[i]);
+                }
             }
 
             answer = Math.max(answer, dy[i]);
@@ -52,19 +57,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-
         List<Brick> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-
             int a = sc.nextInt();
-            int b = sc.nextInt();
-            int c = sc.nextInt();
+            int h = sc.nextInt();
+            int w = sc.nextInt();
 
-            list.add(new Brick(a, b, c));
+            list.add(new Brick(a, h, w));
         }
-
-        Collections.sort(list);
 
         System.out.println(T.solution(n, list));
     }

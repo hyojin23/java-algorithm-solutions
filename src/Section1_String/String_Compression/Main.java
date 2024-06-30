@@ -6,20 +6,22 @@ public class Main {
 
     public String solution(String str) {
 
+        int n = str.length();
         StringBuilder sb = new StringBuilder();
-        str = str + " ";
-        int cnt = 1;
 
-        for (int i = 0; i < str.length() - 1; i++) {
+        int cnt = 1;
+        str = str + "#";
+
+        for (int i = 0; i < n; i++) {
+
             if (str.charAt(i) == str.charAt(i + 1)) {
                 cnt++;
             }
             else {
-                if (cnt == 1) {
-                    sb.append(str.charAt(i));
-                }
-                else {
-                    sb.append(str.charAt(i)).append(cnt);
+                sb.append(str.charAt(i));
+
+                if (cnt > 1) {
+                    sb.append(cnt);
                 }
                 cnt = 1;
             }

@@ -4,23 +4,28 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int[] arr, int n, int m) {
+    public int solution(int n, int m, int[] arr) {
 
-        int answer = 0;
-        int lt = 0, sum = 0;
+        int lt = 0;
+        int rt = 0;
+        int sum = arr[0];
+        int cnt = 0;
 
-        for (int rt = 0; rt < n; rt++) {
-            sum += arr[rt];
-            if (sum == m) {
-                answer++;
+        while (rt < n) {
+
+            if (sum < m) {
+                sum += arr[++rt];
             }
-            while (sum >= m) {
+            else if (sum > m) {
                 sum -= arr[lt++];
-                if (sum == m) answer++;
+            }
+            else {
+                sum -= arr[lt++];
+                cnt++;
             }
         }
 
-        return answer;
+        return cnt;
     }
 
     public static void main(String[] args) {
@@ -30,12 +35,12 @@ public class Main {
 
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int[] arr = new int[n];
+        int[] arr = new int[n + 1];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(arr, n, m));
+        System.out.println(T.solution(n, m, arr));
     }
 }

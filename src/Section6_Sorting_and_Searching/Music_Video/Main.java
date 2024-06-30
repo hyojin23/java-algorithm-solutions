@@ -5,44 +5,39 @@ import java.util.Arrays;
 
 public class Main {
 
-    public int count(int[] arr, int capacity) {
-
-        int sum = 0;
-        int cnt = 1;
-
-        for (int x : arr) {
-            if (sum + x > capacity) {
-                cnt++;
-                sum = x;
-            }
-            else {
-                sum += x;
-            }
-        }
-
-        return cnt;
-    }
-
     public int solution(int n, int m, int[] arr) {
 
+        int cnt;
+        int cpct;
         int lt = Arrays.stream(arr).max().getAsInt();
         int rt = Arrays.stream(arr).sum();
-
-        int mid;
         int answer = 0;
 
         while (lt <= rt) {
 
-            mid = (lt + rt) / 2;
+            cnt = 1;
+            cpct = 0;
+            int mid = (lt + rt) / 2;
 
-            if (count(arr, mid) <= m) {
+            for (int i = 0; i < n; i++) {
+                cpct += arr[i];
+
+                if (cpct > mid) {
+                    cnt++;
+                    cpct = 0;
+                    i--;
+                }
+            }
+
+            if (cnt > m) {
+                lt = mid + 1;
+            }
+            else {
                 answer = mid;
                 rt = mid - 1;
             }
-            else {
-                lt = mid + 1;
-            }
         }
+
         return answer;
     }
 
@@ -58,6 +53,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         System.out.println(T.solution(n, m, arr));
     }
 }
