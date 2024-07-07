@@ -8,26 +8,24 @@ public class Main {
 
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
-        int cnt = 0;
+        int answer = 0;
 
-        for (int i = 1; i <= n ; i++) {
+        for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
-
-                boolean isTop = true;
+                boolean isTop = false;
                 for (int k = 0; k < 4; k++) {
                     if (arr[i][j] <= arr[i + dx[k]][j + dy[k]]) {
                         isTop = false;
                         break;
                     }
+                    isTop = true;
                 }
-
                 if (isTop) {
-                    cnt++;
+                    answer++;
                 }
             }
         }
-
-        return cnt;
+        return answer;
     }
 
     public static void main(String[] args) {

@@ -5,21 +5,24 @@ import java.util.Stack;
 
 public class Main {
 
-    public Stack<Character> solution(String str) {
+    public void solution(String str) {
 
         Stack<Character> stack = new Stack<>();
 
         for (char c : str.toCharArray()) {
-
             if (c == ')') {
-                while (stack.pop() != '(');
+                while (stack.pop() != '(') {
+
+                }
             }
             else {
                 stack.push(c);
             }
         }
 
-        return stack;
+        for (char c : stack) {
+            System.out.print(c);
+        }
     }
 
     public static void main(String[] args) {
@@ -28,9 +31,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
-
-        for (char c : T.solution(str)) {
-            System.out.print(c);
-        }
+        T.solution(str);
     }
 }

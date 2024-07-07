@@ -6,36 +6,38 @@ import java.util.ArrayList;
 
 public class Main {
 
-    public boolean isPrime(int n) {
-
-        if (n == 1) return false;
-
-        for (int i = 2 ; i < n; i++) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public List<Integer> solution(int n, int[] arr) {
 
         List<Integer> list = new ArrayList<>();
+        int[] rvsArr = new int[n];
 
-        for (int x : arr) {
-
-            int tmp = x;
+        int max = 0;
+        for (int i = 0; i < n; i++) {
             int res = 0;
-            while (tmp > 0) {
-
-                int t = tmp % 10;
-                tmp = tmp / 10;
-                res = res * 10 + t;
+            while (arr[i] != 0) {
+                res = res * 10 + (arr[i] % 10);
+                arr[i] = arr[i] / 10;
             }
+            max = Math.max(max, res);
+            rvsArr[i] = res;
+        }
 
-            if (isPrime(res)) {
-                list.add(res);
+        int[] ch = new int[max + 1];
+        ch[1] = 1;
+
+        for (int i = 2; i <= max; i++) {
+            if (ch[i] == 0) {
+                for (int j = i; j <= max; j = j + i) {
+                    if (j != i) {
+                        ch[j] = 1;
+                    }
+                }
+            }
+        }
+
+        for (int i : rvsArr) {
+            if (ch[i] == 0) {
+                list.add(i);
             }
         }
 
@@ -54,8 +56,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, arr)) {
-             System.out.print(x + " ");
+        for (int i : T.solution(n, arr)) {
+            System.out.print(i + " ");
         }
     }
 }

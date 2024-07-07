@@ -6,24 +6,30 @@ public class Main {
 
     public int solution(int n, int k, int[] arr) {
 
-        int lt = 0;
         int answer = 0;
+        int lt = 0;
+        int len = 0;
         int cnt = 0;
 
-        for (int rt = 0; rt < arr.length; rt++) {
+        for (int rt = 0; rt < n; rt++) {
 
             if (arr[rt] == 0) {
                 cnt++;
+            }
 
-                while (cnt > k) {
-
-                    if (arr[lt++] == 0) {
-                        cnt--;
-                    }
+            while (cnt > k) {
+                if (arr[lt] == 0) {
+                    cnt--;
+                    lt++;
+                }
+                else {
+                    lt++;
                 }
             }
 
-            answer = Math.max(answer, rt - lt + 1);
+            len = rt - lt + 1;
+
+            answer =  Math.max(answer, len);
         }
 
         return answer;
@@ -39,10 +45,10 @@ public class Main {
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-
             arr[i] = sc.nextInt();
         }
 
         System.out.println(T.solution(n, k, arr));
     }
 }
+

@@ -6,20 +6,22 @@ public class Main {
 
     public int solution(int n, int k, int[] arr) {
 
+        int answer = 0;
+        int lt = 0;
         int sum = 0;
 
-        for (int i = 0 ; i < k; i++) {
+        for (int i = 0; i < k; i++) {
             sum += arr[i];
         }
 
-        int answer = sum;
+        answer = Math.max(sum, answer);
 
-        for (int i = k; i < n; i++) {
+        for (int rt = k; rt < n; rt++) {
 
-            sum += arr[i];
-            sum -= arr[i - k];
+            sum -= arr[lt++];
+            sum += arr[rt];
 
-            answer = Math.max(answer, sum);
+            answer = Math.max(sum, answer);
         }
 
         return answer;

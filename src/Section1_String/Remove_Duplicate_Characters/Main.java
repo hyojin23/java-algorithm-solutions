@@ -6,16 +6,17 @@ public class Main {
 
     public String solution(String str) {
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder answer = new StringBuilder();
+        int[] ch = new int[26];
 
-        for (int i = 0; i < str.length(); i++) {
-
-            if (i == str.indexOf(str.charAt(i))) {
-                sb.append(str.charAt(i));
+        for (char c : str.toCharArray()) {
+            if (ch[c - 97] == 0) {
+                answer.append(Character.toString(c));
+                ch[c - 97] = 1;
             }
         }
 
-        return sb.toString();
+        return answer.toString();
     }
 
     public static void main(String[] args) {
@@ -28,3 +29,4 @@ public class Main {
         System.out.println(T.solution(str));
     }
 }
+

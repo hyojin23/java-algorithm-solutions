@@ -4,40 +4,40 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-class Person {
+class Patient {
 
-    int priority;  // 위험도
-    int id;        // 순서
+    int d, o;
 
-    public Person(int priority, int id) {
-        this.priority = priority;
-        this.id = id;
+    Patient(int d, int o) {
+        this.d = d;
+        this.o = o;
     }
 }
+
 public class Main {
 
-    public int solution(int n, int m, Queue<Person> q) {
+    public int solution(int n, int m, int[] arr) {
 
+        Queue<Patient> q = new LinkedList<>();
         int answer = 0;
 
+        for (int i = 0; i < n; i++) {
+            q.offer(new Patient(arr[i], i));
+        }
+
+        int cnt = 0;
         while (!q.isEmpty()) {
-
-            Person p = q.poll();
-            boolean isContains = false;
-
-            for (Person other : q) {
-                if (p.priority < other.priority) {
-                    q.offer(p);
-                    isContains = true;
+            Patient a = q.poll();
+            for (Patient b : q) {
+                if (a.d < b.d) {
+                    q.offer(a);
                     break;
                 }
             }
-
-            if (!isContains) {
-                answer++;
-
-                if (p.id == m) {
-                    return answer;
+            if (!q.contains(a)) {
+                cnt++;
+                if (a.o == m) {
+                    answer = cnt;
                 }
             }
         }
@@ -52,14 +52,12 @@ public class Main {
 
         int n = sc.nextInt();
         int m = sc.nextInt();
-
-        Queue<Person> q = new LinkedList<>();
+        int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-            int priority = sc.nextInt();
-            q.offer(new Person(priority, i));
+            arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(n, m, q));
+        System.out.println(T.solution(n, m, arr));
     }
 }

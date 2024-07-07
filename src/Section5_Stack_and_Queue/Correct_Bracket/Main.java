@@ -8,14 +8,12 @@ public class Main {
     public String solution(String str) {
 
         Stack<Character> stack = new Stack<>();
-        String answer = "NO";
 
         for (char c : str.toCharArray()) {
-
             if (c == '(') {
                 stack.push(c);
             }
-            else if (c == ')') {
+            else {
                 if (stack.isEmpty()) {
                     return "NO";
                 }
@@ -25,11 +23,10 @@ public class Main {
             }
         }
 
-        if (stack.isEmpty()) {
-            answer = "YES";
+        if (!stack.isEmpty()) {
+            return "NO";
         }
-
-        return answer;
+        return "YES";
     }
 
     public static void main(String[] args) {

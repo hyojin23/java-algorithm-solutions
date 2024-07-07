@@ -10,30 +10,31 @@ public class Main {
 
     public List<Integer> solution(int n, int k, int[] arr) {
 
-        List<Integer> answer = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
+        int sum = 0;
         int lt = 0;
 
-        for (int i = 0; i < k - 1; i++) {
+        for (int i = 0; i < k; i++) {
             map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
         }
 
-        for (int rt = k - 1; rt < n; rt++) {
+        list.add(map.size());
 
+        for (int rt = k; rt < n; rt++) {
             map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
+            map.put(arr[lt], map.get(arr[lt]) - 1);
 
-            answer.add(map.size());
-
-            if (map.get(arr[lt]) == 1) {
+            if (map.get(arr[lt]) == 0) {
                 map.remove(arr[lt]);
             }
-            else {
-                map.put(arr[lt], map.get(arr[lt]) - 1);
-            }
+
             lt++;
+
+            list.add(map.size());
         }
 
-        return answer;
+        return list;
     }
 
     public static void main(String[] args) {
@@ -49,8 +50,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, k, arr)) {
-            System.out.print(x + " ");
+        for (int i : T.solution(n, k, arr)) {
+            System.out.print(i + " ");
         }
     }
 }

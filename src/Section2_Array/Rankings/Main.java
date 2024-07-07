@@ -1,24 +1,24 @@
 package Section2_Array.Rankings;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main {
 
     public int[] solution(int n, int[] arr) {
 
-        int[] rank = new int[n];
-        Arrays.fill(rank, 1);
+        int[] answer = new int[n];
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (arr[i] < arr[j]) {
-                    rank[i]++;
+            int cnt = 0;
+            for (int y : arr) {
+                if (arr[i] < y) {
+                    cnt++;
                 }
             }
+            answer[i] = cnt + 1;
         }
 
-        return rank;
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -33,8 +33,9 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, arr)) {
-            System.out.print(x + " ");
+        for (int i : T.solution(n, arr)) {
+            System.out.print(i + " ");
         }
     }
 }
+

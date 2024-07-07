@@ -6,14 +6,12 @@ public class Main {
 
     public int solution(int n, int[] arr) {
 
-        int max = Integer.MIN_VALUE;
+        int max = 0;
         int cnt = 0;
-
         for (int x : arr) {
-
             if (x > max) {
-                max = x;
                 cnt++;
+                max = x;
             }
         }
 

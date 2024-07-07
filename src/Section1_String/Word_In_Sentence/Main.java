@@ -6,21 +6,15 @@ public class Main {
 
     public String solution(String str) {
 
+        String[] strArr = str.split(" ");
+        int maxLength = 0;
         String answer = "";
-        int max = Integer.MIN_VALUE, pos;
 
-        while ((pos = str.indexOf(' ')) != -1) {
-            String word = str.substring(0, pos);
-
-            if (word.length() > max) {
-                max = word.length();
-                answer = word;
+        for (String s : strArr) {
+            if (s.length() > maxLength) {
+                answer = s;
+                maxLength = s.length();
             }
-            str = str.substring(pos + 1);
-        }
-
-        if (str.length() > max) {
-            answer = str;
         }
 
         return answer;

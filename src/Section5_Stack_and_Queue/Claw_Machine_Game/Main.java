@@ -5,34 +5,27 @@ import java.util.Stack;
 
 public class Main {
 
-    public int solution(int n, int[][] board, int m, int[] moves) {
+    public int solution(int n, int m, int[][] board, int[] moves) {
 
-        int answer = 0;
         Stack<Integer> stack = new Stack<>();
+        int cnt = 0;
 
-        for (int j : moves) {
-            for (int i = 0; i < n; i++) {
-                int doll = board[i][j - 1];
-                if (doll != 0) {
-                    if (!stack.isEmpty()) {
-                        if (stack.peek() == doll) {
-                            answer = answer + 2;
-                            stack.pop();
-                        }
-                        else {
-                            stack.push(doll);
-                        }
+        for (int i : moves) {
+            for (int j = 0; j < n; j++) {
+                if (board[j][i - 1] != 0) {
+                    if (!stack.isEmpty() && stack.peek() == board[j][i - 1]) {
+                        stack.pop();
+                        cnt = cnt + 2;
                     }
                     else {
-                        stack.push(doll);
+                        stack.push(board[j][i - 1]);
                     }
-                    board[i][j - 1] = 0;
+                    board[j][i - 1] = 0;
                     break;
                 }
             }
         }
-
-        return answer;
+        return cnt;
     }
 
     public static void main(String[] args) {
@@ -56,6 +49,7 @@ public class Main {
             moves[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(n, board, m, moves));
+        System.out.println(T.solution(n, m, board, moves));
     }
 }
+

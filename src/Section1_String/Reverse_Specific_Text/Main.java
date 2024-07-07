@@ -6,29 +6,32 @@ public class Main {
 
     public String solution(String str) {
 
-        char[] cArr = str.toCharArray();
+        String answer = "";
+        char[] charArr = str.toCharArray();
+
         int lt = 0;
         int rt = str.length() - 1;
 
         while (lt < rt) {
 
-            if (!Character.isAlphabetic(cArr[lt])) {
+            if (Character.isAlphabetic(charArr[lt]) && Character.isAlphabetic(charArr[rt])) {
+                char tmp = charArr[lt];
+                charArr[lt] = charArr[rt];
+                charArr[rt] = tmp;
                 lt++;
-
+                rt--;
             }
-            else if (!Character.isAlphabetic(cArr[rt])) {
+            else if (Character.isAlphabetic(charArr[lt])) {
                 rt--;
             }
             else {
-                char tmp = cArr[lt];
-                cArr[lt] = cArr[rt];
-                cArr[rt] = tmp;
                 lt++;
-                rt--;
             }
         }
 
-        return String.valueOf(cArr);
+        answer = String.valueOf(charArr);
+
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -36,8 +39,9 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String n = sc.next();
+        String str = sc.next();
 
-        System.out.println(T.solution(n));
+        System.out.println(T.solution(str));
     }
 }
+

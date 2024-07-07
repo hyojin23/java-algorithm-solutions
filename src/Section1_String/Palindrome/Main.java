@@ -6,16 +6,19 @@ public class Main {
 
     public String solution(String str) {
 
-        int n = str.length();
+        StringBuilder rvsStr = new StringBuilder();
+        String answer = "NO";
 
-        for (int i = 0; i < n / 2; i++) {
+        for (int i = str.length() - 1; i >= 0; i--) {
 
-            if (str.charAt(i) != str.charAt(n - 1 - i)) {
-                return "NO";
-            }
+            rvsStr.append(str.charAt(i));
         }
 
-        return "YES";
+        if (str.equals(rvsStr.toString())) {
+            answer = "YES";
+        }
+
+        return answer;
     }
 
     public static void main(String[] args) {

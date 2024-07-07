@@ -6,18 +6,17 @@ import java.util.LinkedList;
 
 public class Main {
 
-    public String solution(String odr, String plan) {
+    public String solution(String must, String plan) {
 
         Queue<Character> q = new LinkedList<>();
 
-        for (int i = 0; i < odr.length(); i++) {
-            q.offer(odr.charAt(i));
+        for (char c : must.toCharArray()) {
+            q.offer(c);
         }
 
         for (char c : plan.toCharArray()) {
-
             if (q.contains(c)) {
-                if (c == q.peek()) {
+                if (q.peek() == c) {
                     q.poll();
                 }
                 else {
@@ -38,9 +37,10 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String odr = sc.next();
+        String must = sc.next();
         String plan = sc.next();
 
-        System.out.println(T.solution(odr, plan));
+        System.out.println(T.solution(must, plan));
     }
 }
+

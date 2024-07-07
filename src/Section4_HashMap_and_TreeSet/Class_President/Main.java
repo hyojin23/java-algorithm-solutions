@@ -9,16 +9,12 @@ public class Main {
     public char solution(int n, String str) {
 
         Map<Character, Integer> map = new HashMap<>();
-        int max = Integer.MIN_VALUE;
         char answer = ' ';
+        int max = Integer.MIN_VALUE;
 
         for (char c : str.toCharArray()) {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
-
-        // System.out.println(map.containsKey('F'));
-        // System.out.println(map.remove('A'));
-        // System.out.println(map.size());
 
         for (char k : map.keySet()) {
 
@@ -42,3 +38,4 @@ public class Main {
         System.out.println(T.solution(n, str));
     }
 }
+

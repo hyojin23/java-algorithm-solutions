@@ -13,9 +13,9 @@ public class Main {
                     idx = j;
                 }
             }
-            int tmp = arr[i];
-            arr[i] = arr[idx];
-            arr[idx] = tmp;
+            int tmp = arr[idx];
+            arr[idx] = arr[i];
+            arr[i] = tmp;
         }
 
         return arr;
@@ -30,12 +30,12 @@ public class Main {
         int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-
             arr[i] = sc.nextInt();
         }
 
-        for (int i : T.solution(n, arr)) {
-            System.out.print(i + " ");
+        for (int x : T.solution(n, arr)) {
+            System.out.print(x + " ");
         }
     }
 }
+

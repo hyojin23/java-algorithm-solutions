@@ -9,7 +9,6 @@ public class Main {
         StringBuilder answer = new StringBuilder();
 
         for (char c : str.toCharArray()) {
-
             if (Character.isLowerCase(c)) {
                 answer.append(Character.toUpperCase(c));
             }

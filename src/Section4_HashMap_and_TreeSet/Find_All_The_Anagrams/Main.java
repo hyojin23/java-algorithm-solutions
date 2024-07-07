@@ -8,33 +8,35 @@ public class Main {
 
     public int solution(String s, String t) {
 
-        Map<Character, Integer> map = new HashMap<>();
-        Map<Character, Integer> tMap = new HashMap<>();
-        int lt = 0;
-        int n = t.length() - 1;
         int answer = 0;
+        int len = t.length();
+        int lt = 0;
+
+        Map<Character, Integer> sMap = new HashMap<>();
+        Map<Character, Integer> tMap = new HashMap<>();
 
         for (char c : t.toCharArray()) {
             tMap.put(c, tMap.getOrDefault(c, 0) + 1);
         }
 
-        for (int i = 0; i < n; i++) {
-            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        for (int i = 0; i < len - 1; i++) {
+            sMap.put(s.charAt(i), sMap.getOrDefault(s.charAt(i), 0) + 1);
         }
 
-        for (int rt = n; rt < s.length(); rt++) {
+        for (int rt = len - 1; rt < s.length(); rt++) {
 
-            map.put(s.charAt(rt), map.getOrDefault(s.charAt(rt), 0) + 1);
+            sMap.put(s.charAt(rt), sMap.getOrDefault(s.charAt(rt), 0) + 1);
 
-            if (map.equals(tMap)) {
+            if (sMap.equals(tMap)) {
                 answer++;
             }
 
-            map.put(s.charAt(lt), map.get(s.charAt(lt)) - 1);
+            sMap.put(s.charAt(lt), sMap.get(s.charAt(lt)) - 1);
 
-            if (map.get(s.charAt(lt)) == 0) {
-                map.remove(s.charAt(lt));
+            if (sMap.get(s.charAt(lt)) == 0) {
+                sMap.remove(s.charAt(lt));
             }
+
             lt++;
         }
 

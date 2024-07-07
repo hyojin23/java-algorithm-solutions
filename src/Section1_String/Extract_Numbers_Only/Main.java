@@ -7,13 +7,16 @@ public class Main {
     public int solution(String str) {
 
         int answer = 0;
+        StringBuilder sb = new StringBuilder();
 
         for (char c : str.toCharArray()) {
 
-            if (c >= 48 && c <= 57) {
-                answer = answer * 10 + (c - 48);
+            if (Character.isDigit(c)) {
+                sb.append(c);
             }
         }
+
+        answer = Integer.parseInt(sb.toString());
 
         return answer;
     }
@@ -23,7 +26,7 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.nextLine();
+        String str = sc.next();
 
         System.out.println(T.solution(str));
     }

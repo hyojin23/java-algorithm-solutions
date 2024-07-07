@@ -6,28 +6,26 @@ public class Main {
 
     public String solution(String str) {
 
-        int n = str.length();
-        StringBuilder sb = new StringBuilder();
-
+        StringBuilder answer = new StringBuilder();
+        int len = str.length();
         int cnt = 1;
-        str = str + "#";
+        str = str + " ";
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < len; i++) {
 
             if (str.charAt(i) == str.charAt(i + 1)) {
                 cnt++;
             }
             else {
-                sb.append(str.charAt(i));
-
-                if (cnt > 1) {
-                    sb.append(cnt);
+                answer.append(str.charAt(i));
+                if (cnt != 1) {
+                    answer.append(cnt);
                 }
                 cnt = 1;
             }
         }
 
-        return sb.toString();
+        return answer.toString();
     }
 
     public static void main(String[] args) {

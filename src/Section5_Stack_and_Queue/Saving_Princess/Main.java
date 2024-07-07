@@ -10,26 +10,22 @@ public class Main {
 
         Queue<Integer> q = new LinkedList<>();
 
-        for (int i = 0; i < n; i++) {
-            q.offer(i + 1);
+        for (int i = 1; i <= n; i++) {
+            q.offer(i);
         }
 
-        while (q.size() != 1) {
-
+        while (q.size() > 1) {
             for (int i = 1; i <= k; i++) {
-
-                int p = 0;
-                if (!q.isEmpty()) {
-                    p = q.poll();
+                if (i == k) {
+                    q.poll();
                 }
-
-                if (i != k) {
-                    q.offer(p);
+                else {
+                    q.offer(q.poll());
                 }
             }
         }
 
-        return q.poll();
+        return q.peek();
     }
 
     public static void main(String[] args) {

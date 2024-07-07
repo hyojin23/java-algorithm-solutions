@@ -1,29 +1,29 @@
 package Section4_HashMap_and_TreeSet.Kth_Largest_Number;
 
 import java.util.Scanner;
-import java.util.Collections;
 import java.util.TreeSet;
+import java.util.Collections;
 
 public class Main {
 
     public int solution(int n, int k, int[] arr) {
 
         int answer = -1;
-        TreeSet<Integer> tSet = new TreeSet<>(Collections.reverseOrder());
+        TreeSet<Integer> set = new TreeSet<Integer>(Collections.reverseOrder());
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                for (int l = j + 1; l < n; l++) {
-                    tSet.add(arr[i] + arr[j] + arr[l]);
+                for (int s = j + 1; s < n; s++) {
+                    set.add(arr[i] + arr[j] + arr[s]);
                 }
             }
         }
 
         int cnt = 0;
-        for (int x : tSet) {
+        for (int x : set) {
             cnt++;
             if (cnt == k) {
-                return x;
+                answer = x;
             }
         }
 

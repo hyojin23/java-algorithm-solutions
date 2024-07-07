@@ -6,19 +6,21 @@ public class Main {
 
     public int solution(int n, int[] arr) {
 
-        int s = 0;
-        int sum = 0;
-        for (int x : arr) {
+        int answer = 0;
+        int score = 0;
 
-            if (x == 0) {
-                s = 0;
+        for (int i : arr) {
+
+            if (i == 1) {
+                score++;
             }
-            else if (x == 1) {
-                sum += ++s;
+            else {
+                score = 0;
             }
+            answer += score;
         }
 
-        return sum;
+        return answer;
     }
 
     public static void main(String[] args) {

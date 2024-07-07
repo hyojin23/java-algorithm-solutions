@@ -6,28 +6,14 @@ public class Main {
 
     public String[] solution(int n, String[] arr) {
 
-        String[] newArr = new String[n];
+        String[] answer = new String[n];
 
         for (int i = 0; i < n; i++) {
-
-            char[] charArr = arr[i].toCharArray();
-            int lt = 0;
-            int rt = arr[i].length() - 1;
-
-            while (lt < rt) {
-                char tmp = charArr[lt];
-                charArr[lt] = charArr[rt];
-                charArr[rt] = tmp;
-                lt++;
-                rt--;
-            }
-
-            newArr[i] = String.valueOf(charArr);
+            answer[i] = new StringBuilder(arr[i]).reverse().toString();
         }
 
-        return newArr;
+        return answer;
     }
-
 
     public static void main(String[] args) {
 
@@ -41,8 +27,8 @@ public class Main {
             arr[i] = sc.next();
         }
 
-        for (String s : T.solution(n, arr)) {
-            System.out.println(s);
+        for (String str : T.solution(n, arr)) {
+            System.out.println(str);
         }
     }
 }

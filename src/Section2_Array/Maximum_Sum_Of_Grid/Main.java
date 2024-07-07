@@ -6,30 +6,28 @@ public class Main {
 
     public int solution(int n, int[][] arr) {
 
-        int rsum;
-        int csum;
         int answer = 0;
 
+        int downCrsSum = 0;
+        int upCrsSum = 0;
+
         for (int i = 0; i < n; i++) {
-            rsum = 0;
-            csum = 0;
+            int rowSum = 0;
+            int colSum = 0;
+
             for (int j = 0; j < n; j++) {
-                rsum += arr[i][j];
-                csum += arr[j][i];
+                rowSum += arr[i][j];
+                colSum += arr[j][i];
             }
-            answer = Math.max(answer, rsum);
-            answer = Math.max(answer, csum);
+            answer = Math.max(answer, rowSum);
+            answer = Math.max(answer, colSum);
+
+            downCrsSum += arr[i][i];
+            upCrsSum += arr[i][n - 1 - i];
         }
 
-        int dsum = 0;
-        int usum = 0;
-
-        for (int i = 0; i < n; i++) {
-            dsum += arr[i][i];
-            usum += arr[i][n - i - 1];
-        }
-        answer = Math.max(answer, dsum);
-        answer = Math.max(answer, usum);
+        answer = Math.max(answer, downCrsSum);
+        answer = Math.max(answer, upCrsSum);
 
         return answer;
     }
@@ -49,6 +47,5 @@ public class Main {
         }
 
         System.out.println(T.solution(n, arr));
-
     }
 }

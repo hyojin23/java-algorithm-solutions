@@ -4,18 +4,26 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n) {
+    public int solution(int n, int[] arr) {
 
         int answer = 0;
-        int cnt = 1;
-        n--;
+        int lt = 0;
+        int sum = 0;
 
-        while (n > 0) {
-            cnt++;
-            n = n -cnt;
+        for (int rt = 0; rt < n; rt++) {
 
-            if (n % cnt == 0) {
+            sum += arr[rt];
+
+            if (sum == n) {
                 answer++;
+            }
+
+            while (sum > n) {
+                sum -= arr[lt++];
+
+                if (sum == n) {
+                    answer++;
+                }
             }
         }
 
@@ -28,7 +36,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+        int[] arr = new int[n];
 
-        System.out.println(T.solution(n));
+        for (int i = 0; i < n; i++) {
+            arr[i] = i;
+        }
+
+        System.out.println(T.solution(n, arr));
     }
 }

@@ -6,26 +6,26 @@ public class Main {
 
     public int solution(int n, int m, int[] arr) {
 
+        int answer = 0;
         int lt = 0;
-        int rt = 0;
-        int sum = arr[0];
-        int cnt = 0;
+        int sum = 0;
 
-        while (rt < n) {
+        for (int rt = 0; rt < n; rt++) {
+            sum += arr[rt];
 
-            if (sum < m) {
-                sum += arr[++rt];
+            if (sum == m) {
+                answer++;
             }
-            else if (sum > m) {
+
+            while (sum > m) {
                 sum -= arr[lt++];
-            }
-            else {
-                sum -= arr[lt++];
-                cnt++;
+                if (sum == m) {
+                    answer++;
+                }
             }
         }
 
-        return cnt;
+        return answer;
     }
 
     public static void main(String[] args) {
@@ -35,12 +35,12 @@ public class Main {
 
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int[] arr = new int[n + 1];
+        int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-
         System.out.println(T.solution(n, m, arr));
     }
 }
+

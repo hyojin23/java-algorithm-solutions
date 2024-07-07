@@ -6,24 +6,23 @@ public class Main {
 
     public int solution(int n, int[][] arr) {
 
-        int cnt;
-        int max = Integer.MIN_VALUE;
         int answer = 0;
+        int max = Integer.MIN_VALUE;
 
-        for (int i = 1; i <= n; i++) {
-            cnt = 0;
-            for (int j = 1; j <= n; j++) {
-                for (int k = 1; k <= 5; k++) {
+        for (int i = 0; i < n; i++) {
+            int cnt = 0;
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < 5; k++) {
                     if (arr[i][k] == arr[j][k]) {
-                        if (i == j) continue;
                         cnt++;
                         break;
                     }
                 }
             }
+
             if (cnt > max) {
                 max = cnt;
-                answer = i;
+                answer = i + 1;
             }
         }
 
@@ -36,10 +35,10 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[][] arr = new int[n + 1][6];
+        int[][] arr = new int[n][5];
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j < 6; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 5; j++) {
                 arr[i][j] = sc.nextInt();
             }
         }
@@ -47,3 +46,4 @@ public class Main {
         System.out.println(T.solution(n, arr));
     }
 }
+

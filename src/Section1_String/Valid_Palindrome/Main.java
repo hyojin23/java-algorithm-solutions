@@ -6,16 +6,26 @@ public class Main {
 
     public String solution(String str) {
 
-        str = str.replaceAll("[^a-z]", "");
+        int lt = 0;
+        int rt = str.length() - 1;
 
-        StringBuilder sb = new StringBuilder(str);
+        while (lt < rt) {
+            if (!Character.isAlphabetic(str.charAt(lt))) {
+                lt++;
+            }
+            else if (!Character.isAlphabetic(str.charAt(rt))) {
+                rt--;
+            }
+            else {
+                if (str.charAt(lt) != str.charAt(rt)) {
+                    return "NO";
+                }
+                lt++;
+                rt--;
+            }
+        }
 
-        if (str.equals(sb.reverse().toString())) {
-            return "YES";
-        }
-        else {
-            return "NO";
-        }
+        return "YES";
     }
 
     public static void main(String[] args) {

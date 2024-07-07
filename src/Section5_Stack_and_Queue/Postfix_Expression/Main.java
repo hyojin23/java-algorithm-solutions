@@ -10,36 +10,29 @@ public class Main {
         Stack<Integer> stack = new Stack<>();
 
         for (char c : str.toCharArray()) {
-
             if (Character.isDigit(c)) {
-                stack.add(c - 48);
+                stack.push(c - 48);
             }
             else {
-                int s2 = stack.pop();
-                int s1 = stack.pop();
-
-                switch (c) {
-
-                    case '+':
-                        stack.add(s1 + s2);
-                        break;
-
-                    case '-':
-                        stack.add(s1 - s2);
-                        break;
-
-                    case '*':
-                        stack.add(s1 * s2);
-                        break;
-
-                    case '/':
-                        stack.add(s1 / s2);
-                        break;
+                int b = stack.pop();
+                int a = stack.pop();
+                int res;
+                if (c == '+') {
+                    res = a + b;
                 }
+                else if (c == '-') {
+                    res = a - b;
+                }
+                else if (c == '*') {
+                    res = a * b;
+                }
+                else {
+                    res = a / b;
+                }
+                stack.push(res);
             }
         }
-
-        return stack.pop();
+        return stack.get(0);
     }
 
     public static void main(String[] args) {
@@ -48,7 +41,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
-
         System.out.println(T.solution(str));
     }
 }

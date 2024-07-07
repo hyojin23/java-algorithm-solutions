@@ -14,14 +14,13 @@ public class Main {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        for (char c : str2.toCharArray()) {
+        for (char c: str2.toCharArray()) {
 
-            if (!map.containsKey(c) || map.get(c) == 0) {
+            if (map.getOrDefault(c, 0) == 0) {
                 return "NO";
             }
-            else {
-                map.put(c, map.get(c) - 1);
-            }
+
+            map.put(c, map.getOrDefault(c, 0) - 1);
         }
 
         return "YES";
@@ -38,3 +37,4 @@ public class Main {
         System.out.println(T.solution(str1, str2));
     }
 }
+

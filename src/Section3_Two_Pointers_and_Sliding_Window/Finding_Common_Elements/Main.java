@@ -9,19 +9,20 @@ public class Main {
 
     public List<Integer> solution(int n, int m, int[] arr1, int[] arr2) {
 
+        List<Integer> list = new ArrayList<>();
         Arrays.sort(arr1);
         Arrays.sort(arr2);
 
         int p1 = 0;
         int p2 = 0;
-        List<Integer> answer = new ArrayList<>();
 
         while (p1 < n && p2 < m) {
             if (arr1[p1] == arr2[p2]) {
-                answer.add(arr1[p1++]);
+                list.add(arr1[p1]);
+                p1++;
                 p2++;
             }
-            else if (arr1[p1] < arr2[p2]){
+            else if (arr1[p1] < arr2[p2]) {
                 p1++;
             }
             else {
@@ -29,7 +30,7 @@ public class Main {
             }
         }
 
-        return answer;
+        return list;
     }
 
     public static void main(String[] args) {
