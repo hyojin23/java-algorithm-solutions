@@ -1,30 +1,40 @@
-package Section6_Sorting_and_Searching.Binary_Search;
+package Section6_Sorting_and_Searching.Music_Video;
 
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_3rd {
 
     public int solution(int n, int m, int[] arr) {
 
-        Arrays.sort(arr);
-        int lt = 0;
-        int rt = n -1;
+        int cnt;
+        int cpct;
+        int lt = Arrays.stream(arr).max().getAsInt();
+        int rt = Arrays.stream(arr).sum();
         int answer = 0;
 
         while (lt <= rt) {
 
+            cnt = 1;
+            cpct = 0;
             int mid = (lt + rt) / 2;
 
-            if (m > arr[mid]) {
+            for (int i = 0; i < n; i++) {
+                cpct += arr[i];
+
+                if (cpct > mid) {
+                    cnt++;
+                    cpct = 0;
+                    i--;
+                }
+            }
+
+            if (cnt > m) {
                 lt = mid + 1;
             }
-            else if (m < arr[mid]) {
-                rt = mid - 1;
-            }
             else {
-                answer = mid + 1;
-                break;
+                answer = mid;
+                rt = mid - 1;
             }
         }
 
@@ -33,7 +43,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

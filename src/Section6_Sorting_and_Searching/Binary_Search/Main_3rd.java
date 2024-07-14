@@ -3,37 +3,36 @@ package Section6_Sorting_and_Searching.Binary_Search;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_3rd {
 
     public int solution(int n, int m, int[] arr) {
 
-        Arrays.sort(arr);
         int lt = 0;
-        int rt = n -1;
-        int answer = 0;
+        int rt = n - 1;
+
+        Arrays.sort(arr);
 
         while (lt <= rt) {
 
             int mid = (lt + rt) / 2;
 
-            if (m > arr[mid]) {
-                lt = mid + 1;
-            }
-            else if (m < arr[mid]) {
+            if (m < arr[mid]) {
                 rt = mid - 1;
             }
+            else if (m > arr[mid]) {
+                lt = mid + 1;
+            }
             else {
-                answer = mid + 1;
-                break;
+                return mid + 1;
             }
         }
 
-        return answer;
+        return 0;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

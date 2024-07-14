@@ -5,41 +5,45 @@ import java.util.Arrays;
 
 public class Main {
 
+    public boolean isPosRecord(int mid, int m, int[] arr) {
+
+        int sum = 0;
+        int cnt = 1;
+        for (int i = 0; i < arr.length; i++) {
+
+            sum += arr[i];
+
+            if (sum > mid) {
+                i--;
+                sum = 0;
+                cnt++;
+            }
+        }
+
+        return cnt <= m;
+    }
+
     public int solution(int n, int m, int[] arr) {
 
-        int cnt;
-        int cpct;
-        int lt = Arrays.stream(arr).max().getAsInt();
+        int lt = Arrays.stream(arr).max().isPresent() ? Arrays.stream(arr).max().getAsInt() : 0;
         int rt = Arrays.stream(arr).sum();
         int answer = 0;
 
         while (lt <= rt) {
 
-            cnt = 1;
-            cpct = 0;
             int mid = (lt + rt) / 2;
 
-            for (int i = 0; i < n; i++) {
-                cpct += arr[i];
-
-                if (cpct > mid) {
-                    cnt++;
-                    cpct = 0;
-                    i--;
-                }
-            }
-
-            if (cnt > m) {
-                lt = mid + 1;
+            if (isPosRecord(mid, m, arr)) {
+                rt = mid - 1;
+                answer = mid;
             }
             else {
-                answer = mid;
-                rt = mid - 1;
+                lt = mid + 1;
             }
         }
-
         return answer;
     }
+
 
     public static void main(String[] args) {
 

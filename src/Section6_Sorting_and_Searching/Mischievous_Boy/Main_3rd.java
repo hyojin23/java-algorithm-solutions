@@ -1,31 +1,31 @@
 package Section6_Sorting_and_Searching.Mischievous_Boy;
 
 import java.util.Scanner;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class Main {
+public class Main_3rd {
 
     public List<Integer> solution(int n, int[] arr) {
 
-        List<Integer> list = new ArrayList<>();
-
-        int[] orgArr = Arrays.copyOf(arr, n);
-
+        int[] orgArr = Arrays.copyOf(arr, arr.length);
         Arrays.sort(arr);
 
-        for (int i = 0; i < n; i++) {
+        List<Integer> answer = new ArrayList<>();
+
+        for (int i = 0 ; i < n; i++) {
             if (orgArr[i] != arr[i]) {
-                list.add(i + 1);
+                answer.add(i + 1);
             }
         }
-        return list;
+
+        return answer;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -35,8 +35,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, arr)) {
-            System.out.print(x + " ");
+        for (int i : T.solution(n, arr)) {
+            System.out.print(i + " ");
         }
     }
 }

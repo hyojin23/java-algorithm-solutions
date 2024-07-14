@@ -3,7 +3,7 @@ package Section6_Sorting_and_Searching.Duplicate_Check;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_3rd {
 
     public String solution(int n, int[] arr) {
 
@@ -14,12 +14,13 @@ public class Main {
                 return "D";
             }
         }
+
         return "U";
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -28,6 +29,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         System.out.println(T.solution(n, arr));
     }
 }

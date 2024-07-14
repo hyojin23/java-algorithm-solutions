@@ -3,38 +3,34 @@ package Section6_Sorting_and_Searching.Choosing_A_Stable;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
-
-    public boolean isPosPlace(int mid, int c, int[] arr) {
-
-        int cnt = 1;
-        int sel = arr[0];
-        for (int i = 0; i < arr.length; i++) {
-
-            if (arr[i] >= sel + mid) {
-                cnt++;
-                sel = arr[i];
-            }
-        }
-
-        return cnt >= c;
-    }
+public class Main_3rd {
 
     public int solution(int n, int c, int[] arr) {
 
         Arrays.sort(arr);
 
-        int lt = arr[1] - arr[0];
-        int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
+        int lt = 1;
+        int rt = arr[n -1];
         int answer = 0;
 
         while (lt <= rt) {
 
-            int mid = (rt + lt) / 2;
+            int mid = (lt + rt) / 2;
+            int ep = arr[0];
+            int cnt = 1;
 
-            if (isPosPlace(mid, c, arr)) {
-                lt = mid + 1;
+            for (int x : arr) {
+                if (x - ep >= mid) {
+                    ep = x;
+                    cnt++;
+                }
+
+                if (cnt == c) break;
+            }
+
+            if (cnt == c) {
                 answer = mid;
+                lt = mid + 1;
             }
             else {
                 rt = mid - 1;
@@ -46,7 +42,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

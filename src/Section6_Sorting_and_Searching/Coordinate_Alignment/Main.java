@@ -1,27 +1,25 @@
 package Section6_Sorting_and_Searching.Coordinate_Alignment;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 
-class Coordinates implements Comparable<Coordinates>{
+class Coordinate implements Comparable<Coordinate> {
 
-    int x;
-    int y;
+    int x, y;
 
-    public Coordinates(int x, int y) {
+    Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public int compareTo(Coordinates c) {
-        if (this.x == c.x) {
-            return this.y - c.y;
+    public int compareTo(Coordinate ob) {
+
+        if (this.x == ob.x) {
+            return this.y - ob.y;
         }
         else {
-            return this.x - c.x;
+            return this.x - ob.x;
         }
     }
 }
@@ -30,23 +28,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main_2nd T = new Main_2nd();
+        Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Coordinates> list = new ArrayList<>();
+        Coordinate[] arr = new Coordinate[n];
 
         for (int i = 0; i < n; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
-
-            list.add(new Coordinates(x, y));
+            arr[i] = new Coordinate(x, y);
         }
 
-        Collections.sort(list);
+        Arrays.sort(arr);
 
-        for (Coordinates c : list) {
-            System.out.println(c.x + " " + c.y);
+        for (Coordinate co : arr) {
+            System.out.println(co.x + " " + co.y);
         }
     }
 }
