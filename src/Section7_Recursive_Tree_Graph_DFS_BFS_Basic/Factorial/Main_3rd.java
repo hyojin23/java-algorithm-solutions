@@ -2,27 +2,25 @@ package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Factorial;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_3rd {
 
-    int answer = 1;
-    public void DFS(int n) {
+    public int DFS(int n) {
 
-        if (n == 0) {
-            System.out.println(answer);
+        if (n == 1) {
+            return 1;
         }
         else {
-            answer *= n;
-            DFS(n - 1);
+            return n * DFS(n - 1);
         }
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
 
-        T.DFS(n);
+        System.out.println(T.DFS(n));
     }
 }
