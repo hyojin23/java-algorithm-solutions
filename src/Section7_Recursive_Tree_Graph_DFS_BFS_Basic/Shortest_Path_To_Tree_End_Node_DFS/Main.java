@@ -1,30 +1,34 @@
 package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Shortest_Path_To_Tree_End_Node_DFS;
 
+
+
 class Node {
 
     int data;
-    Node lt;
-    Node rt;
+    Node lt, rt;
 
-    public Node(int data) {
-        this.data = data;
+    Node(int val) {
+        data = val;
         lt = null;
         rt = null;
     }
 }
+
 public class Main {
 
     Node root;
+    static int answer = Integer.MAX_VALUE;
+    public void DFS(int L, Node node) {
 
-    public int DFS(Node root, int L) {
-
-        if (root.lt == null && root.rt == null) {
-            return L;
+        if (node.lt == null && node.rt == null) {
+            answer = Math.min(answer, L);
         }
-        else {
-            return Math.min(DFS(root.lt, L + 1), DFS(root.rt, L + 1));
+        else if (node.lt != null && node.rt != null) {
+            DFS(L + 1, node.lt);
+            DFS(L + 1, node.rt);
         }
     }
+
 
     public static void main(String[] args) {
 
@@ -35,6 +39,7 @@ public class Main {
         tree.root.lt.lt = new Node(4);
         tree.root.lt.rt = new Node(5);
 
-        System.out.println(tree.DFS(tree.root, 0));
+        tree.DFS(0, tree.root);
+        System.out.println(answer);
     }
 }

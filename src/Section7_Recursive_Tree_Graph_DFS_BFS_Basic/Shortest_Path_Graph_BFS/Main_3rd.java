@@ -6,42 +6,45 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_3rd {
 
-    static int n;
     static List<List<Integer>> graph;
-    static int[] dis;
+    static int[] ch;
+    static int[] answer;
 
-    public int[] BFS(int v) {
+    public int[] BFS(int n) {
 
         Queue<Integer> q = new LinkedList<>();
-        q.offer(v);
-
+        q.offer(n);
+        int L = 0;
         while (!q.isEmpty()) {
 
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                int cur = q.poll();
-                for (int x : graph.get(cur)) {
-                    if (dis[x] == 0) {
-                        q.offer(x);
-                        dis[x] = dis[cur] + 1;
+                int fromNode = q.poll();
+                for (int toNode : graph.get(fromNode)) {
+                    if (ch[toNode] == 0) {
+                        ch[toNode] = 1;
+                        q.offer(toNode);
                     }
                 }
+                answer[fromNode] = L;
             }
+            L++;
         }
-        return dis;
+        return answer;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
+        int n = sc.nextInt();
         int m = sc.nextInt();
         graph = new ArrayList<>();
-        dis = new int[n + 1];
+        ch = new int[n + 1];
+        answer = new int[n + 1];
 
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
@@ -50,14 +53,13 @@ public class Main {
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
-
             graph.get(a).add(b);
         }
 
-        dis[1] = 0;
+        ch[1] = 1;
         T.BFS(1);
         for (int i = 2; i <= n; i++) {
-            System.out.println(i + " : " + dis[i]);
+            System.out.println(i + " : " + answer[i]);
         }
     }
 }

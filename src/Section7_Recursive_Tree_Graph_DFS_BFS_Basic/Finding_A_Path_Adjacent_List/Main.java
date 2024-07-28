@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class Main {
 
-    static List<List<Integer>> graph;
-    static int[] ch;
+    static int n;
     static int answer = 0;
-    static int n, m;
+    static int[] ch;
+    static List<List<Integer>> graph;
 
     public void DFS(int v) {
 
@@ -17,11 +17,11 @@ public class Main {
             answer++;
         }
         else {
-            for (int i : graph.get(v)) {
-                if (ch[i] == 0) {
-                    ch[i] = 1;
-                    DFS(i);
-                    ch[i] = 0;
+            for (int x : graph.get(v)) {
+                if (ch[x] == 0) {
+                    ch[x] = 1;
+                    DFS(x);
+                    ch[x] = 0;
                 }
             }
         }
@@ -33,7 +33,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        m = sc.nextInt();
+        int m = sc.nextInt();
         graph = new ArrayList<>();
         ch = new int[n + 1];
 

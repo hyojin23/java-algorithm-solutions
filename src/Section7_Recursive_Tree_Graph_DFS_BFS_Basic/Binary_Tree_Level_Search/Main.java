@@ -8,8 +8,8 @@ class Node {
     int data;
     Node lt, rt;
 
-    public Node(int data) {
-        this.data = data;
+    Node(int val) {
+        data = val;
         lt = null;
         rt = null;
     }
@@ -22,15 +22,15 @@ public class Main {
     public void BFS(Node root) {
 
         Queue<Node> q = new LinkedList<>();
+
         q.offer(root);
-        int L = 0;
 
         while (!q.isEmpty()) {
 
             int len = q.size();
-
-            for (int i = 0 ; i < len; i++) {
+            for (int i = 0; i < len; i++) {
                 Node node = q.poll();
+                System.out.print(node.data + " ");
 
                 if (node.lt != null) {
                     q.offer(node.lt);
@@ -39,8 +39,6 @@ public class Main {
                 if (node.rt != null) {
                     q.offer(node.rt);
                 }
-
-                System.out.print(node.data + " ");
             }
         }
     }

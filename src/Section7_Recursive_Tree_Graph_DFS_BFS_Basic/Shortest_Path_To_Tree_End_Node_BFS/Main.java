@@ -6,15 +6,15 @@ import java.util.LinkedList;
 class Node {
 
     int data;
-    Node lt;
-    Node rt;
+    Node lt, rt;
 
-    public Node(int data) {
-        this.data = data;
+    Node(int val) {
+        data = val;
         lt = null;
         rt = null;
     }
 }
+
 public class Main {
 
     Node root;
@@ -24,28 +24,29 @@ public class Main {
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
         int L = 0;
-
         while (!q.isEmpty()) {
+
             int len = q.size();
             for (int i = 0; i < len; i++) {
+
                 Node cur = q.poll();
+
+                if (cur.lt != null) {
+                    q.offer(cur.lt);
+                }
+
+                if (cur.rt != null) {
+                    q.offer(cur.rt);
+                }
 
                 if (cur.lt == null && cur.rt == null) {
                     return L;
                 }
-                else {
-                    if (cur.lt != null) {
-                        q.offer(cur.lt);
-                    }
-
-                    if (cur.rt != null) {
-                        q.offer(cur.rt);
-                    }
-                }
             }
             L++;
         }
-        return L;
+
+        return 0;
     }
 
     public static void main(String[] args) {
