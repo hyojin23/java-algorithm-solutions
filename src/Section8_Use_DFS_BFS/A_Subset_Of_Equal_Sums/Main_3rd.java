@@ -1,18 +1,26 @@
-package Section8_Use_DFS_BFS.Put_Spotted_Dog;
+package Section8_Use_DFS_BFS.A_Subset_Of_Equal_Sums;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_3rd {
 
-    static int c, n;
+    static int n;
     static int[] arr;
-    static int answer = Integer.MIN_VALUE;
-
+    static int totSum = 0;
+    static String answer = "NO";
     public void DFS(int L, int sum) {
 
+        if ("YES".equals(answer)) {
+            return;
+        }
+
+        if (sum * 2 > totSum) {
+            return;
+        }
+
         if (L == n) {
-            if (sum < c) {
-                answer = Math.max(answer, sum);
+            if (totSum == sum * 2) {
+                answer = "YES";
             }
         }
         else {
@@ -23,18 +31,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
-        c = sc.nextInt();
         n = sc.nextInt();
         arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
+            totSum += arr[i];
         }
 
         T.DFS(0, 0);
         System.out.println(answer);
-    }
+     }
 }

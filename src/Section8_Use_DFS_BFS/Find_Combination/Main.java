@@ -4,23 +4,23 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int n, m;
-    static int[] cb;
-    static int[] ch;
+    static int[][] arr;
 
-    public void DFS(int L, int s) {
+    public int DFS(int n, int r) {
 
-        if (L == m) {
-            for (int x : cb) {
-                System.out.print(x + " ");
-            }
-            System.out.println();
+        if (arr[n][r] != 0) {
+            return arr[n][r];
+        }
+
+        if (n == r) {
+            return 1;
+        }
+
+        if (n == 1 || r == 0) {
+            return 1;
         }
         else {
-            for (int i = s; i <= n; i++) {
-                cb[L] = i;
-                DFS(L + 1, i + 1);
-            }
+            return arr[n][r] = DFS(n - 1, r) + DFS(n - 1, r  - 1);
         }
     }
 
@@ -29,11 +29,10 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
-        m = sc.nextInt();
-        ch = new int[n + 1];
-        cb = new int[m];
+        int n = sc.nextInt();
+        int r = sc.nextInt();
+        arr = new int[n + 1][n + 1];
 
-        T.DFS(0, 1);
+        System.out.println(T.DFS(n, r));
     }
 }

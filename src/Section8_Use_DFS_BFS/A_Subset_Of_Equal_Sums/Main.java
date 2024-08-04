@@ -1,25 +1,17 @@
 package Section8_Use_DFS_BFS.A_Subset_Of_Equal_Sums;
 
 import java.util.Scanner;
-
 public class Main {
 
+    static int totSum;
     static int n;
     static int[] arr;
-    static int totSum = 0;
     static String answer = "NO";
+
     public void DFS(int L, int sum) {
 
-        if ("YES".equals(answer)) {
-            return;
-        }
-
-        if (sum * 2 > totSum) {
-            return;
-        }
-
         if (L == n) {
-            if (totSum == sum * 2) {
+            if (totSum % 2 == 0 && sum == totSum / 2) {
                 answer = "YES";
             }
         }
@@ -44,5 +36,5 @@ public class Main {
 
         T.DFS(0, 0);
         System.out.println(answer);
-     }
+    }
 }

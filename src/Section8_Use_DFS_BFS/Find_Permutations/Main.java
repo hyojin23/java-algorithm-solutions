@@ -1,26 +1,29 @@
 package Section8_Use_DFS_BFS.Find_Permutations;
 
 import java.util.Scanner;
+
 public class Main {
 
     static int n, m;
+    static int[] arr;
     static int[] ch;
+    static int[] pm;
 
-    public void DFS(int L, int[] arr, int[] answer) {
+    public void DFS(int L) {
 
         if (L == m) {
-            for (int i = 0; i < m; i++) {
-                System.out.print(answer[i] + " ");
+            for (int x : pm) {
+                System.out.print(x + " ");
             }
             System.out.println();
         }
         else {
-            for (int i = 0; i < n; i++) {
-                if (ch[i] == 0) {
-                    answer[L] = arr[i];
-                    ch[i] = 1;
-                    DFS(L + 1, arr, answer);
-                    ch[i] = 0;
+            for (int x : arr) {
+                if (ch[x] == 0) {
+                    pm[L] = x;
+                    ch[x] = 1;
+                    DFS(L + 1);
+                    ch[x] = 0;
                 }
             }
         }
@@ -33,14 +36,14 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-        int[] arr = new int[n];
-        int[] answer = new int[m];
-        ch = new int[n];
+        arr = new int[n];
+        ch = new int[11];
+        pm = new int[m];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        T.DFS(0, arr, answer);
+        T.DFS(0);
     }
 }

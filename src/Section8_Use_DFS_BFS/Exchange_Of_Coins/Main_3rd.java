@@ -4,43 +4,42 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Main {
+public class Main_3rd {
 
     static int n, m;
-    static Integer[] coins;
+    static Integer[] arr;
     static int answer = Integer.MAX_VALUE;
 
-    public void DFS(int cnt, int sum) {
+    public void DFS(int L, int sum) {
 
         if (sum > m) return;
-
-        if (cnt >= answer) return;
+        if (L >= answer) return;
 
         if (sum == m) {
-            answer = Math.min(cnt, answer);
+            answer = Math.min(answer, L);
         }
         else {
             for (int i = 0; i < n; i++) {
-                DFS(cnt + 1, sum + coins[i]);
+                DFS(L + 1, sum + arr[i]);
             }
         }
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        coins = new Integer[n];
+        arr = new Integer[n];
 
         for (int i = 0; i < n; i++) {
-            coins[i] = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
 
-        Arrays.sort(coins, Collections.reverseOrder());
-
         m = sc.nextInt();
+
+        Arrays.sort(arr, Collections.reverseOrder());
 
         T.DFS(0, 0);
         System.out.println(answer);
