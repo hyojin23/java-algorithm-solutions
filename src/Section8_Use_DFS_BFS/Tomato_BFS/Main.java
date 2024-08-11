@@ -8,59 +8,61 @@ class Tomato {
 
     int x, y;
 
-    public Tomato(int x, int y) {
+    Tomato(int x, int y) {
         this.x = x;
         this.y = y;
     }
 }
+
 public class Main {
 
-    static int n, m;
-    static int[][] board;
-    static int[][] dis;
-    static int initCnt = 0;
+    static int[][] board, dis;
     int[] dx = {-1, 0, 1, 0};
     int[] dy = {0, 1, 0, -1};
+    static int n, m;
 
-    public int BFS(Queue<Tomato> q) {
+    public void BFS(Queue<Tomato> q) {
 
         while (!q.isEmpty()) {
+
             int len = q.size();
+
             for (int i = 0; i < len; i++) {
                 Tomato t = q.poll();
-                if (t != null) {
-                    for (int j = 0; j < 4; j++) {
-                        int nx = t.x + dx[j];
-                        int ny = t.y + dy[j];
-                        if (nx >= 1 && nx <= n && ny >= 1 && ny <= m && board[nx][ny] == 0) {
-                            board[nx][ny] = 1;
-                            q.offer(new Tomato(nx, ny));
-                            dis[nx][ny] = dis[t.x][t.y] + 1;
-                        }
+                for (int j = 0; j < 4; j++) {
+                    int nx = t.x + dx[j];
+                    int ny = t.y + dy[j];
+
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < m && board[nx][ny] == 0) {
+                        board[nx][ny] = 1;
+                        q.offer(new Tomato(nx, ny));
+                        dis[nx][ny] = dis[t.x][t.y] + 1;
                     }
                 }
             }
         }
-        return -1;
     }
 
     public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+        Queue<Tomato> q = new LinkedList<>();
 
         m = sc.nextInt();
         n = sc.nextInt();
-        board = new int[n + 1][m + 1];
-        dis = new int[n + 1][m + 1];
-        Queue<Tomato> q = new LinkedList<>();
+        board = new int[n][m];
+        dis = new int[n][m];
+        int cnt = 0;
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                int val = sc.nextInt();
-                board[i][j] = val;
-                if (val == 1) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int a = sc.nextInt();
+                board[i][j] = a;
+
+                if (a == 1) {
                     q.offer(new Tomato(i, j));
+                    cnt++;
                 }
             }
         }
@@ -68,26 +70,24 @@ public class Main {
         T.BFS(q);
 
         int answer = Integer.MIN_VALUE;
-        boolean flag = true;
-
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
-                if (board[i][j] == 0) {
-                    flag = false;
-                }
-            }
-        }
-
-        if (flag) {
-            for (int i = 1; i <= n; i++) {
-                for (int j = 1; j <= m; j++) {
-                    answer = Math.max(answer, dis[i][j]);
-                }
-            }
-            System.out.println(answer);
+        if (cnt == n * m) {
+            answer = 0;
         }
         else {
-            System.out.println(-1);
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    answer = Math.max(dis[i][j], answer);
+                }
+            }
+
+            for (int i = 0; i < n; i++) {
+                for (int j =0 ; j < m; j++) {
+                    if (board[i][j] == 0) {
+                        answer = -1;
+                    }
+                }
+            }
         }
+        System.out.println(answer);
     }
 }
