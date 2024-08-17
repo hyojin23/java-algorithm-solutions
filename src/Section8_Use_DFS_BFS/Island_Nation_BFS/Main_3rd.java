@@ -4,40 +4,46 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-class Point {
+class Island_3rd {
 
     int x, y;
 
-    Point (int x, int y) {
+    Island_3rd(int x, int y) {
         this.x = x;
         this.y = y;
     }
 }
 
-public class Main {
+public class Main_3rd {
 
+    static int n, answer = 0;
+    static int[][] arr;
     int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
     int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
-    static int[][] board;
-    static int n;
 
-    public void BFS(Point point) {
+    public void BFS(int x, int y) {
 
-        Queue<Point> q = new LinkedList<>();
-        q.offer(point);
+        Queue<Island_3rd> q = new LinkedList<>();
+
+        q.offer(new Island_3rd(x, y));
+        answer++;
 
         while (!q.isEmpty()) {
+
             int len = q.size();
-            Point p = q.poll();
 
             for (int i = 0; i < len; i++) {
-                for (int j = 0; j < 8; j++) {
-                    int nx = p.x + dx[j];
-                    int ny = p.y + dy[j];
 
-                    if (nx >= 0 && nx <= n - 1 && ny >= 0 && ny <= n - 1 && board[nx][ny] == 1) {
-                        board[nx][ny] = 0;
-                        q.offer(new Point(nx, ny));
+                Island_3rd is = q.poll();
+
+                for (int j = 0; j < 8; j++) {
+
+                    int nx = is.x + dx[j];
+                    int ny = is.y + dy[j];
+
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < n && arr[nx][ny] == 1) {
+                        arr[nx][ny] = 0;
+                        q.offer(new Island_3rd(nx, ny));
                     }
                 }
             }
@@ -46,27 +52,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        board = new int[n][n];
-        int answer = 0;
+        arr = new int[n][n];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                board[i][j] = sc.nextInt();
+                arr[i][j] = sc.nextInt();
             }
         }
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board[i][j] == 1) {
-                    answer++;
-                    T.BFS(new Point(i, j));
+            for (int j = 0; j< n; j++) {
+                if (arr[i][j] == 1) {
+                    arr[i][j] = 0;
+                    T.BFS(i, j);
                 }
             }
         }
+
         System.out.println(answer);
     }
 }

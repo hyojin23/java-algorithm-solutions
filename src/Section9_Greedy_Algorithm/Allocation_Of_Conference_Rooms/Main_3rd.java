@@ -5,55 +5,58 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Time implements Comparable<Time> {
+class Time_3rd implements Comparable<Time_3rd> {
 
     int s, e;
 
-    Time(int s, int e) {
+    Time_3rd(int s, int e) {
         this.s = s;
         this.e = e;
     }
 
     @Override
-    public int compareTo(Time t) {
-        if (this.e == t.e) {
-            return this.s - t.s;
+    public int compareTo(Time_3rd o) {
+        if (this.e == o.e) {
+            return this.s - o.s;
         }
         else {
-            return this.e - t.e;
+            return this.e - o.e;
         }
     }
 }
-public class Main {
+public class Main_3rd {
 
-    public int solution(List<Time> list) {
+    public int solution(List<Time_3rd> list) {
+
+        int answer = 0;
+        int lastEndTime = Integer.MIN_VALUE;
 
         Collections.sort(list);
-        int last = Integer.MIN_VALUE;
-        int answer = 0;
 
-        for (Time t : list) {
-            if (t.s >= last) {
-                last = t.e;
+        for (Time_3rd time : list) {
+
+            if (time.s >= lastEndTime) {
                 answer++;
+                lastEndTime = time.e;
             }
         }
+
         return answer;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Time> list = new ArrayList<>();
+        List<Time_3rd> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int e = sc.nextInt();
 
-            list.add(new Time(s, e));
+            list.add(new Time_3rd(s, e));
         }
 
         System.out.println(T.solution(list));

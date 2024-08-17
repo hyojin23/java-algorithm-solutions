@@ -5,44 +5,42 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Time implements Comparable<Time> {
+class Plan implements Comparable<Plan> {
 
-    int t;
-    char s;
+    int time;
+    char type;
 
-    public Time(int t, char s) {
-        this.s = s;
-        this.t = t;
+    Plan(int time, char type) {
+        this.time = time;
+        this.type = type;
     }
 
     @Override
-    public int compareTo(Time o) {
-        if (t != o.t) {
-            return this.t - o.t;
+    public int compareTo(Plan o) {
+        if (this.time == o.time) {
+            return this.type - o.type;
         }
         else {
-            return this.s - o.s;
+            return this.time - o.time;
         }
     }
 }
 
 public class Main {
 
-    public int solution(List<Time> list) {
-
-        int answer = Integer.MIN_VALUE;
-        int cnt = 0;
+    public int solution(List<Plan> list) {
 
         Collections.sort(list);
+        int cnt = 0;
+        int answer = 0;
 
-        for (Time o : list) {
-            if (o.s == 's') {
+        for (Plan p : list) {
+            if (p.type == 's') {
                 cnt++;
             }
-            else if (o.s == 'e') {
+            else if (p.type == 'e') {
                 cnt--;
             }
-
             answer = Math.max(answer, cnt);
         }
 
@@ -55,14 +53,14 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Time> list = new ArrayList<>();
+        List<Plan> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int e = sc.nextInt();
 
-            list.add(new Time(s, 's')); // start time
-            list.add(new Time(e, 'e')); // end time
+            list.add(new Plan(s, 's'));
+            list.add(new Plan(e, 'e'));
         }
 
         System.out.println(T.solution(list));

@@ -2,41 +2,40 @@ package Section9_Greedy_Algorithm.Wrestler;
 
 import java.util.*;
 
-
-class Wrestler implements Comparable<Wrestler> {
+class Person implements Comparable<Person> {
 
     int h, w;
 
-    public Wrestler(int h, int w) {
+    Person(int h, int w) {
         this.h = h;
         this.w = w;
     }
 
     @Override
-    public int compareTo(Wrestler o) {
-        return o.h - this.h;
+    public int compareTo(Person p) {
+        return p.h - this.h;
     }
 }
 
 public class Main {
 
-    public int solution(List<Wrestler> list) {
+    public int solution(List<Person> list) {
 
-        int answer = 0;
+        int answer = list.size();
         int max = Integer.MIN_VALUE;
 
         Collections.sort(list);
 
-        for (Wrestler w : list) {
-
-            if (w.w > max) {
-                answer++;
-            }
-            max = Math.max(max, w.w);
+        for (int i = 1; i < list.size(); i++) {
+            Person p1 = list.get(i);
+            Person p2 = list.get(i - 1);
+            max = Math.max(p2.w, max);
+             if (p1.w < max) {
+                 answer--;
+             }
         }
         return answer;
     }
-
 
     public static void main(String[] args) {
 
@@ -44,13 +43,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Wrestler> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int h = sc.nextInt();
             int w = sc.nextInt();
 
-            list.add(new Wrestler(h, w));
+            list.add(new Person(h, w));
         }
 
         System.out.println(T.solution(list));
