@@ -23,10 +23,10 @@ class Edge implements Comparable<Edge> {
 
 public class Main {
 
-    public static int[] unf;
+    static int[] unf;
+    public static int Find(int v) {
 
-    public int Find(int v) {
-        if (v == unf[v]) {
+        if (unf[v] == v) {
             return v;
         }
         else {
@@ -34,7 +34,8 @@ public class Main {
         }
     }
 
-    public void Union(int a, int b) {
+    public static void Union(int a, int b) {
+
         int fa = Find(a);
         int fb = Find(b);
 
@@ -43,22 +44,22 @@ public class Main {
         }
     }
 
-    public int solution(int v, int e, List<Edge> list) {
+    public int solution(List<Edge> list) {
 
-        int answer = 0;
         Collections.sort(list);
 
-        for (Edge edge : list) {
-            int fa = Find(edge.v1);
-            int fb = Find(edge.v2);
+        int sum = 0;
+        for (Edge e : list) {
+            int fv1 = Find(e.v1);
+            int fv2 = Find(e.v2);
 
-            if (fa != fb) {
-                Union(edge.v1, edge.v2);
-                answer += edge.cost;
+            if (fv1 != fv2) {
+                Union(e.v1, e.v2);
+                sum += e.cost;
             }
         }
 
-        return answer;
+        return sum;
     }
 
     public static void main(String[] args) {
@@ -69,19 +70,20 @@ public class Main {
         int v = sc.nextInt();
         int e = sc.nextInt();
         List<Edge> list = new ArrayList<>();
-        unf = new int[v + 1];   
+        unf = new int[v + 1];
 
-        for (int i = 1; i < v + 1; i++) {
+        for (int i = 1; i <= v; i++) {
             unf[i] = i;
         }
 
         for (int i = 0; i < e; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            int c = sc.nextInt();
-            list.add(new Edge(a, b, c));
+            int v1 = sc.nextInt();
+            int v2 = sc.nextInt();
+            int cost = sc.nextInt();
+
+            list.add(new Edge(v1, v2, cost));
         }
 
-        System.out.println(T.solution(v, e, list));
+        System.out.println(T.solution(list));
     }
 }

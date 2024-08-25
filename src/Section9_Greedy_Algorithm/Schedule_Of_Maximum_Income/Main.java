@@ -6,66 +6,68 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-class Lecture implements Comparable<Lecture> {
+class Schedule implements Comparable<Schedule> {
 
-    int m, t;
+    int m, d;
 
-    public Lecture(int m, int t) {
+    Schedule(int m, int d) {
         this.m = m;
-        this.t = t;
+        this.d = d;
     }
 
     @Override
-    public int compareTo(Lecture o) {
-        return o.t - this.t;
+    public int compareTo(Schedule ob) {
+        return ob.d - this.d;
     }
 }
 
 public class Main {
 
-    static int n;
-    public int solution(List<Lecture> list, int today) {
+    static int max = Integer.MIN_VALUE;
 
-        int answer = 0;
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+    public int solution(int n, List<Schedule> list) {
 
         Collections.sort(list);
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
         int j = 0;
-        for (int i = today; i >= 1; i--) {
+        int sum = 0;
+        for (int i = max; i >= 1; i--) {
             for ( ; j < n; j++) {
-                if (list.get(j).t >= i) {
+                if (list.get(j).d >= i) {
                     pq.offer(list.get(j).m);
                 }
                 else {
                     break;
                 }
             }
-
             if (!pq.isEmpty()) {
-                answer += pq.poll();
+                sum += pq.poll();
             }
         }
-
-        return answer;
+        return sum;
     }
+
 
     public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
-        int today = Integer.MIN_VALUE;
 
-        n = sc.nextInt();
-        List<Lecture> list = new ArrayList<>();
+        int n = sc.nextInt();
+        List<Schedule> list = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
             int m = sc.nextInt();
-            int t = sc.nextInt();
+            int d = sc.nextInt();
 
-            list.add(new Lecture(m, t));
-            today = Math.max(t, today);
+            list.add(new Schedule(m, d));
+
+            if (d > max) {
+                max = d;
+            }
         }
 
-        System.out.println(T.solution(list, today));
+        System.out.println(T.solution(n, list));
     }
 }

@@ -8,11 +8,10 @@ import java.util.PriorityQueue;
 
 class Edge implements Comparable<Edge> {
 
-    int vex;
-    int cost;
+    int v, cost;
 
-    Edge(int vex, int cost) {
-        this.vex = vex;
+    Edge(int v, int cost) {
+        this.v = v;
         this.cost = cost;
     }
 
@@ -24,32 +23,36 @@ class Edge implements Comparable<Edge> {
 
 public class Main {
 
-    static List<List<Edge>> graph;
-    static int[] dis;
+    static int n;
 
-    public void solution(int v) {
+    public int[] solution(List<List<Edge>> list) {
+
+        int[] cost = new int[n + 1];
+        Arrays.fill(cost, Integer.MAX_VALUE);
+        cost[1] = 0;
 
         PriorityQueue<Edge> pq = new PriorityQueue<>();
-
-        pq.offer(new Edge(v, 0));
-        dis[v] = 0;
+        pq.offer(new Edge(1, 0));
 
         while (!pq.isEmpty()) {
 
-            Edge data = pq.poll();
+            Edge edge = pq.poll();
+            int nowVex = edge.v;
+            int nowCost = edge.cost;
 
-            int now = data.vex;
-            int nowCost = data.cost;
+            if (nowCost > cost[nowVex]) {
+                continue;
+            }
 
-            if (nowCost > dis[now]) continue;
-
-            for (Edge to : graph.get(now)) {
-                if (dis[to.vex] > nowCost + to.cost) {
-                    dis[to.vex] = nowCost + to.cost;
-                    pq.offer(new Edge(to.vex, nowCost + to.cost));
+            for (Edge e : list.get(nowVex)) {
+                int nc = nowCost + e.cost;
+                if (nc < cost[e.v]) {
+                    cost[e.v] = nc;
+                    pq.offer(new Edge(e.v, nc));
                 }
             }
         }
+        return cost;
     }
 
     public static void main(String[] args) {
@@ -57,32 +60,31 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
+        n = sc.nextInt();
         int m = sc.nextInt();
-        graph = new ArrayList<>();
 
-        for (int i = 0; i <= n; i++) {
-            graph.add(new ArrayList<>());
+        List<List<Edge>> list =  new ArrayList<>();
+
+        for (int i = 0; i < n + 1; i++) {
+            list.add(new ArrayList<>());
         }
-
-        dis = new int[n + 1];
-        Arrays.fill(dis, Integer.MAX_VALUE);
 
         for (int i = 0; i < m; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            int c = sc.nextInt();
+            int v1 = sc.nextInt();
+            int v2 = sc.nextInt();
+            int cost = sc.nextInt();
 
-            graph.get(a).add(new Edge(b, c));
+            list.get(v1).add(new Edge(v2, cost));
         }
-        T.solution(1);
+
+        int[] answer = T.solution(list);
 
         for (int i = 2; i <= n; i++) {
-            if (dis[i] == Integer.MAX_VALUE) {
+            if (answer[i] == Integer.MAX_VALUE) {
                 System.out.println(i + " : impossible");
             }
             else {
-                System.out.println(i + " : " + dis[i]);
+                System.out.println(i + " : " + answer[i]);
             }
         }
     }
