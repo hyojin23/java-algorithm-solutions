@@ -6,33 +6,32 @@ public class Main {
 
     public String solution(String str) {
 
-        String answer = "";
-        char[] charArr = str.toCharArray();
-
+        char[] chArr = str.toCharArray();
         int lt = 0;
-        int rt = str.length() - 1;
+        int rt = chArr.length - 1;
 
         while (lt < rt) {
-
-            if (Character.isAlphabetic(charArr[lt]) && Character.isAlphabetic(charArr[rt])) {
-                char tmp = charArr[lt];
-                charArr[lt] = charArr[rt];
-                charArr[rt] = tmp;
+            if (Character.isAlphabetic(chArr[lt]) && Character.isAlphabetic(chArr[rt])) {
+                char tmp = chArr[lt];
+                chArr[lt] = chArr[rt];
+                chArr[rt] = tmp;
                 lt++;
                 rt--;
             }
-            else if (Character.isAlphabetic(charArr[lt])) {
+            else if (!Character.isAlphabetic(chArr[lt])) {
+                lt++;
+            }
+            else if (!Character.isAlphabetic(chArr[rt])) {
                 rt--;
             }
             else {
                 lt++;
+                rt--;
             }
         }
-
-        answer = String.valueOf(charArr);
-
-        return answer;
+        return String.valueOf(chArr);
     }
+
 
     public static void main(String[] args) {
 
@@ -44,4 +43,3 @@ public class Main {
         System.out.println(T.solution(str));
     }
 }
-

@@ -6,19 +6,27 @@ public class Main {
 
     public String solution(String str) {
 
-        String[] strArr = str.split(" ");
-        int maxLength = 0;
+        str = str + " ";
+        int max = Integer.MIN_VALUE;
         String answer = "";
 
-        for (String s : strArr) {
-            if (s.length() > maxLength) {
-                answer = s;
-                maxLength = s.length();
+        while (str.contains(" ")) {
+
+            int endIdx = str.indexOf(" ");
+            int beginIdx = str.indexOf(" ") + 1;
+
+            String word = str.substring(0, endIdx);
+            str = str.substring(beginIdx);
+
+            if (word.length() > max) {
+                answer = word;
+                max = word.length();
             }
         }
 
         return answer;
     }
+
 
     public static void main(String[] args) {
 

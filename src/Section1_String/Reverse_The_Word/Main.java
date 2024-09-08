@@ -3,16 +3,11 @@ package Section1_String.Reverse_The_Word;
 import java.util.Scanner;
 
 public class Main {
-
-    public String[] solution(int n, String[] arr) {
-
-        String[] answer = new String[n];
-
-        for (int i = 0; i < n; i++) {
-            answer[i] = new StringBuilder(arr[i]).reverse().toString();
+ 
+    public void solution(String[] arr) {
+        for (String str : arr) {
+            System.out.println(new StringBuilder(str).reverse());
         }
-
-        return answer;
     }
 
     public static void main(String[] args) {
@@ -27,8 +22,6 @@ public class Main {
             arr[i] = sc.next();
         }
 
-        for (String str : T.solution(n, arr)) {
-            System.out.println(str);
-        }
+        T.solution(arr);
     }
 }
