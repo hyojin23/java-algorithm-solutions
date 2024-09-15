@@ -6,37 +6,30 @@ public class Main {
 
     public String solution(int n, String str) {
 
+        int len = 7;
         StringBuilder sb = new StringBuilder();
-        String answer = "";
 
         for (int i = 0; i < n; i++) {
-            String s = str.substring(0, 7).replace("#", "1").replace("*", "0");
-            str = str.substring(7);
+            String signal = str.substring(0, len);
+            str = str.substring(len);
 
-            int res = 0;
-            int b = 1;
+            int answer = 0;
+            int base = 1;
 
-            for (int j = 6; j >= 0; j--) {
-
-                if (j == 6) {
-                    b = b * 1;
+            for (int j = len - 1; j >= 0; j--) {
+                if (signal.charAt(j) == '#') {
+                    answer += base;
                 }
-                else {
-                    b = b * 2;
-                }
-
-                res = res + (s.charAt(j) - 48) * b;
+                base = base * 2;
             }
-
-            sb.append((char) res);
+            sb.append((char) answer);
         }
 
-        answer = sb.toString();
-
-        return answer;
+        return sb.toString();
     }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] argss) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
@@ -47,4 +40,3 @@ public class Main {
         System.out.println(T.solution(n, str));
     }
 }
-

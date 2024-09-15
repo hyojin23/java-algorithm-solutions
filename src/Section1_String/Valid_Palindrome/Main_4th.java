@@ -2,43 +2,35 @@ package Section1_String.Valid_Palindrome;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public String solution(String str) {
 
         int lt = 0;
         int rt = str.length() - 1;
-        char[] arr = str.toCharArray();
 
         while (lt < rt) {
-            char a = arr[lt];
-            char b = arr[rt];
-
-            if (Character.isAlphabetic(a) && Character.isAlphabetic(b)) {
-                if (a != b) {
+            if (!Character.isAlphabetic(str.charAt(lt))) {
+                lt++;
+            }
+            else if (!Character.isAlphabetic(str.charAt(rt))) {
+                rt--;
+            }
+            else {
+                if (str.charAt(lt) != str.charAt(rt)) {
                     return "NO";
                 }
                 lt++;
                 rt--;
             }
-            else if (!Character.isAlphabetic(a)) {
-                lt++;
-            }
-            else if (!Character.isAlphabetic(b)) {
-                rt--;
-            }
-            else {
-                lt++;
-                rt--;
-            }
         }
+
         return "YES";
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.nextLine().toLowerCase();
