@@ -1,25 +1,31 @@
-package Section2_Array.Visible_Student;
+package Section2_Array.Calculating_The_Score;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public int solution(int n, int[] arr) {
 
-        int max = arr[0];
-        int cnt = 1;
-        for (int i = 1; i < n; i++) {
-            if (arr[i] > max) {
-                cnt++;
-                max = arr[i];
+        int answer = 0;
+        int score = 0;
+
+        for (int i : arr) {
+
+            if (i == 1) {
+                score++;
             }
+            else {
+                score = 0;
+            }
+            answer += score;
         }
-        return cnt;
+
+        return answer;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

@@ -4,23 +4,19 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int solution(int n, int[] arr) {
+    public int solution(int[] arr) {
 
-        int answer = 0;
         int score = 0;
-
-        for (int i : arr) {
-
-            if (i == 1) {
-                score++;
-            }
-            else {
+        int sum = 0;
+        for (int x : arr) {
+            if (x == 0) {
                 score = 0;
             }
-            answer += score;
+            else {
+                sum += ++score;
+            }
         }
-
-        return answer;
+        return sum;
     }
 
     public static void main(String[] args) {
@@ -35,6 +31,6 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(n, arr));
+        System.out.println(T.solution(arr));
     }
 }

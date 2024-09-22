@@ -2,24 +2,25 @@ package Section2_Array.Visible_Student;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public int solution(int n, int[] arr) {
 
-        int max = arr[0];
-        int cnt = 1;
-        for (int i = 1; i < n; i++) {
-            if (arr[i] > max) {
+        int max = 0;
+        int cnt = 0;
+        for (int x : arr) {
+            if (x > max) {
                 cnt++;
-                max = arr[i];
+                max = x;
             }
         }
+
         return cnt;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

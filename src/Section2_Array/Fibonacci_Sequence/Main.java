@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int[] solution(int n) {
+    public void solution(int n) {
 
-        int[] arr = new int[n];
-
-        arr[0] = 1;
-        arr[1] = 1;
+        int a = 1;
+        int b = 1;
+        System.out.print(a + " " + b + " ");
 
         for (int i = 2; i < n; i++) {
-            arr[i] = arr[i - 1] + arr[i - 2];
+            int c = a + b;
+            a = b;
+            b = c;
+            System.out.print(c + " ");
         }
-
-        return arr;
     }
 
     public static void main(String[] args) {
@@ -25,8 +25,6 @@ public class Main {
 
         int n = sc.nextInt();
 
-        for (int i : T.solution(n)) {
-            System.out.print(i + " ");
-        }
+        T.solution(n);
     }
 }

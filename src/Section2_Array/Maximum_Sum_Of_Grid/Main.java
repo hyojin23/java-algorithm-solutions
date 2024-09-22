@@ -6,30 +6,32 @@ public class Main {
 
     public int solution(int n, int[][] arr) {
 
-        int answer = 0;
-
-        int downCrsSum = 0;
-        int upCrsSum = 0;
-
+        int max = Integer.MIN_VALUE;
+        int crossSum1 = 0;
+        int crossSum2 = 0;
         for (int i = 0; i < n; i++) {
-            int rowSum = 0;
-            int colSum = 0;
-
+            int hSum = 0;
+            int vSum = 0;
             for (int j = 0; j < n; j++) {
-                rowSum += arr[i][j];
-                colSum += arr[j][i];
-            }
-            answer = Math.max(answer, rowSum);
-            answer = Math.max(answer, colSum);
+                hSum += arr[i][j];
+                vSum += arr[j][i];
 
-            downCrsSum += arr[i][i];
-            upCrsSum += arr[i][n - 1 - i];
+                if (i == j) {
+                    crossSum1 += arr[i][j];
+                }
+
+                if (i + j == n - 1) {
+                    crossSum2 += arr[i][j];
+                }
+            }
+            max = Math.max(hSum, max);
+            max = Math.max(vSum, max);
         }
 
-        answer = Math.max(answer, downCrsSum);
-        answer = Math.max(answer, upCrsSum);
+        max = Math.max(crossSum1, max);
+        max = Math.max(crossSum2, max);
 
-        return answer;
+        return max;
     }
 
     public static void main(String[] args) {

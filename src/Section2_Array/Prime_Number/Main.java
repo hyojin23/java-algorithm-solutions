@@ -6,21 +6,19 @@ public class Main {
 
     public int solution(int n) {
 
-        int answer = 0;
-        int[] ch = new int[n + 1];
-
-        for (int i = 2; i < n + 1; i++) {
-
-            if (ch[i] == 0) {
-                answer++;
-            }
-            for (int j = 2; i * j < n + 1; j++) {
-                ch[i * j] = 1;
+        int[] arr = new int[n + 1];
+        int cnt = 0;
+        for (int i = 2; i <= n; i++) {
+            if (arr[i] == 0) {
+                cnt++;
+                for (int j = i; j <= n; j = j + i) {
+                    arr[j] = 1;
+                }
             }
         }
-
-        return answer;
+        return cnt;
     }
+
 
     public static void main(String[] args) {
 

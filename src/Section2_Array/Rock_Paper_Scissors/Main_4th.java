@@ -2,7 +2,7 @@ package Section2_Array.Rock_Paper_Scissors;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public void solution(int n, int[] a, int[] b) {
 
@@ -31,12 +31,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int[] a = new int[n];
-        int[] b = new int[n];
+        int[] b= new int[n];
 
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();

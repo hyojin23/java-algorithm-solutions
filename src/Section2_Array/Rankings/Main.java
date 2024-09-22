@@ -1,25 +1,28 @@
 package Section2_Array.Rankings;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
 
-    public int[] solution(int n, int[] arr) {
+    public List<Integer> solution(int[] arr) {
 
-        int[] answer = new int[n];
+        List<Integer> list = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            int cnt = 0;
+        for (int x : arr) {
+            int rank = 1;
             for (int y : arr) {
-                if (arr[i] < y) {
-                    cnt++;
+                if (x < y) {
+                    rank++;
                 }
             }
-            answer[i] = cnt + 1;
+            list.add(rank);
         }
 
-        return answer;
+        return list;
     }
+
 
     public static void main(String[] args) {
 
@@ -33,9 +36,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        for (int i : T.solution(n, arr)) {
-            System.out.print(i + " ");
+        for (int x : T.solution(arr)) {
+            System.out.print(x + " ");
         }
     }
 }
-
