@@ -2,42 +2,35 @@ package Section3_Two_Pointers_and_Sliding_Window.Continuous_Partial_Sequence;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public int solution(int n, int m, int[] arr) {
 
-        int lt = 0;
-        int rt = 0;
-        int sum = arr[0];
         int answer = 0;
+        int lt = 0;
+        int sum = 0;
 
-        while (lt < n && rt < n) {
-            if (sum < m) {
-                rt++;
-                if (rt >= n) {
-                    break;
-                }
-                sum += arr[rt];
-            }
-            else if (sum > m) {
-                sum -= arr[lt++];
-            }
-            else {
+        for (int rt = 0; rt < n; rt++) {
+            sum += arr[rt];
+
+            if (sum == m) {
                 answer++;
-                rt++;
-                if (rt >= n) {
-                    break;
+            }
+
+            while (sum > m) {
+                sum -= arr[lt++];
+                if (sum == m) {
+                    answer++;
                 }
-                sum += arr[rt];
             }
         }
+
         return answer;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -47,7 +40,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-
         System.out.println(T.solution(n, m, arr));
     }
 }
+

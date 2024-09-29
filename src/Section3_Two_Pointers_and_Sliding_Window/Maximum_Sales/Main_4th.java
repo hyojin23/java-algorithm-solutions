@@ -2,10 +2,11 @@ package Section3_Two_Pointers_and_Sliding_Window.Maximum_Sales;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public int solution(int n, int k, int[] arr) {
 
+        int answer = 0;
         int lt = 0;
         int sum = 0;
 
@@ -13,19 +14,22 @@ public class Main {
             sum += arr[i];
         }
 
-        int max = sum;
-        for (int rt = k; rt < n; rt++) {
-            sum += arr[rt];
-            sum -= arr[lt++];
-            max = Math.max(sum, max);
-        }
-        return max;
-    }
+        answer = Math.max(sum, answer);
 
+        for (int rt = k; rt < n; rt++) {
+
+            sum -= arr[lt++];
+            sum += arr[rt];
+
+            answer = Math.max(sum, answer);
+        }
+
+        return answer;
+    }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -35,6 +39,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         System.out.println(T.solution(n, k, arr));
     }
 }

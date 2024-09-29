@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Main {
+public class Main_4th {
 
     public char solution(int n, String str) {
 
@@ -13,22 +13,23 @@ public class Main {
         int max = Integer.MIN_VALUE;
 
         for (char c : str.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 1) + 1);
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
 
-        for (char c : map.keySet()) {
-            if (map.get(c) > max) {
-                max = map.get(c);
-                answer = c;
+        for (char k : map.keySet()) {
+
+            if (map.get(k) > max) {
+                answer = k;
+                max = map.get(k);
             }
         }
+
         return answer;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -37,3 +38,4 @@ public class Main {
         System.out.println(T.solution(n, str));
     }
 }
+
