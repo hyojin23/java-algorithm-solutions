@@ -3,35 +3,34 @@ package Section5_Stack_and_Queue.Remove_Characters_in_Brackets;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class Main_4th {
 
-    public Stack<Character> solution(String str) {
+    public void solution(String str) {
 
         Stack<Character> stack = new Stack<>();
 
         for (char c : str.toCharArray()) {
             if (c == ')') {
                 while (stack.pop() != '(') {
-                    continue;
+
                 }
             }
             else {
                 stack.push(c);
             }
         }
-        return stack;
-    }
 
+        for (char c : stack) {
+            System.out.print(c);
+        }
+    }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
-
-        for (char c : T.solution(str)) {
-            System.out.print(c);
-        }
+        T.solution(str);
     }
 }

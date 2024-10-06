@@ -4,38 +4,35 @@ import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.Collections;
 
-public class Main {
+public class Main_4th {
 
     public int solution(int n, int k, int[] arr) {
 
-        TreeSet<Integer> set = new TreeSet<>(Collections.reverseOrder());
         int answer = -1;
+        TreeSet<Integer> set = new TreeSet<Integer>(Collections.reverseOrder());
 
-        for (int i = 0 ; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                for (int l = j + 1; l < n; l++) {
-                    set.add(arr[i] + arr[j] + arr[l]);
+                for (int s = j + 1; s < n; s++) {
+                    set.add(arr[i] + arr[j] + arr[s]);
                 }
             }
         }
-        int cnt = 1;
-        //set.remove(143);
-        //System.out.println(set.size());
-        //System.out.println(set.last());
+
+        int cnt = 0;
         for (int x : set) {
+            cnt++;
             if (cnt == k) {
                 answer = x;
             }
-            cnt++;
         }
 
         return answer;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

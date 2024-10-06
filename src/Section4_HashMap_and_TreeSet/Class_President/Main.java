@@ -16,6 +16,10 @@ public class Main {
             map.put(c, map.getOrDefault(c, 1) + 1);
         }
 
+        //System.out.println(map.containsKey('A'));
+        //System.out.println(map.size());
+        //System.out.println(map.remove('A'));
+
         for (char c : map.keySet()) {
             if (map.get(c) > max) {
                 max = map.get(c);
