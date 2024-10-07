@@ -16,7 +16,7 @@ public class Main {
 
         for (char c : plan.toCharArray()) {
             if (q.contains(c)) {
-                if (q.peek() == c) {
+                if (c == q.peek()) {
                     q.poll();
                 }
                 else {
@@ -32,6 +32,7 @@ public class Main {
         return "YES";
     }
 
+
     public static void main(String[] args) {
 
         Main T = new Main();
@@ -43,4 +44,3 @@ public class Main {
         System.out.println(T.solution(must, plan));
     }
 }
-

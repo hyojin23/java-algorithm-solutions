@@ -30,7 +30,7 @@ public class Main_3rd {
 
     public static void main(String[] args) {
 
-        Main_2nd T = new Main_2nd();
+        Main_3rd T = new Main_3rd();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

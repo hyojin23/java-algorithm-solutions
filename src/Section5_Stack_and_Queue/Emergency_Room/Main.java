@@ -6,11 +6,12 @@ import java.util.LinkedList;
 
 class Patient {
 
-    int d, o;
+    int rank;
+    int danger;
 
-    Patient(int d, int o) {
-        this.d = d;
-        this.o = o;
+    Patient(int rank, int danger) {
+        this.rank = rank;
+        this.danger = danger;
     }
 }
 
@@ -21,29 +22,28 @@ public class Main {
         Queue<Patient> q = new LinkedList<>();
         int answer = 0;
 
-        for (int i = 0; i < n; i++) {
-            q.offer(new Patient(arr[i], i));
+        for (int i = 0; i < arr.length; i++) {
+            q.offer(new Patient(i, arr[i]));
         }
 
-        int cnt = 0;
         while (!q.isEmpty()) {
-            Patient a = q.poll();
-            for (Patient b : q) {
-                if (a.d < b.d) {
-                    q.offer(a);
+            Patient p = q.poll();
+            for (Patient r : q) {
+                if (r.danger > p.danger) {
+                    q.offer(p);
                     break;
                 }
             }
-            if (!q.contains(a)) {
-                cnt++;
-                if (a.o == m) {
-                    answer = cnt;
+            if (!q.contains(p)) {
+                answer++;
+                if (p.rank == m) {
+                    break;
                 }
             }
         }
-
         return answer;
     }
+
 
     public static void main(String[] args) {
 
