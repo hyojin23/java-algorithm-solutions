@@ -3,49 +3,50 @@ package Section6_Sorting_and_Searching.Choosing_A_Stable;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_4th {
 
-    public boolean canArrange(int targetCnt, int distance, int[] arr) {
+    public boolean isPosPlace(int mid, int c, int[] arr) {
 
-        Arrays.sort(arr);
-
-        int pos = arr[0];
         int cnt = 1;
-        for (int x : arr) {
-            if (x >= pos + distance) {
-                pos = x;
+        int sel = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+
+            if (arr[i] >= sel + mid) {
                 cnt++;
+                sel = arr[i];
             }
         }
 
-        return cnt >= targetCnt;
+        return cnt >= c;
     }
 
     public int solution(int n, int c, int[] arr) {
 
-        int lt = 1;
+        Arrays.sort(arr);
+
+        int lt = arr[1] - arr[0];
         int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
         int answer = 0;
 
         while (lt <= rt) {
-            int mid = (lt + rt) / 2;
-            boolean canArrage = canArrange(c, mid, arr);
 
-            if (canArrage) {
-                answer = mid;
+            int mid = (rt + lt) / 2;
+
+            if (isPosPlace(mid, c, arr)) {
                 lt = mid + 1;
+                answer = mid;
             }
             else {
                 rt = mid - 1;
             }
         }
+
         return answer;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

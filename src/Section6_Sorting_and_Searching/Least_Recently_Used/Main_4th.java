@@ -2,37 +2,41 @@ package Section6_Sorting_and_Searching.Least_Recently_Used;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     public int[] solution(int s, int n, int[] arr) {
 
         int[] cache = new int[s];
 
-        for (int x : arr) {
-            boolean cacheHit = false;
-            for (int i = 0; i < cache.length; i++) {
-                if (x == cache[i]) {
-                    for (int j = i - 1; j >= 0; j--) {
-                        cache[j + 1] = cache[j];
-                    }
-                    cacheHit = true;
+        for (int job : arr) {
+            int i;
+            for (i = s - 1; i >= 0; i--) {
+                if (cache[i] == job) {
                     break;
                 }
             }
-            if (!cacheHit) {
-                for (int i = s - 2; i >= 0; i--) {
-                    cache[i + 1] = cache[i];
-                }
+
+            // Cache Miss
+            int k;
+            if (i == -1) {
+                k = s - 1;
             }
-            cache[0] = x;
+            // Cache Hit
+            else {
+                k = i;
+            }
+            for (int j = k - 1; j >= 0; j--) {
+                cache[j + 1] = cache[j];
+            }
+            cache[0] = job;
         }
+
         return cache;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int s = sc.nextInt();

@@ -1,37 +1,39 @@
 package Section6_Sorting_and_Searching.Music_Video;
 
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Arrays;
 
-public class Main {
+public class Main_4th {
 
-    public boolean canRecord(int targetCnt, int minute, int[] arr) {
+    public boolean isPosRecord(int mid, int m, int[] arr) {
 
         int sum = 0;
         int cnt = 1;
-        for (int x : arr) {
-            if (sum + x <= minute) {
-                sum += x;
-            }
-            else {
-                sum = x;
+        for (int i = 0; i < arr.length; i++) {
+
+            sum += arr[i];
+
+            if (sum > mid) {
+                i--;
+                sum = 0;
                 cnt++;
             }
         }
-        return cnt <= targetCnt;
+
+        return cnt <= m;
     }
 
     public int solution(int n, int m, int[] arr) {
 
-        int lt = 0;
+        int lt = Arrays.stream(arr).max().isPresent() ? Arrays.stream(arr).max().getAsInt() : 0;
         int rt = Arrays.stream(arr).sum();
         int answer = 0;
 
         while (lt <= rt) {
-            int mid = (lt + rt) / 2;
-            boolean canRecord = canRecord(m, mid, arr);
 
-            if (canRecord) {
+            int mid = (lt + rt) / 2;
+
+            if (isPosRecord(mid, m, arr)) {
                 rt = mid - 1;
                 answer = mid;
             }
@@ -45,7 +47,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
