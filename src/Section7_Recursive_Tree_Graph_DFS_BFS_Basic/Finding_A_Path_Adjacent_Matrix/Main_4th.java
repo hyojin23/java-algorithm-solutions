@@ -2,11 +2,12 @@ package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Finding_A_Path_Adjacent_Matr
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
-    static int n, m, answer = 0;
-    static int[][] arr;
+    static int n;
     static int[] ch;
+    static int[][] graph;
+    static int answer = 0;
 
     public void DFS(int L) {
 
@@ -14,8 +15,8 @@ public class Main {
             answer++;
         }
         else {
-            for (int i = 1; i <= n; i++) {
-                if (arr[L][i] == 1 && ch[i] == 0) {
+            for (int i = 2; i <= n; i++) {
+                if (ch[i] == 0 && graph[L][i] == 1) {
                     ch[i] = 1;
                     DFS(i);
                     ch[i] = 0;
@@ -24,22 +25,20 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        m = sc.nextInt();
-        arr = new int[n + 1][n + 1];
+        int m = sc.nextInt();
+        graph = new int[n + 1][n + 1];
         ch = new int[n + 1];
 
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
-
-            arr[a][b] = 1;
+            graph[a][b] = 1;
         }
 
         ch[1] = 1;

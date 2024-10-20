@@ -3,31 +3,33 @@ package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Binary_Tree_Level_Search;
 import java.util.Queue;
 import java.util.LinkedList;
 
-class Node {
+class Node_4th {
 
     int data;
-    Node lt, rt;
+    Node_4th lt, rt;
 
-    Node(int val) {
-        this.data = val;
-        this.lt = null;
-        this.rt = null;
+    Node_4th(int val) {
+        data = val;
+        lt = null;
+        rt = null;
     }
 }
-public class Main {
 
-    Node root;
+public class Main_4th {
 
-    public void BFS(Node root) {
+    Node_4th root;
 
-        Queue<Node> q = new LinkedList<>();
+    public void BFS(Node_4th root) {
+
+        Queue<Node_4th> q = new LinkedList<>();
+
         q.offer(root);
 
-        int L = 0;
         while (!q.isEmpty()) {
+
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                Node node = q.poll();
+                Node_4th node = q.poll();
                 System.out.print(node.data + " ");
 
                 if (node.lt != null) {
@@ -43,15 +45,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main tree = new Main();
+        Main_4th tree = new Main_4th();
 
-        tree.root = new Node(1);
-        tree.root.lt = new Node(2);
-        tree.root.rt = new Node(3);
-        tree.root.lt.lt = new Node(4);
-        tree.root.lt.rt = new Node(5);
-        tree.root.rt.lt = new Node(6);
-        tree.root.rt.rt = new Node(7);
+        tree.root = new Node_4th(1);
+        tree.root.lt = new Node_4th(2);
+        tree.root.rt = new Node_4th(3);
+        tree.root.lt.lt = new Node_4th(4);
+        tree.root.lt.rt = new Node_4th(5);
+        tree.root.rt.lt = new Node_4th(6);
+        tree.root.rt.rt = new Node_4th(7);
 
         tree.BFS(tree.root);
     }

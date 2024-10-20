@@ -4,30 +4,30 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_4th {
 
     public int BFS(int s, int e) {
 
         Queue<Integer> q = new LinkedList<>();
-        q.offer(s);
         int[] ch = new int[10001];
-        ch[s] = 1;
+        q.offer(s);
         int L = 0;
-        int[] jumps = {1, -1, 5};
-
         while (!q.isEmpty()) {
+
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                int pos = q.poll();
-                if (pos == e) {
-                    return L;
-                }
-                for (int jump : jumps) {
-                    int np = pos + jump;
-                    if (np >= 1 && np <= 10000 && ch[np] == 0) {
-                        q.offer(np);
-                        ch[np] = 1;
+                int cur = q.poll();
+
+                if (cur > 0 && cur <= 10000 && ch[cur] == 0) {
+                    if (cur == e) {
+                        return L;
                     }
+                    else {
+                        q.offer(cur + 5);
+                        q.offer(cur + 1);
+                        q.offer(cur - 1);
+                    }
+                    ch[cur] = 1;
                 }
             }
             L++;
@@ -35,10 +35,9 @@ public class Main {
         return 0;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int s = sc.nextInt();
