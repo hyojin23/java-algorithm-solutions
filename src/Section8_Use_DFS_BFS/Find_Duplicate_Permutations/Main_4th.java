@@ -1,23 +1,23 @@
-package Section8_Use_DFS_BFS.Find_Combination;
+package Section8_Use_DFS_BFS.Find_Duplicate_Permutations;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     static int n, m;
-    static int[] combi;
-    public void DFS(int L, int s) {
+
+    public void DFS(int L, int[] arr) {
 
         if (L == m) {
-            for (int x : combi) {
+            for (int x : arr) {
                 System.out.print(x + " ");
             }
             System.out.println();
         }
         else {
-            for (int i = s; i <= n; i++) {
-                combi[L] = i;
-                DFS(L + 1, i + 1);
+            for (int i = 0; i < n; i++) {
+                arr[L] = i + 1;
+                DFS(L + 1, arr);
             }
         }
     }
@@ -25,13 +25,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
-        combi = new int[m];
 
-        T.DFS(0, 1);
+        int[] arr = new int[m];
+
+        T.DFS(0, arr);
     }
 }

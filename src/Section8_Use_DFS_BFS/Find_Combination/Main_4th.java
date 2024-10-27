@@ -2,36 +2,36 @@ package Section8_Use_DFS_BFS.Find_Combination;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     static int n, m;
-    static int[] combi;
-    public void DFS(int L, int s) {
+    static int[] arr;
+
+    public void DFS(int L, int a) {
 
         if (L == m) {
-            for (int x : combi) {
+            for (int x : arr) {
                 System.out.print(x + " ");
             }
             System.out.println();
         }
         else {
-            for (int i = s; i <= n; i++) {
-                combi[L] = i;
-                DFS(L + 1, i + 1);
+            for (int i = a + 1; i <= n; i++) {
+                arr[L] = i;
+                DFS(L + 1, i);
             }
         }
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
-        combi = new int[m];
+        arr = new int[m];
 
-        T.DFS(0, 1);
+        T.DFS(0, 0);
     }
 }

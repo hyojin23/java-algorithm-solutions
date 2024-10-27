@@ -16,24 +16,21 @@ class Tomato {
 
 public class Main {
 
+    static int n, m;
     static int[][] board, dis;
     int[] dx = {-1, 0, 1, 0};
     int[] dy = {0, 1, 0, -1};
-    static int n, m;
 
-    public void BFS(Queue<Tomato> q) {
+    public int BFS(Queue<Tomato> q) {
 
         while (!q.isEmpty()) {
-
             int len = q.size();
-
             for (int i = 0; i < len; i++) {
                 Tomato t = q.poll();
                 for (int j = 0; j < 4; j++) {
                     int nx = t.x + dx[j];
                     int ny = t.y + dy[j];
-
-                    if (nx >= 0 && nx < n && ny >= 0 && ny < m && board[nx][ny] == 0) {
+                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && board[nx][ny] == 0) {
                         board[nx][ny] = 1;
                         q.offer(new Tomato(nx, ny));
                         dis[nx][ny] = dis[t.x][t.y] + 1;
@@ -41,53 +38,52 @@ public class Main {
                 }
             }
         }
+
+        return 0;
     }
 
     public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
+
+        n = sc.nextInt();
+        m = sc.nextInt();
+        board = new int[m][n];
+        dis = new int[m][n];
         Queue<Tomato> q = new LinkedList<>();
 
-        m = sc.nextInt();
-        n = sc.nextInt();
-        board = new int[n][m];
-        dis = new int[n][m];
-        int cnt = 0;
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                int a = sc.nextInt();
-                board[i][j] = a;
-
-                if (a == 1) {
+        int sum = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int status = sc.nextInt();
+                if (status == 1) {
                     q.offer(new Tomato(i, j));
-                    cnt++;
                 }
+                sum += status;
+                board[i][j] = status;
             }
         }
 
         T.BFS(q);
 
-        int answer = Integer.MIN_VALUE;
-        if (cnt == n * m) {
-            answer = 0;
+        if (sum == n * m) {
+            System.out.println(0);
         }
         else {
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < m; j++) {
-                    answer = Math.max(dis[i][j], answer);
-                }
-            }
-
-            for (int i = 0; i < n; i++) {
-                for (int j =0 ; j < m; j++) {
+            int answer = Integer.MIN_VALUE;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
                     if (board[i][j] == 0) {
-                        answer = -1;
+                        System.out.println(-1);
+                        return;
+                    }
+                    else {
+                        answer = Math.max(answer, dis[i][j]);
                     }
                 }
             }
+            System.out.println(answer);
         }
-        System.out.println(answer);
     }
 }

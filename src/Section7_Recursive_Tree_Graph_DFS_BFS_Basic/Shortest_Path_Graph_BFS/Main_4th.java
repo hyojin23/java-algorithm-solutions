@@ -5,13 +5,12 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.Arrays;
 
-public class Main {
+public class Main_4th {
 
-    static int n, m;
+    static int n;
     static List<List<Integer>> graph;
-    static int[] answer;
+    static int[] dis;
 
     public int[] BFS(int v) {
 
@@ -19,29 +18,30 @@ public class Main {
         q.offer(v);
 
         while (!q.isEmpty()) {
+
             int len = q.size();
             for (int i = 0; i < len; i++) {
                 int cur = q.poll();
                 for (int x : graph.get(cur)) {
-                    if (answer[x] == 0) {
+                    if (dis[x] == 0) {
                         q.offer(x);
-                        answer[x] = answer[cur] + 1;
+                        dis[x] = dis[cur] + 1;
                     }
                 }
             }
         }
-        return answer;
+        return dis;
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        m = sc.nextInt();
-        answer = new int[n + 1];
+        int m = sc.nextInt();
         graph = new ArrayList<>();
+        dis = new int[n + 1];
 
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
@@ -54,9 +54,10 @@ public class Main {
             graph.get(a).add(b);
         }
 
+        dis[1] = 0;
         T.BFS(1);
         for (int i = 2; i <= n; i++) {
-            System.out.println(i + " : " + answer[i]);
+            System.out.println(i + " : " + dis[i]);
         }
     }
 }

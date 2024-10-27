@@ -5,29 +5,28 @@ import java.util.Scanner;
 public class Main {
 
     static int n, m;
-    static int[] arr;
-    static int[] ch;
-    static int[] pm;
+    static int[] arr, pm, ch;
 
     public void DFS(int L) {
 
         if (L == m) {
-            for (int x : pm) {
+            for (int x :  pm) {
                 System.out.print(x + " ");
             }
             System.out.println();
         }
         else {
-            for (int x : arr) {
-                if (ch[x] == 0) {
-                    pm[L] = x;
-                    ch[x] = 1;
+            for (int i = 0; i < n; i++) {
+                if (ch[i] == 0) {
+                    ch[i] = 1;
+                    pm[L] = arr[i];
                     DFS(L + 1);
-                    ch[x] = 0;
+                    ch[i] = 0;
                 }
             }
         }
     }
+
 
     public static void main(String[] args) {
 
@@ -37,8 +36,8 @@ public class Main {
         n = sc.nextInt();
         m = sc.nextInt();
         arr = new int[n];
-        ch = new int[11];
         pm = new int[m];
+        ch = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();

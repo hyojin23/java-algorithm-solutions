@@ -2,7 +2,7 @@ package Section8_Use_DFS_BFS.Put_Spotted_Dog;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     static int c, n;
     static int[] arr;
@@ -10,12 +10,10 @@ public class Main {
 
     public void DFS(int L, int sum) {
 
-        if (sum > c) {
-            return;
-        }
-
         if (L == n) {
-            answer = Math.max(sum, answer);
+            if (sum < c) {
+                answer = Math.max(answer, sum);
+            }
         }
         else {
             DFS(L + 1, sum + arr[L]);
@@ -23,10 +21,9 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         c = sc.nextInt();
