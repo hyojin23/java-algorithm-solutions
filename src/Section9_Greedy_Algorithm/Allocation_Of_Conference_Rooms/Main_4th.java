@@ -5,59 +5,57 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Time implements Comparable<Time> {
+class Time_4th implements Comparable<Time_4th> {
 
     int s, e;
 
-    Time (int s, int e) {
+    Time_4th(int s, int e) {
         this.s = s;
         this.e = e;
     }
 
     @Override
-    public int compareTo(Time ob) {
-        if (this.e == ob.e) {
-            return this.s - ob.s;
+    public int compareTo(Time_4th t) {
+        if (this.e == t.e) {
+            return this.s - t.s;
         }
         else {
-            return this.e - ob.e;
+            return this.e - t.e;
         }
     }
 }
+public class Main_4th {
 
-public class Main {
+    public int solution(List<Time_4th> list) {
 
-    public int solution(int n, List<Time> list) {
-
+        Collections.sort(list);
         int last = Integer.MIN_VALUE;
         int answer = 0;
 
-        Collections.sort(list);
-
-        for (Time t : list) {
+        for (Time_4th t : list) {
             if (t.s >= last) {
-                answer++;
                 last = t.e;
+                answer++;
             }
         }
         return answer;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Time> list = new ArrayList<>();
+        List<Time_4th> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int e = sc.nextInt();
-            list.add(new Time(s, e));
+
+            list.add(new Time_4th(s, e));
         }
 
-        System.out.println(T.solution(n, list));
+        System.out.println(T.solution(list));
     }
 }
