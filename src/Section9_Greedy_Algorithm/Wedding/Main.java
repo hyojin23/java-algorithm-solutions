@@ -7,45 +7,45 @@ import java.util.Collections;
 
 class Plan implements Comparable<Plan> {
 
-    int time;
-    char type;
+    int t;
+    char s;
 
-    Plan(int time, char type) {
-        this.time = time;
-        this.type = type;
+    Plan(int t, char s) {
+        this.t = t;
+        this.s = s;
     }
 
     @Override
-    public int compareTo(Plan o) {
-        if (this.time == o.time) {
-            return this.type - o.type;
+    public int compareTo(Plan ob) {
+        if (this.t == ob.t) {
+            return this.s - ob.s;
         }
         else {
-            return this.time - o.time;
+            return this.t - ob.t;
         }
     }
 }
 
 public class Main {
 
-    public int solution(List<Plan> list) {
+    public int solution(int n, List<Plan> list) {
 
         Collections.sort(list);
+        int answer = Integer.MIN_VALUE;
         int cnt = 0;
-        int answer = 0;
 
         for (Plan p : list) {
-            if (p.type == 's') {
+            if (p.s == 's') {
                 cnt++;
             }
-            else if (p.type == 'e') {
+            else if (p.s == 'e') {
                 cnt--;
             }
             answer = Math.max(answer, cnt);
         }
-
         return answer;
     }
+
 
     public static void main(String[] args) {
 
@@ -56,13 +56,13 @@ public class Main {
         List<Plan> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
-            int s = sc.nextInt();
-            int e = sc.nextInt();
+            int a = sc.nextInt();
+            list.add(new Plan(a, 's'));
 
-            list.add(new Plan(s, 's'));
-            list.add(new Plan(e, 'e'));
+            int b = sc.nextInt();
+            list.add(new Plan(b, 'e'));
         }
 
-        System.out.println(T.solution(list));
+        System.out.println(T.solution(n, list));
     }
 }

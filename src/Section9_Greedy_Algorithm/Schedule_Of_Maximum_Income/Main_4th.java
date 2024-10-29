@@ -3,65 +3,71 @@ package Section9_Greedy_Algorithm.Schedule_Of_Maximum_Income;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import java.util.Collections;
+import java.util.PriorityQueue;
 
-class Schedule implements Comparable<Schedule> {
+class Schedule_4th implements Comparable<Schedule_4th> {
 
     int m, d;
 
-    Schedule (int m, int d) {
+    Schedule_4th(int m, int d) {
         this.m = m;
         this.d = d;
     }
 
     @Override
-    public int compareTo(Schedule ob) {
+    public int compareTo(Schedule_4th ob) {
         return ob.d - this.d;
     }
 }
 
-public class Main {
+public class Main_4th {
 
-    public int solution(int n, int max, List<Schedule> list) {
+    static int max = Integer.MIN_VALUE;
+
+    public int solution(int n, List<Schedule_4th> list) {
 
         Collections.sort(list);
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        int answer = 0;
 
         int j = 0;
+        int sum = 0;
         for (int i = max; i >= 1; i--) {
-            for ( ; j < n; j++)  {
-                if (list.get(j).d < i) {
+            for ( ; j < n; j++) {
+                if (list.get(j).d >= i) {
+                    pq.offer(list.get(j).m);
+                }
+                else {
                     break;
                 }
-                pq.offer(list.get(j).m);
             }
             if (!pq.isEmpty()) {
-                answer += pq.poll();
+                sum += pq.poll();
             }
         }
-        return answer;
+        return sum;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Schedule> list = new ArrayList<>();
-        int max = Integer.MIN_VALUE;
+        List<Schedule_4th> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int m = sc.nextInt();
             int d = sc.nextInt();
-            max = Math.max(d, max);
 
-            list.add(new Schedule(m, d));
+            list.add(new Schedule_4th(m, d));
+
+            if (d > max) {
+                max = d;
+            }
         }
 
-        System.out.println(T.solution(n, max, list));
+        System.out.println(T.solution(n, list));
     }
 }
