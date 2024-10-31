@@ -2,9 +2,11 @@ package Section10_Dynamic_Programming.Climbing_The_Stairs;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
-    public int solution(int n, int[] dy) {
+    public int solution(int n) {
+
+        int[] dy = new int[n + 1];
 
         dy[1] = 1;
         dy[2] = 2;
@@ -19,12 +21,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] dy = new int[n + 1];
 
-        System.out.println(T.solution(n, dy));
+        System.out.println(T.solution(n));
     }
 }

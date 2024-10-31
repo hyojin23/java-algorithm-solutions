@@ -2,19 +2,11 @@ package Section9_Greedy_Algorithm.Are_They_Friend;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_4th {
 
     static int[] unf;
-
-    public static void Union(int a, int b) {
-        int fa = Find(a);
-        int fb = Find(b);
-        if (fa != fb) {
-            unf[fa] = fb;
-        }
-    }
-
     public static int Find(int v) {
+
         if (unf[v] == v) {
             return v;
         }
@@ -23,9 +15,18 @@ public class Main {
         }
     }
 
+    public static void Union(int a, int b) {
+        int fa = Find(a);
+        int fb = Find(b);
+
+        if (fa != fb) {
+            unf[fa] = fb;
+        }
+    }
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_4th T = new Main_4th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -39,6 +40,7 @@ public class Main {
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
+
             Union(a, b);
         }
 

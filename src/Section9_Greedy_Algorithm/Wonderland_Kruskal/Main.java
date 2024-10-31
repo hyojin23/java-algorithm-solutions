@@ -24,8 +24,18 @@ class Edge implements Comparable<Edge> {
 public class Main {
 
     static int[] unf;
-    public static int Find(int v) {
 
+    static List<Edge> list;
+
+    public static void Union(int a, int b) {
+        int fa = Find(a);
+        int fb = Find(b);
+        if (fa != fb) {
+            unf[fa] = fb;
+        }
+    }
+
+    public static int Find(int v) {
         if (unf[v] == v) {
             return v;
         }
@@ -34,31 +44,19 @@ public class Main {
         }
     }
 
-    public static void Union(int a, int b) {
-
-        int fa = Find(a);
-        int fb = Find(b);
-
-        if (fa != fb) {
-            unf[fa] = fb;
-        }
-    }
-
-    public int solution(List<Edge> list) {
+    public int solution(int v, int e) {
 
         Collections.sort(list);
 
         int sum = 0;
-        for (Edge e : list) {
-            int fv1 = Find(e.v1);
-            int fv2 = Find(e.v2);
-
-            if (fv1 != fv2) {
-                Union(e.v1, e.v2);
-                sum += e.cost;
+        for (Edge edge : list) {
+            int fa = Find(edge.v1);
+            int fb = Find(edge.v2);
+            if (fa != fb) {
+                Union(edge.v1, edge.v2);
+                sum += edge.cost;
             }
         }
-
         return sum;
     }
 
@@ -69,21 +67,21 @@ public class Main {
 
         int v = sc.nextInt();
         int e = sc.nextInt();
-        List<Edge> list = new ArrayList<>();
+        list = new ArrayList<>();
         unf = new int[v + 1];
+
+        for (int i = 0; i < e; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+
+            list.add(new Edge(a, b, c));
+        }
 
         for (int i = 1; i <= v; i++) {
             unf[i] = i;
         }
 
-        for (int i = 0; i < e; i++) {
-            int v1 = sc.nextInt();
-            int v2 = sc.nextInt();
-            int cost = sc.nextInt();
-
-            list.add(new Edge(v1, v2, cost));
-        }
-
-        System.out.println(T.solution(list));
+        System.out.println(T.solution(v, e));
     }
 }

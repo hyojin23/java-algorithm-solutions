@@ -22,32 +22,30 @@ class Edge implements Comparable<Edge> {
 
 public class Main {
 
-    static int[] ch;
+    static int ch[];
+    static List<List<Edge>> graph;
 
-    public int solution(List<List<Edge>> list) {
+    public int solution(int v, int e) {
 
         PriorityQueue<Edge> pq = new PriorityQueue<>();
         pq.offer(new Edge(1, 0));
         int answer = 0;
 
         while (!pq.isEmpty()) {
-
-            Edge e1 = pq.poll();
-
-            if (ch[e1.vex] == 0) {
-                answer += e1.cost;
-                ch[e1.vex] = 1;
-
-                for (Edge e2 : list.get(e1.vex)) {
-                    if (ch[e2.vex] == 0) {
-                        pq.offer(e2);
+            Edge edge = pq.poll();
+            if (ch[edge.vex] == 0) {
+                ch[edge.vex] = 1;
+                answer += edge.cost;
+                for (Edge eg : graph.get(edge.vex)) {
+                    if (ch[eg.vex] == 0) {
+                        pq.offer(eg);
                     }
                 }
             }
         }
-
         return answer;
     }
+
 
     public static void main(String[] args) {
 
@@ -56,22 +54,22 @@ public class Main {
 
         int v = sc.nextInt();
         int e = sc.nextInt();
-        List<List<Edge>> list = new ArrayList<>();
+
         ch = new int[v + 1];
+        graph = new ArrayList<>();
 
         for (int i = 0; i <= v; i++) {
-            list.add(new ArrayList<>());
+            graph.add(new ArrayList<>());
         }
 
         for (int i = 0; i < e; i++) {
-            int v1 = sc.nextInt();
-            int v2 = sc.nextInt();
-            int cost = sc.nextInt();
-
-            list.get(v1).add(new Edge(v2, cost));
-            list.get(v2).add(new Edge(v1, cost));
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            graph.get(a).add(new Edge(b, c));
+            graph.get(b).add(new Edge(a, c));
         }
 
-        System.out.println(T.solution(list));
+        System.out.println(T.solution(v, e));
     }
 }

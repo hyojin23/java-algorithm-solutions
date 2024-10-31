@@ -1,15 +1,15 @@
 package Section9_Greedy_Algorithm.Wonderland_Prim;
 
-import java.util.Scanner;
-import java.util.PriorityQueue;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
-class Edge_2nd implements Comparable<Edge_4th> {
+class Edge_3nd implements Comparable<Edge_4th> {
 
     int v, cost;
 
-    Edge_2nd(int v, int cost) {
+    Edge_3nd(int v, int cost) {
         this.v = v;
         this.cost = cost;
     }
@@ -20,7 +20,7 @@ class Edge_2nd implements Comparable<Edge_4th> {
     }
 }
 
-public class Main_2nd {
+public class Main_3nd {
 
     static int[] ch;
     static List<List<Edge_4th>> graph;
