@@ -5,26 +5,17 @@ import java.util.Arrays;
 
 public class Main {
 
-    static int n, m;
-
-    public int solution(int[] coins) {
+    public int solution(int n, int m, int[] coins) {
 
         int[] dy = new int[m + 1];
         Arrays.fill(dy, Integer.MAX_VALUE);
         dy[0] = 0;
 
-        for (int i = 1; i <= m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (coins[j] <= i) {
-                    dy[i] = Math.min(dy[i], dy[i - coins[j]] + 1);
-                }
-
-                if (dy[i] == Integer.MAX_VALUE) {
-                    dy[i] = 0;
-                }
+        for (int coin : coins) {
+            for (int i = coin; i <= m; i++) {
+                dy[i] = Math.min(dy[i], dy[i - coin] + 1);
             }
         }
-
         return dy[m];
     }
 
@@ -34,15 +25,14 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
+        int n = sc.nextInt();
         int[] coins = new int[n];
 
         for (int i = 0; i < n; i++) {
             coins[i] = sc.nextInt();
         }
+        int m = sc.nextInt();
 
-        m = sc.nextInt();
-
-        System.out.println(T.solution(coins));
+        System.out.println(T.solution(n, m, coins));
     }
 }
