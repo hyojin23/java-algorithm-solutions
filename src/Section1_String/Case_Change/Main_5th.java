@@ -2,28 +2,31 @@ package Section1_String.Case_Change;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
-    public void solution(String str) {
+    public String solution(String str) {
+
+        StringBuilder sb = new StringBuilder();
 
         for (char c : str.toCharArray()) {
             if (Character.isLowerCase(c)) {
-                System.out.print(Character.toUpperCase(c));
+                sb.append(Character.toUpperCase(c));
             }
             else {
-                System.out.print(Character.toLowerCase(c));
+                sb.append(Character.toLowerCase(c));
             }
         }
-    }
 
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
 
-       T.solution(str);
+        System.out.println(T.solution(str));
     }
 }
