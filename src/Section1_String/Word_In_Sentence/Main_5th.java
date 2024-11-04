@@ -2,30 +2,35 @@ package Section1_String.Word_In_Sentence;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public String solution(String str) {
 
         str = str + " ";
-        String answer = "";
         int max = Integer.MIN_VALUE;
+        String answer = "";
 
-        while (str.indexOf(" ") != -1) {
-            int idx = str.indexOf(" ");
-            String word = str.substring(0, idx);
+        while (str.contains(" ")) {
+
+            int endIdx = str.indexOf(" ");
+            int beginIdx = str.indexOf(" ") + 1;
+
+            String word = str.substring(0, endIdx);
+            str = str.substring(beginIdx);
+
             if (word.length() > max) {
                 answer = word;
                 max = word.length();
             }
-            str = str.substring(idx + 1);
         }
+
         return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.nextLine();

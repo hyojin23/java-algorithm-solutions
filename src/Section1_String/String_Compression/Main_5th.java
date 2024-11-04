@@ -2,21 +2,22 @@ package Section1_String.String_Compression;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public String solution(String str) {
 
-        int cnt = 1;
-        str = str + " ";
-        char[] cArr = str.toCharArray();
         StringBuilder sb = new StringBuilder();
+        int cnt = 1;
+        int len = str.length();
+        str = str + " ";
+        char[] arr = str.toCharArray();
 
-        for (int i = 0; i < cArr.length - 1; i++) {
-            if (cArr[i] == cArr[i + 1]) {
+        for (int i = 0; i < len; i++) {
+            if (arr[i] == arr[i + 1]) {
                 cnt++;
             }
             else {
-                sb.append(cArr[i]);
+                sb.append(arr[i]);
                 if (cnt != 1) {
                     sb.append(cnt);
                 }
@@ -29,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();

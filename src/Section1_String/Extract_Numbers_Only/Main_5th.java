@@ -2,23 +2,24 @@ package Section1_String.Extract_Numbers_Only;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int solution(String str) {
 
-        int answer = 0;
+        StringBuilder sb = new StringBuilder();
+
         for (char c : str.toCharArray()) {
             if (Character.isDigit(c)) {
-                answer = answer * 10 + (c - 48);
+                sb.append(c);
             }
         }
-        return answer;
+        return Integer.parseInt(sb.toString());
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();

@@ -2,7 +2,7 @@ package Section1_String.Palindrome;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public String solution(String str) {
 
@@ -11,8 +11,10 @@ public class Main {
         String answer = "YES";
 
         while (lt < rt) {
+
             if (str.charAt(lt) != str.charAt(rt)) {
                 answer = "NO";
+                break;
             }
             lt++;
             rt--;
@@ -20,10 +22,9 @@ public class Main {
         return answer;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next().toLowerCase();

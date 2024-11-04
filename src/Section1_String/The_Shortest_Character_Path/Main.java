@@ -1,53 +1,48 @@
 package Section1_String.The_Shortest_Character_Path;
 
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main {
 
-    public int[] solution(String s, char t) {
+    public int[] solution(String str, char c) {
 
-        int len = s.length();
-        int[] answer = new int[len];
-        Arrays.fill(answer, Integer.MAX_VALUE);
-        char[] arr = s.toCharArray();
+        int len = str.length();
+        int[] disArr = new int[len];
 
-        int dis = -1;
+        int dis = 100;
         for (int i = 0; i < len; i++) {
-            if (arr[i] == t) {
+            if (str.charAt(i) == c) {
                 dis = 0;
-                answer[i] = dis;
             }
             else {
-                if (dis != -1) {
-                    answer[i] = Math.min(++dis, answer[i]);
-                }
+                dis++;
             }
+            disArr[i] = dis;
         }
 
+        dis = 100;
         for (int i = len - 1; i >= 0; i--) {
-            if (arr[i] == t) {
+            if (str.charAt(i) == c) {
                 dis = 0;
-                answer[i] = dis;
             }
             else {
-                if (dis != -1) {
-                    answer[i] = Math.min(++dis, answer[i]);
-                }
+                dis++;
             }
+            disArr[i] = Math.min(dis, disArr[i]);
         }
-        return answer;
+        return disArr;
     }
+
 
     public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String s = sc.next();
-        char t = sc.next().charAt(0);
+        String str = sc.next();
+        char c = sc.next().charAt(0);
 
-        for (int x : T.solution(s, t)) {
+        for (int x : T.solution(str, c)) {
             System.out.print(x + " ");
         }
     }

@@ -6,30 +6,19 @@ public class Main {
 
     public String solution(int n, String str) {
 
-        int len = 7;
-        StringBuilder sb = new StringBuilder();
+        str = str.replace('#', '1').replace('*', '0');
+        StringBuilder answer = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
-            String signal = str.substring(0, len);
-            str = str.substring(len);
-
-            int answer = 0;
-            int base = 1;
-
-            for (int j = len - 1; j >= 0; j--) {
-                if (signal.charAt(j) == '#') {
-                    answer += base;
-                }
-                base = base * 2;
-            }
-            sb.append((char) answer);
+            String code = str.substring(0, 7);
+            answer.append((char) Integer.parseInt(code, 2));
+            str = str.substring(7);
         }
-
-        return sb.toString();
+        return answer.toString();
     }
 
 
-    public static void main(String[] argss) {
+    public static void main(String[] args) {
 
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
