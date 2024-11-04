@@ -3,15 +3,16 @@ package Section1_String.Find_String;
 import java.util.Scanner;
 
 public class Main {
-    public int solution(String s, char c) {
 
-        int cnt = 0;
-        for (char ch : s.toCharArray()) {
+    public int solution(String str, char ch) {
+
+        int answer = 0;
+        for (char c : str.toCharArray()) {
             if (ch == c) {
-                cnt++;
+                answer++;
             }
         }
-        return cnt;
+        return answer;
     }
 
 
@@ -20,9 +21,9 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String s = sc.next().toLowerCase();
-        char c = sc.next().toLowerCase().charAt(0);
+        String str = sc.next().toLowerCase();
+        char ch = sc.next().toLowerCase().charAt(0);
 
-        System.out.println(T.solution(s, c));
+        System.out.println(T.solution(str, ch));
     }
 }
