@@ -2,27 +2,26 @@ package Section2_Array.Calculating_The_Score;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
-    public int solution(int n, int[] arr) {
+    public int solution(int[] arr) {
 
-        int answer = 0;
         int score = 0;
+        int sum = 0;
         for (int x : arr) {
             if (x == 0) {
                 score = 0;
             }
             else {
-                answer += ++score;
+                sum += ++score;
             }
         }
-        return answer;
+        return sum;
     }
-
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -32,6 +31,6 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        System.out.println(T.solution(n, arr));
+        System.out.println(T.solution(arr));
     }
 }

@@ -2,40 +2,41 @@ package Section2_Array.Maximum_Sum_Of_Grid;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int[][] arr) {
 
-        int answer = Integer.MIN_VALUE;
-
-        int rtUpSum = 0;
-        int rtDownSum = 0;
+        int max = Integer.MIN_VALUE;
+        int crossSum1 = 0;
+        int crossSum2 = 0;
         for (int i = 0; i < n; i++) {
-            int rowSum = 0;
-            int colSum = 0;
+            int hSum = 0;
+            int vSum = 0;
             for (int j = 0; j < n; j++) {
-                rowSum += arr[i][j];
-                colSum += arr[j][i];
+                hSum += arr[i][j];
+                vSum += arr[j][i];
+
                 if (i == j) {
-                    rtUpSum += arr[i][j];
+                    crossSum1 += arr[i][j];
                 }
-                if (j == n - 1 - i) {
-                    rtDownSum += arr[i][j];
+
+                if (i + j == n - 1) {
+                    crossSum2 += arr[i][j];
                 }
             }
-            answer = Math.max(rowSum, answer);
-            answer = Math.max(colSum, answer);
+            max = Math.max(hSum, max);
+            max = Math.max(vSum, max);
         }
-        answer = Math.max(rtUpSum, answer);
-        answer = Math.max(rtDownSum, answer);
 
-        return answer;
+        max = Math.max(crossSum1, max);
+        max = Math.max(crossSum2, max);
+
+        return max;
     }
-
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

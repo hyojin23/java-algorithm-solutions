@@ -2,12 +2,11 @@ package Section2_Array.Mentoring;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int m, int[][] arr) {
 
         int answer = 0;
-
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= n; j++) {
                 int cnt = 0;
@@ -15,10 +14,11 @@ public class Main {
                     int mentoRank = 0;
                     int menteeRank = 0;
                     for (int l = 0; l < n; l++) {
-                        if (i == arr[k][l]) {
+                        if (arr[k][l] == i) {
                             mentoRank = l;
                         }
-                        if (j == arr[k][l]) {
+
+                        if (arr[k][l] == j) {
                             menteeRank = l;
                         }
                     }
@@ -37,7 +37,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -49,6 +49,7 @@ public class Main {
                 arr[i][j] = sc.nextInt();
             }
         }
+
         System.out.println(T.solution(n, m, arr));
     }
 }

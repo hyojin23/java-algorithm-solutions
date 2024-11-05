@@ -2,13 +2,12 @@ package Section2_Array.Decide_Temporary_Class_President;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int[][] arr) {
 
-        int answer = 0;
         int max = Integer.MIN_VALUE;
-
+        int answer = 0;
         for (int i = 0; i < n; i++) {
             int cnt = 0;
             for (int j = 0; j < n; j++) {
@@ -20,8 +19,8 @@ public class Main {
                 }
             }
             if (cnt > max) {
-                answer = i + 1;
                 max = cnt;
+                answer = i + 1;
             }
         }
         return answer;
@@ -30,7 +29,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

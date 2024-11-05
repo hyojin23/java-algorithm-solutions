@@ -1,30 +1,41 @@
 package Section2_Array.Reverse_Prime_Number;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Main {
 
-    public void solution(int n, int[] arr) {
-
-        for (int x : arr) {
-            boolean isPrime = true;
-            int num = Integer.parseInt(new StringBuilder(String.valueOf(x)).reverse().toString());
-
-            if (num == 1) {
-                isPrime = false;
-            }
-
-            for (int i = 2; i < num; i++) {
-                if (num % i == 0) {
-                    isPrime = false;
-                    break;
-                }
-            }
-            if (isPrime) {
-                System.out.print(num + " ");
+    public boolean isPrime(int n) {
+        if (n == 1) {
+            return false;
+        }
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
+                return false;
             }
         }
+        return true;
     }
+
+    public List<Integer> solution(int n, int[] arr) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for (int x : arr) {
+            int res = 0;
+            while (x > 0) {
+                int r = x % 10;
+                x = x / 10;
+                res = res * 10 + r;
+            }
+            if (isPrime(res)) {
+                list.add(res);
+            }
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
 
@@ -38,6 +49,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        T.solution(n, arr);
+        for (int x : T.solution(n, arr)) {
+            System.out.print(x + " ");
+        }
     }
 }

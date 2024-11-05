@@ -6,16 +6,18 @@ public class Main {
 
     public int solution(int n, int[] arr) {
 
-        int max = arr[0];
-        int cnt = 1;
-        for (int i = 1; i < n; i++) {
-            if (arr[i] > max) {
+        int max = Integer.MIN_VALUE;
+        int cnt = 0;
+
+        for (int height : arr) {
+            if (height > max) {
                 cnt++;
-                max = arr[i];
+                max = height;
             }
         }
         return cnt;
     }
+
 
     public static void main(String[] args) {
 
