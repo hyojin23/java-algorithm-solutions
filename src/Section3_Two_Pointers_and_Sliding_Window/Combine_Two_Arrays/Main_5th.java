@@ -1,55 +1,66 @@
 package Section3_Two_Pointers_and_Sliding_Window.Combine_Two_Arrays;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
-public class Main {
+public class Main_5th {
 
-    public List<Integer> solution(int n, int m, int[] arr1, int[] arr2) {
+    public int[] solution(int n, int[] arr1, int m, int[] arr2) {
 
         int p1 = 0;
         int p2 = 0;
-        List<Integer> list = new ArrayList<>();
+        int idx = 0;
+        int[] answer = new int[n + m];
 
         while (p1 < n && p2 < m) {
-            if (arr1[p1] <= arr2[p2]) {
-                list.add(arr1[p1++]);
+
+            if (arr1[p1] < arr2[p2]) {
+                answer[idx] = arr1[p1];
+                p1++;
             }
             else if (arr1[p1] > arr2[p2]) {
-                list.add(arr2[p2++]);
+                answer[idx] = arr2[p2];
+                p2++;
             }
+            else {
+                answer[idx++] = arr1[p1];
+                answer[idx] = arr2[p2];
+                p1++;
+                p2++;
+            }
+            idx++;
         }
-        while (p1 < n) {
-            list.add(arr1[p1++]);
-        }
-        while (p2 < m) {
-            list.add(arr2[p2++]);
-        }
-        return list;
-    }
 
+        while (p1 < n) {
+            answer[idx++] = arr1[p1];
+            p1++;
+        }
+
+        while (p2 < m) {
+            answer[idx++] = arr2[p2];
+            p2++;
+        }
+
+        return answer;
+    }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int[] arr1 = new int[n];
-
         for (int i = 0; i < n; i++) {
             arr1[i] = sc.nextInt();
         }
 
         int m = sc.nextInt();
         int[] arr2 = new int[m];
-
         for (int i = 0; i < m; i++) {
             arr2[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, m, arr1, arr2)) {
+        for (int x : T.solution(n, arr1, m, arr2)) {
             System.out.print(x + " ");
         }
     }

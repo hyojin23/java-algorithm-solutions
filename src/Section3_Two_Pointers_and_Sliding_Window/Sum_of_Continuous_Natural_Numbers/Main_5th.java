@@ -2,25 +2,33 @@ package Section3_Two_Pointers_and_Sliding_Window.Sum_of_Continuous_Natural_Numbe
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n) {
 
+        int lt = 1;
+        int sum = 0;
         int answer = 0;
-        n -= 1;
-        int i = 1;
-        while (n > 0) {
-            n -= ++i;
-            if (n % i == 0) {
+
+        for (int rt = 1; rt <= n / 2 + 1; rt++) {
+            sum += rt;
+            if (sum == n) {
                 answer++;
+            }
+            while (sum >= n) {
+                sum -= lt++;
+                if (sum == n) {
+                    answer++;
+                }
             }
         }
         return answer;
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
