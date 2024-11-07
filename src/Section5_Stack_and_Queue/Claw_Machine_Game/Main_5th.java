@@ -3,41 +3,39 @@ package Section5_Stack_and_Queue.Claw_Machine_Game;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int m, int[][] board, int[] moves) {
 
         Stack<Integer> stack = new Stack<>();
-        int answer = 0;
-
-        for (int pos : moves) {
+        int cnt = 0;
+        for (int k : moves) {
             for (int i = 0; i < n; i++) {
-                if (board[i][pos] != 0) {
-                    int doll = board[i][pos];
-                    board[i][pos] = 0;
-                    if (stack.isEmpty()) {
-                        stack.push(doll);
-                    }
-                    else {
-                        if (stack.peek() == doll) {
-                            stack.pop();
-                            answer = answer + 2;
-                        }
-                        else {
-                            stack.push(doll);
-                        }
-                    }
-                    break;
+                int pick =  board[i][k];
+                if (pick == 0) {
+                    continue;
                 }
+
+                board[i][k] = 0;
+
+                if (!stack.isEmpty() && stack.peek() == pick) {
+                    stack.pop();
+                    cnt = cnt + 2;
+                }
+                else {
+                    stack.push(pick);
+                }
+
+                break;
             }
         }
-        return answer;
+        return cnt;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

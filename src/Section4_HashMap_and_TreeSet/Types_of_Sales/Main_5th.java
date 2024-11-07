@@ -6,29 +6,31 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Main {
+public class Main_5th {
 
     public List<Integer> solution(int n, int k, int[] arr) {
 
         List<Integer> list = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
+        int lt = 0;
 
         for (int i = 0; i < k; i++) {
             map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
         }
+
         list.add(map.size());
 
-        int lt = 0;
         for (int rt = k; rt < n; rt++) {
-            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
-
-            if (map.get(arr[lt]) > 1) {
-                map.put(arr[lt], map.get(arr[lt]) - 1);
-            }
-            else {
+            if (map.get(arr[lt]) == 1) {
                 map.remove(arr[lt]);
             }
+            else {
+                map.put(arr[lt], map.get(arr[lt]) - 1);
+            }
             lt++;
+
+            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
+
             list.add(map.size());
         }
         return list;
@@ -37,7 +39,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

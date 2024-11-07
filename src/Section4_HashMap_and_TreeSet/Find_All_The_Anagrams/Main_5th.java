@@ -4,35 +4,32 @@ import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Main {
+public class Main_5th {
 
     public int solution(String s, String t) {
 
-        Map<Character, Integer> targetMap = new HashMap<>();
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
         int len = t.length();
+        int lt = 0;
         int answer = 0;
 
         for (char c : t.toCharArray()) {
-            targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
+            map1.put(c, map1.getOrDefault(c, 0) + 1);
         }
 
         for (int i = 0; i < len - 1; i++) {
-            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+            map2.put(s.charAt(i), map2.getOrDefault(s.charAt(i), 0) + 1);
         }
 
-        int lt = 0;
         for (int rt = len - 1; rt < s.length(); rt++) {
-
-            map.put(s.charAt(rt), map.getOrDefault(s.charAt(rt), 0) + 1);
-
-            if (map.equals(targetMap)) {
+            map2.put(s.charAt(rt), map2.getOrDefault(s.charAt(rt), 0) + 1);
+            if (map1.equals(map2)) {
                 answer++;
             }
-
-            map.put(s.charAt(lt), map.get(s.charAt(lt)) - 1);
-            if (map.get(s.charAt(lt)) == 0) {
-                map.remove(s.charAt(lt));
+            map2.put(s.charAt(lt), map2.get(s.charAt(lt)) - 1);
+            if (map2.get(s.charAt(lt)) == 0) {
+                map2.remove(s.charAt(lt));
             }
             lt++;
         }
@@ -42,7 +39,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String s = sc.next();

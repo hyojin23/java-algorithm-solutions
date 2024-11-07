@@ -4,38 +4,38 @@ import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.Collections;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int k, int[] arr) {
 
-        TreeSet<Integer> tSet = new TreeSet<>(Collections.reverseOrder());
+        TreeSet<Integer> set = new TreeSet<>(Collections.reverseOrder());
         int answer = -1;
-        for (int i = 0; i < n; i++) {
+
+        for (int i = 0 ; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 for (int l = j + 1; l < n; l++) {
-                    tSet.add(arr[i] + arr[j] + arr[l]);
+                    set.add(arr[i] + arr[j] + arr[l]);
                 }
             }
         }
-
-        //tSet.remove(143);
-        //System.out.println("size >> " + tSet.size());
-        //System.out.println("first >> " + tSet.first());
-        //System.out.println("last >> " + tSet.last());
-        int order = 1;
-        for (int x : tSet) {
-            if (order == k) {
+        int cnt = 1;
+        //set.remove(143);
+        //System.out.println(set.size());
+        //System.out.println(set.last());
+        for (int x : set) {
+            if (cnt == k) {
                 answer = x;
             }
-            order++;
+            cnt++;
         }
+
         return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

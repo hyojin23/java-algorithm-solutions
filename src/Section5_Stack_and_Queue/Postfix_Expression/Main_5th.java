@@ -3,39 +3,41 @@ package Section5_Stack_and_Queue.Postfix_Expression;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class Main_5th {
 
     public int solution(String str) {
 
         Stack<Integer> stack = new Stack<>();
+
         for (char c : str.toCharArray()) {
-            if (!Character.isDigit(c)) {
-                int b = stack.pop();
-                int a = stack.pop();
-                if (c == '+') {
-                    stack.push(a + b);
-                }
-                else if (c == '-') {
-                    stack.push(a - b);
-                }
-                else if (c == '*') {
-                    stack.push(a * b);
-                }
-                else if (c == '/') {
-                    stack.push(a / b);
-                }
+            if (Character.isDigit(c)) {
+                stack.push((c - 48));
             }
             else {
-                stack.push(c - 48);
+                int i2 = stack.pop();
+                int i1 = stack.pop();
+                int res = 0;
+                if (c == '+') {
+                    res = i1 + i2;
+                }
+                else if (c == '-') {
+                    res = i1 - i2;
+                }
+                else if (c == '*') {
+                    res = i1 * i2;
+                }
+                else if (c == '/') {
+                    res = i1 / i2;
+                }
+                stack.push(res);
             }
         }
-        return stack.get(0);
+        return stack.peek();
     }
-
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
