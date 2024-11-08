@@ -4,38 +4,31 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int k) {
 
         Queue<Integer> q = new LinkedList<>();
-        int answer = 0;
-
         for (int i = 1; i <= n; i++) {
             q.offer(i);
         }
 
-        int cnt = 0;
-        while (!q.isEmpty() && q.size() != 1) {
-            int prince = q.poll();
-            cnt++;
-            if (cnt == k) {
-                cnt = 0;
-            }
-            else {
-                q.offer(prince);
+        while (q.size() != 1) {
+            for (int i = 1; i <= k; i++) {
+                if (i == k) {
+                    q.poll();
+                }
+                else {
+                    q.offer(q.poll());
+                }
             }
         }
-        if (!q.isEmpty()) {
-            answer = q.poll();
-        }
-        return answer;
+        return q.peek();
     }
-
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

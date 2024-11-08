@@ -1,21 +1,23 @@
-package Section6_Sorting_and_Searching.Selection_Sort;
+package Section6_Sorting_and_Searching.Insertion_Sort;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int[] solution(int n, int[] arr) {
 
-        for (int i = 0; i < n - 1; i++) {
-            int idx = i;
-            for (int j = i + 1; j < n; j++) {
-                if (arr[j] < arr[idx]) {
-                    idx = j;
+        for (int i = 1; i < n; i++) {
+            int tmp = arr[i];
+            int j;
+            for (j = i - 1; j >= 0; j--) {
+                if (arr[j] > tmp) {
+                    arr[j + 1] = arr[j];
+                }
+                else {
+                    break;
                 }
             }
-            int tmp = arr[idx];
-            arr[idx] = arr[i];
-            arr[i] = tmp;
+            arr[j + 1] = tmp;
         }
         return arr;
     }
@@ -23,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

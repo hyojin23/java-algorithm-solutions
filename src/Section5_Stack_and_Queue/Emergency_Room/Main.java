@@ -6,38 +6,36 @@ import java.util.LinkedList;
 
 class Patient {
 
-    int rank;
+    int order;
     int danger;
 
-    Patient(int rank, int danger) {
-        this.rank = rank;
+    Patient(int order, int danger) {
+        this.order = order;
         this.danger = danger;
     }
 }
 
 public class Main {
 
-    public int solution(int n, int m, int[] arr) {
+    public int solution(int n, int m, Queue<Patient> q) {
 
-        Queue<Patient> q = new LinkedList<>();
         int answer = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            q.offer(new Patient(i, arr[i]));
-        }
-
         while (!q.isEmpty()) {
-            Patient p = q.poll();
-            for (Patient r : q) {
-                if (r.danger > p.danger) {
-                    q.offer(p);
+            Patient me = q.poll();
+            boolean notMyTurn = false;
+            for (Patient other : q) {
+                if (other.danger > me.danger) {
+                    notMyTurn = true;
                     break;
                 }
             }
-            if (!q.contains(p)) {
+            if (notMyTurn) {
+                q.offer(me);
+            }
+            else {
                 answer++;
-                if (p.rank == m) {
-                    break;
+                if (me.order == m) {
+                    return answer;
                 }
             }
         }
@@ -52,12 +50,13 @@ public class Main {
 
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int[] arr = new int[n];
+        Queue<Patient> q = new LinkedList<>();
 
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            int danger = sc.nextInt();
+            q.offer(new Patient(i, danger));
         }
 
-        System.out.println(T.solution(n, m, arr));
+        System.out.println(T.solution(n, m, q));
     }
 }

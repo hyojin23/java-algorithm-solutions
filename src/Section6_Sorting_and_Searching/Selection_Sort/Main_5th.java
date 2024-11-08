@@ -2,7 +2,7 @@ package Section6_Sorting_and_Searching.Selection_Sort;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int[] solution(int n, int[] arr) {
 
@@ -13,9 +13,9 @@ public class Main {
                     idx = j;
                 }
             }
-            int tmp = arr[idx];
-            arr[idx] = arr[i];
-            arr[i] = tmp;
+            int tmp = arr[i];
+            arr[i] = arr[idx];
+            arr[idx] = tmp;
         }
         return arr;
     }
@@ -23,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

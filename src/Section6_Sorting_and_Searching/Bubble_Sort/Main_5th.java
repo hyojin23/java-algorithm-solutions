@@ -1,21 +1,19 @@
-package Section6_Sorting_and_Searching.Selection_Sort;
+package Section6_Sorting_and_Searching.Bubble_Sort;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     public int[] solution(int n, int[] arr) {
 
         for (int i = 0; i < n - 1; i++) {
-            int idx = i;
-            for (int j = i + 1; j < n; j++) {
-                if (arr[j] < arr[idx]) {
-                    idx = j;
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = tmp;
                 }
             }
-            int tmp = arr[idx];
-            arr[idx] = arr[i];
-            arr[i] = tmp;
         }
         return arr;
     }
@@ -23,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
