@@ -3,12 +3,11 @@ package Section6_Sorting_and_Searching.Duplicate_Check;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_5th {
 
     public Character solution(int n, int[] arr) {
 
         Arrays.sort(arr);
-
         for (int i = 0; i < n - 1; i++) {
             if (arr[i] == arr[i + 1]) {
                 return 'D';
@@ -20,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
