@@ -3,34 +3,35 @@ package Section6_Sorting_and_Searching.Choosing_A_Stable;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_5th {
 
-    public int horseCount(int dis, int[] arr) {
+    public boolean canArrange(int targetCnt, int distance, int[] arr) {
+
+        Arrays.sort(arr);
 
         int pos = arr[0];
         int cnt = 1;
         for (int x : arr) {
-            if (x >= pos + dis) {
-                cnt++;
+            if (x >= pos + distance) {
                 pos = x;
+                cnt++;
             }
         }
-        return cnt;
-    }
 
+        return cnt >= targetCnt;
+    }
 
     public int solution(int n, int c, int[] arr) {
 
-        Arrays.sort(arr);
-
         int lt = 1;
-        int rt = arr[n - 1] - arr[0];
+        int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
         int answer = 0;
 
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
-            int cnt = horseCount(mid, arr);
-            if (cnt >= c) {
+            boolean canArrage = canArrange(c, mid, arr);
+
+            if (canArrage) {
                 answer = mid;
                 lt = mid + 1;
             }
@@ -44,7 +45,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

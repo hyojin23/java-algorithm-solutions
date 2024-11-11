@@ -3,21 +3,22 @@ package Section6_Sorting_and_Searching.Binary_Search;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int m, int[] arr) {
 
         Arrays.sort(arr);
 
         int lt = 0;
-        int rt = n - 1;
+        int rt = arr.length - 1;
         int answer = 0;
+
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
-            if (m < arr[mid]) {
+            if (arr[mid] > m) {
                 rt = mid - 1;
             }
-            else if (m > arr[mid]) {
+            else if (arr[mid] < m) {
                 lt = mid + 1;
             }
             else {
@@ -31,7 +32,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

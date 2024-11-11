@@ -5,17 +5,18 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Point implements Comparable<Point> {
+class Point_5th implements Comparable<Point_5th> {
 
-    int x, y;
+    int x;
+    int y;
 
-    Point(int x, int y) {
+    Point_5th(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public int compareTo(Point ob) {
+    public int compareTo(Point_5th ob) {
         if (this.x == ob.x) {
             return this.y - ob.y;
         }
@@ -25,25 +26,26 @@ class Point implements Comparable<Point> {
     }
 }
 
-public class Main {
+public class Main_5th {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        List<Point> list = new ArrayList<>();
+        int n  = sc.nextInt();
+        List<Point_5th> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int x = sc.nextInt();
-            int y = sc.nextInt();
-            list.add(new Point(x, y));
+            int y  = sc.nextInt();
+            list.add(new Point_5th(x, y));
         }
 
         Collections.sort(list);
-        for (Point p : list) {
-            System.out.println(p.x + " " + p.y);
+
+        for (Point_5th c : list) {
+            System.out.println(c.x + " " + c.y);
         }
     }
 }
