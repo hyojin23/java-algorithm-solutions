@@ -5,11 +5,11 @@ import java.util.LinkedList;
 
 class Node {
 
-    Node lt, rt;
     int data;
+    Node lt, rt;
 
     Node(int val) {
-        this.data = val;
+        data = val;
         lt = null;
         rt = null;
     }
@@ -23,32 +23,30 @@ public class Main {
 
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
-
         int L = 0;
         while (!q.isEmpty()) {
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                Node cur = q.poll();
-                if (cur.lt == null && cur.rt == null) {
+                Node node = q.poll();
+                if (node.lt == null && node.rt == null) {
                     return L;
                 }
-                if (cur.lt != null) {
-                    q.offer(cur.lt);
+                if (node.lt != null) {
+                    q.offer(node.lt);
                 }
-                if (cur.rt != null) {
-                    q.offer(cur.rt);
+                if (node.rt != null) {
+                    q.offer(node.rt);
                 }
             }
             L++;
         }
-        return 0;
+        return L;
     }
 
 
     public static void main(String[] args) {
 
         Main tree = new Main();
-
         tree.root = new Node(1);
         tree.root.lt = new Node(2);
         tree.root.rt = new Node(3);

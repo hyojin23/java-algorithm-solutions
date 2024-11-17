@@ -6,16 +6,15 @@ class Node {
     Node lt, rt;
 
     Node(int val) {
-        this.data = val;
-        this.lt = null;
-        this.rt = null;
+        data = val;
+        lt = null;
+        rt = null;
     }
 }
 
 public class Main {
 
     Node root;
-    static int answer = Integer.MAX_VALUE;
 
     public int DFS(Node root, int L) {
 
@@ -27,6 +26,7 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
         Main tree = new Main();
@@ -36,6 +36,6 @@ public class Main {
         tree.root.lt.lt = new Node(4);
         tree.root.lt.rt = new Node(5);
 
-        System.out.println(tree.DFS(tree.root, 0));;
+        System.out.println(tree.DFS(tree.root, 0));
     }
 }

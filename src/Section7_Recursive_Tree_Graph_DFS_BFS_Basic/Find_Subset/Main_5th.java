@@ -2,17 +2,17 @@ package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Find_Subset;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
-    static int n;
     static int[] arr;
+    static int n;
 
     public void DFS(int L) {
 
-        if (L == n) {
-            for (int i = 0; i < n; i++) {
+        if (L == n + 1) {
+            for (int i = 1; i <= n; i++) {
                 if (arr[i] == 1) {
-                    System.out.print((i + 1) + " ");
+                    System.out.print(i + " ");
                 }
             }
             System.out.println();
@@ -28,12 +28,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
-        arr = new int[n];
+        arr = new int[n + 1];
 
-        T.DFS(0);
+        T.DFS(1);
     }
 }
