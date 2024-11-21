@@ -1,32 +1,23 @@
-package Section8_Use_DFS_BFS.A_Subset_Of_Equal_Sums;
+package Section8_Use_DFS_BFS.Put_Spotted_Dog;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
-public class Main {
+public class Main_5th {
 
-    static int n, total;
+    static int c, n;
     static int[] arr;
-    static String answer = "NO";
-    boolean flag = false;
+    static int answer = Integer.MIN_VALUE;
 
     public void DFS(int L, int sum) {
 
-        if (flag) return;
-
-        if (sum > total / 2) {
+        if (sum > c) {
             return;
         }
 
         if (L == n) {
-            if (total - sum == sum) {
-                answer = "YES";
-                flag = true;
-            }
+            answer = Math.max(sum, answer);
         }
         else {
-
             DFS(L + 1, sum + arr[L]);
             DFS(L + 1, sum);
         }
@@ -35,15 +26,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
+        c = sc.nextInt();
         n = sc.nextInt();
         arr = new int[n];
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            total += arr[i];
         }
 
         T.DFS(0, 0);

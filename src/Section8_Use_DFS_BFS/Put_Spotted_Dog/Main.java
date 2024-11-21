@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int c, n;
+    static int c, n, answer = Integer.MIN_VALUE;
     static int[] arr;
-    static int answer = Integer.MIN_VALUE;
 
     public void DFS(int L, int sum) {
 
@@ -15,7 +14,7 @@ public class Main {
         }
 
         if (L == n) {
-            answer = Math.max(sum, answer);
+            answer = Math.max(answer, sum);
         }
         else {
             DFS(L + 1, sum + arr[L]);

@@ -6,6 +6,7 @@ public class Main {
 
     static int n, m;
     static int[] combi;
+
     public void DFS(int L, int s) {
 
         if (L == m) {
@@ -30,8 +31,9 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
+
         combi = new int[m];
 
-        T.DFS(0, 1);
+        T.DFS(0, 0);
     }
 }

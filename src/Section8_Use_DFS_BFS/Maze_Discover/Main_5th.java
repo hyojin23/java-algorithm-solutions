@@ -2,10 +2,10 @@ package Section8_Use_DFS_BFS.Maze_Discover;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     static int[][] maze;
-    static int answer;
+    static int answer = 0;
     int[] dx = {-1, 0, 1, 0};
     int[] dy = {0, 1, 0, -1};
 
@@ -27,15 +27,14 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         maze = new int[8][8];
 
-        for (int i = 1; i <= 7; i++) {
+        for (int i = 1; i  <= 7; i++) {
             for (int j = 1; j <= 7; j++) {
                 maze[i][j] = sc.nextInt();
             }

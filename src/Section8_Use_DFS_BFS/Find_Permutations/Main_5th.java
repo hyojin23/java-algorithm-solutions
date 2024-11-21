@@ -2,15 +2,15 @@ package Section8_Use_DFS_BFS.Find_Permutations;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     static int n, m;
-    static int[] ch, pm, arr;
+    static int[] arr, pm, ch;
 
     public void DFS(int L) {
 
         if (L == m) {
-            for (int x : pm) {
+            for (int x :  pm) {
                 System.out.print(x + " ");
             }
             System.out.println();
@@ -27,15 +27,16 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
-        pm = new int[m];
         arr = new int[n];
+        pm = new int[m];
         ch = new int[n];
 
         for (int i = 0; i < n; i++) {

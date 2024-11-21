@@ -2,7 +2,7 @@ package Section8_Use_DFS_BFS.Find_Duplicate_Permutations;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     static int n, m;
     static int[] pm;
@@ -25,12 +25,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
-
         pm = new int[m];
 
         T.DFS(0);

@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Main {
+public class Main_5th {
 
     static int n, m, answer = Integer.MAX_VALUE;
     static Integer[] coins;
@@ -31,7 +31,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
@@ -42,6 +42,7 @@ public class Main {
         }
 
         m = sc.nextInt();
+
         Arrays.sort(coins, Collections.reverseOrder());
 
         T.DFS(0, 0);

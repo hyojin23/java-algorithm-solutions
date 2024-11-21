@@ -1,32 +1,29 @@
 package Section8_Use_DFS_BFS.A_Subset_Of_Equal_Sums;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
-public class Main {
+public class Main_5th {
 
+    static String answer = "NO";
     static int n, total;
     static int[] arr;
-    static String answer = "NO";
-    boolean flag = false;
 
     public void DFS(int L, int sum) {
-
-        if (flag) return;
 
         if (sum > total / 2) {
             return;
         }
 
+        if ("YES".equals(answer)) {
+            return;
+        }
+
         if (L == n) {
-            if (total - sum == sum) {
+            if (sum == total - sum) {
                 answer = "YES";
-                flag = true;
             }
         }
         else {
-
             DFS(L + 1, sum + arr[L]);
             DFS(L + 1, sum);
         }
@@ -35,10 +32,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
+        total = 0;
         arr = new int[n];
 
         for (int i = 0; i < n; i++) {
