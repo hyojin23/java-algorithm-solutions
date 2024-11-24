@@ -2,7 +2,7 @@ package Section9_Greedy_Algorithm.Are_They_Friend;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_5th {
 
     static int[] unf;
 
@@ -15,7 +15,7 @@ public class Main {
     }
 
     public static int Find(int v) {
-        if (v == unf[v]) {
+        if (unf[v] == v) {
             return v;
         }
         else {
@@ -25,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

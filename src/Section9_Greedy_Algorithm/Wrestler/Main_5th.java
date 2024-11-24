@@ -5,30 +5,30 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Person implements Comparable<Person> {
+class Person_5th implements Comparable<Person_5th> {
 
     int h, w;
 
-    Person(int h, int w) {
+    Person_5th(int h, int w) {
         this.h = h;
         this.w = w;
     }
 
     @Override
-    public int compareTo(Person ob) {
+    public int compareTo(Person_5th ob) {
         return ob.h - this.h;
     }
 }
 
-public class Main {
+public class Main_5th {
 
-    public int solution(List<Person> list) {
+    public int solution(int n, List<Person_5th> list) {
 
         Collections.sort(list);
         int max = Integer.MIN_VALUE;
         int answer = 0;
 
-        for (Person p : list) {
+        for (Person_5th p : list) {
             if (p.w > max) {
                 answer++;
                 max = p.w;
@@ -40,18 +40,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Person> list = new ArrayList<>();
+        List<Person_5th> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int h = sc.nextInt();
             int w = sc.nextInt();
-            list.add(new Person(h, w));
+            list.add(new Person_5th(h, w));
         }
 
-        System.out.println(T.solution(list));
+        System.out.println(T.solution(n, list));
     }
 }

@@ -22,30 +22,28 @@ class Edge implements Comparable<Edge> {
 
 public class Main {
 
-    static int ch[];
     static List<List<Edge>> graph;
+    static int[] ch;
 
-    public int solution(int v, int e) {
+    public int solution(int v) {
 
         PriorityQueue<Edge> pq = new PriorityQueue<>();
-        pq.offer(new Edge(1, 0));
-        int answer = 0;
-
+        pq.offer(new Edge(v, 0));
+        int sum = 0;
         while (!pq.isEmpty()) {
-            Edge edge = pq.poll();
-            if (ch[edge.vex] == 0) {
-                ch[edge.vex] = 1;
-                answer += edge.cost;
-                for (Edge eg : graph.get(edge.vex)) {
-                    if (ch[eg.vex] == 0) {
-                        pq.offer(eg);
+            Edge cur = pq.poll();
+            if (ch[cur.vex] == 0) {
+                ch[cur.vex] = 1;
+                sum += cur.cost;
+                for (Edge edge : graph.get(cur.vex)) {
+                    if (ch[edge.vex] == 0) {
+                        pq.offer(edge);
                     }
                 }
             }
         }
-        return answer;
+        return sum;
     }
-
 
     public static void main(String[] args) {
 
@@ -54,9 +52,8 @@ public class Main {
 
         int v = sc.nextInt();
         int e = sc.nextInt();
-
-        ch = new int[v + 1];
         graph = new ArrayList<>();
+        ch = new int[v + 1];
 
         for (int i = 0; i <= v; i++) {
             graph.add(new ArrayList<>());
@@ -70,6 +67,6 @@ public class Main {
             graph.get(b).add(new Edge(a, c));
         }
 
-        System.out.println(T.solution(v, e));
+        System.out.println(T.solution(1));
     }
 }

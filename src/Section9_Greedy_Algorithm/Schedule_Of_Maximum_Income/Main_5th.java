@@ -6,63 +6,62 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Collections;
 
-class Schedule implements Comparable<Schedule> {
+class Schedule_5th implements Comparable<Schedule_5th> {
 
     int m, d;
 
-    Schedule(int m, int d) {
+    Schedule_5th(int m, int d) {
         this.m = m;
         this.d = d;
     }
 
     @Override
-    public int compareTo(Schedule ob) {
+    public int compareTo(Schedule_5th ob) {
         return ob.d - this.d;
     }
 }
 
-public class Main {
+public class Main_5th {
 
-    public int solution(int n, List<Schedule> list, int maxDay) {
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+    public int solution(int n, int max, List<Schedule_5th> list) {
 
         Collections.sort(list);
-        int sum = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int answer = 0;
+
         int j = 0;
-        for (int i = maxDay; i >= 1; i--) {
-            for ( ; j < n; j++) {
-                if (i == list.get(j).d) {
-                    pq.offer(list.get(j).m);
-                }
-                else {
+        for (int i = max; i >= 1; i--) {
+            for ( ; j < n; j++)  {
+                if (list.get(j).d < i) {
                     break;
                 }
+                pq.offer(list.get(j).m);
             }
             if (!pq.isEmpty()) {
-                sum += pq.poll();
+                answer += pq.poll();
             }
         }
-        return sum;
+        return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Schedule> list = new ArrayList<>();
-        int maxDay = Integer.MIN_VALUE;
+        List<Schedule_5th> list = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
 
         for (int i = 0; i < n; i++) {
             int m = sc.nextInt();
             int d = sc.nextInt();
-            list.add(new Schedule(m, d));
-            maxDay = Math.max(d, maxDay);
+            max = Math.max(d, max);
+
+            list.add(new Schedule_5th(m, d));
         }
 
-        System.out.println(T.solution(n, list, maxDay));
+        System.out.println(T.solution(n, max, list));
     }
 }
