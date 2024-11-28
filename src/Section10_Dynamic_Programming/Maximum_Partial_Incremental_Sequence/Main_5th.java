@@ -1,22 +1,25 @@
 package Section10_Dynamic_Programming.Maximum_Partial_Incremental_Sequence;
 
 import java.util.Scanner;
+import java.util.Arrays;
 
-public class Main {
+public class Main_5th {
 
     public int solution(int n, int[] arr) {
 
         int[] dy = new int[n];
-        int answer = 0;
+        Arrays.fill(dy, 1);
+        int answer = Integer.MIN_VALUE;
+
         for (int i = 0; i < n; i++) {
             int max = 0;
-            for (int j = i - 1; j >= 0; j--) {
+            for (int j = 0; j < i; j++) {
                 if (arr[j] < arr[i]) {
                     max = Math.max(max, dy[j]);
                 }
             }
             dy[i] = max + 1;
-            answer = Math.max(dy[i], answer);
+            answer = Math.max(answer, dy[i]);
         }
         return answer;
     }
@@ -24,7 +27,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_5th T = new Main_5th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
