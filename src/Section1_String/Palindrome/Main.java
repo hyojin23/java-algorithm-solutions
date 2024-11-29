@@ -6,18 +6,13 @@ public class Main {
 
     public String solution(String str) {
 
-        int lt = 0;
-        int rt = str.length() - 1;
-        String answer = "YES";
-
-        while (lt < rt) {
-            if (str.charAt(lt) != str.charAt(rt)) {
-                answer = "NO";
+        int len = str.length();
+        for (int i = 0; i < len / 2; i++) {
+            if (str.charAt(i) != str.charAt(len - 1 - i)) {
+                return "NO";
             }
-            lt++;
-            rt--;
         }
-        return answer;
+        return "YES";
     }
 
 
@@ -26,8 +21,7 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.next().toLowerCase();
-
+        String str = sc.next().toUpperCase();
         System.out.println(T.solution(str));
     }
 }

@@ -2,24 +2,24 @@ package Section1_String.String_Compression;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     public String solution(String str) {
 
-        int len = str.length();
-        str = str + " ";
         int cnt = 1;
+        str = str + " ";
+        char[] cArr = str.toCharArray();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < len; i++) {
-            if (str.charAt(i) == str.charAt(i + 1)) {
+
+        for (int i = 0; i < cArr.length - 1; i++) {
+            if (cArr[i] == cArr[i + 1]) {
                 cnt++;
             }
-            else if (cnt == 1){
-                sb.append(str.charAt(i));
-                cnt = 1;
-            }
             else {
-                sb.append(str.charAt(i)).append(cnt);
+                sb.append(cArr[i]);
+                if (cnt != 1) {
+                    sb.append(cnt);
+                }
                 cnt = 1;
             }
         }
@@ -29,10 +29,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
+
         System.out.println(T.solution(str));
     }
 }

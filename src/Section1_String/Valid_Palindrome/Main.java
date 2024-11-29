@@ -6,15 +6,14 @@ public class Main {
 
     public String solution(String str) {
 
-        String newStr = str.replaceAll("[^a-z]", "");
-        String reverseStr = new StringBuilder(newStr).reverse().toString();
-
-        if (newStr.equals(reverseStr)) {
-            return "YES";
+        str = str.replaceAll("[^A-Z]", "");
+        int len = str.length();
+        for (int i = 0; i < len / 2; i++) {
+            if (str.charAt(i) != str.charAt(len - 1 - i)) {
+                return "NO";
+            }
         }
-        else {
-            return "NO";
-        }
+        return "YES";
     }
 
 
@@ -23,8 +22,7 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.nextLine().toLowerCase();
-
+        String str = sc.nextLine().toUpperCase();
         System.out.println(T.solution(str));
     }
 }

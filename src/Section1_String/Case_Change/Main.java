@@ -4,16 +4,18 @@ import java.util.Scanner;
 
 public class Main {
 
-    public void solution(String str) {
+    public String solution(String str) {
 
+        StringBuilder sb = new StringBuilder();
         for (char c : str.toCharArray()) {
-            if (Character.isLowerCase(c)) {
-                System.out.print(Character.toUpperCase(c));
+            if (Character.isUpperCase(c)) {
+                sb.append(Character.toLowerCase(c));
             }
             else {
-                System.out.print(Character.toLowerCase(c));
+                sb.append(Character.toUpperCase(c));
             }
         }
+        return sb.toString();
     }
 
 
@@ -24,6 +26,6 @@ public class Main {
 
         String str = sc.next();
 
-       T.solution(str);
+        System.out.println(T.solution(str));
     }
 }

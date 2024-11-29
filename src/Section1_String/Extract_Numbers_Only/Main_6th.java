@@ -2,7 +2,7 @@ package Section1_String.Extract_Numbers_Only;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     public int solution(String str) {
 
@@ -18,10 +18,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
+
         System.out.println(T.solution(str));
     }
 }

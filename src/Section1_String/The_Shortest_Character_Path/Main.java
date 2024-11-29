@@ -4,33 +4,32 @@ import java.util.Scanner;
 
 public class Main {
 
-    public int[] solution(String str, char c) {
+    public int[] solution(String s, char t) {
 
-        int len = str.length();
-        int[] disArr = new int[len];
-
-        int dis = 100;
+        int len = s.length();
+        int[] dis = new int[len];
+        int pos = 100;
         for (int i = 0; i < len; i++) {
-            if (str.charAt(i) == c) {
-                dis = 0;
+            if (s.charAt(i) == t) {
+                pos = 0;
+                dis[i] = pos;
             }
             else {
-                dis++;
+                dis[i] = ++pos;
             }
-            disArr[i] = dis;
         }
 
-        dis = 100;
+        pos = 100;
+
         for (int i = len - 1; i >= 0; i--) {
-            if (str.charAt(i) == c) {
-                dis = 0;
+            if (s.charAt(i) == t) {
+                pos = 0;
             }
             else {
-                dis++;
+                dis[i] = Math.min(dis[i], ++pos);
             }
-            disArr[i] = Math.min(dis, disArr[i]);
         }
-        return disArr;
+        return dis;
     }
 
 
@@ -39,10 +38,10 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String str = sc.next();
-        char c = sc.next().charAt(0);
+        String s = sc.next();
+        char t = sc.next().charAt(0);
 
-        for (int x : T.solution(str, c)) {
+        for (int x : T.solution(s, t)) {
             System.out.print(x + " ");
         }
     }
