@@ -6,17 +6,17 @@ public class Main {
 
     public int solution(int n, int[] arr) {
 
-        int answer = 0;
+        int sum = 0;
         int score = 0;
         for (int x : arr) {
-            if (x == 0) {
-                score = 0;
+            if (x == 1) {
+                sum += ++score;
             }
             else {
-                answer += ++score;
+                score = 0;
             }
         }
-        return answer;
+        return sum;
     }
 
 

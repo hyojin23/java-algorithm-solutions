@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class Main_6th {
 
     public boolean isPrime(int n) {
         if (n == 1) {
@@ -18,19 +18,19 @@ public class Main {
         return true;
     }
 
-
     public List<Integer> solution(int n, int[] arr) {
 
         List<Integer> list = new ArrayList<>();
+
         for (int x : arr) {
-            int result = 0;
+            int res = 0;
             while (x > 0) {
-                int remain = x % 10;
-                result = result * 10 + remain;
+                int r = x % 10;
                 x = x / 10;
+                res = res * 10 + r;
             }
-            if (isPrime(result)) {
-                list.add(result);
+            if (isPrime(res)) {
+                list.add(res);
             }
         }
         return list;
@@ -39,7 +39,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

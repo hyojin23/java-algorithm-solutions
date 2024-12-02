@@ -1,24 +1,28 @@
 package Section2_Array.Print_Big_Number;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
-public class Main {
+public class Main_6th {
 
-    public void solution(int n, int[] arr) {
+    public List<Integer> solution(int n, int[] arr) {
 
-        System.out.print(arr[0] + " ");
+        List<Integer> list = new ArrayList<>();
+        list.add(arr[0]);
 
         for (int i = 1; i < n; i++) {
             if (arr[i] > arr[i - 1]) {
-                System.out.print(arr[i] + " ");
+                list.add(arr[i]);
             }
         }
+        return list;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -28,6 +32,8 @@ public class Main {
             arr[i] = sc.nextInt();
         }
 
-        T.solution(n, arr);
+        for (int x : T.solution(n, arr)) {
+            System.out.print(x + " ");
+        }
     }
 }

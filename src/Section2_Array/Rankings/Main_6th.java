@@ -2,15 +2,16 @@ package Section2_Array.Rankings;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
-    public int[] solution(int n, int[] scores) {
+    public int[] solution(int n, int[] arr) {
 
         int[] answer = new int[n];
+
         for (int i = 0; i < n; i++) {
             int grade = 1;
-            for (int other : scores) {
-                if (other > scores[i]) {
+            for (int j = 0; j < n; j++) {
+                if (arr[j] > arr[i]) {
                     grade++;
                 }
             }
@@ -22,17 +23,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] scores = new int[n];
+        int[] arr = new int[n];
 
         for (int i = 0; i < n; i++) {
-            scores[i] = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
 
-        for (int x : T.solution(n, scores)) {
+        for (int x : T.solution(n, arr)) {
             System.out.print(x + " ");
         }
     }

@@ -2,13 +2,14 @@ package Section2_Array.Maximum_Sum_Of_Grid;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     public int solution(int n, int[][] arr) {
 
-        int max = Integer.MIN_VALUE;
-        int upCrossSum = 0;
-        int downCrossSum = 0;
+        int answer = Integer.MIN_VALUE;
+
+        int rtUpSum = 0;
+        int rtDownSum = 0;
         for (int i = 0; i < n; i++) {
             int rowSum = 0;
             int colSum = 0;
@@ -16,25 +17,25 @@ public class Main {
                 rowSum += arr[i][j];
                 colSum += arr[j][i];
                 if (i == j) {
-                    upCrossSum += arr[i][j];
+                    rtUpSum += arr[i][j];
                 }
                 if (j == n - 1 - i) {
-                    downCrossSum += arr[i][j];
+                    rtDownSum += arr[i][j];
                 }
             }
-            max = Math.max(rowSum, max);
-            max = Math.max(colSum, max);
+            answer = Math.max(rowSum, answer);
+            answer = Math.max(colSum, answer);
         }
-        max = Math.max(upCrossSum, max);
-        max = Math.max(downCrossSum, max);
+        answer = Math.max(rtUpSum, answer);
+        answer = Math.max(rtDownSum, answer);
 
-        return max;
+        return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -45,6 +46,7 @@ public class Main {
                 arr[i][j] = sc.nextInt();
             }
         }
+
         System.out.println(T.solution(n, arr));
     }
 }
