@@ -3,7 +3,7 @@ package Section5_Stack_and_Queue.Correct_Bracket;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class Main_6th {
 
     public String solution(String str) {
 
@@ -13,7 +13,7 @@ public class Main {
             if (c == '(') {
                 stack.push(c);
             }
-            else if (c == ')'){
+            else {
                 if (!stack.isEmpty()) {
                     stack.pop();
                 }
@@ -22,7 +22,6 @@ public class Main {
                 }
             }
         }
-
         if (!stack.isEmpty()) {
             return "NO";
         }
@@ -32,10 +31,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        Main_6th T = new Main_6th();
+        Scanner sc  = new Scanner(System.in);
 
         String str = sc.next();
+
         System.out.println(T.solution(str));
     }
 }

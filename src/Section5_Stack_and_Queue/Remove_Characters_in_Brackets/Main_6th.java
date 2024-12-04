@@ -3,9 +3,9 @@ package Section5_Stack_and_Queue.Remove_Characters_in_Brackets;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class Main_6th {
 
-    public void solution(String str) {
+    public String solution(String str) {
 
         Stack<Character> stack = new Stack<>();
 
@@ -17,18 +17,22 @@ public class Main {
                 stack.push(c);
             }
         }
+
+        StringBuilder answer = new StringBuilder();
         for (char c : stack) {
-            System.out.print(c);
+            answer.append(c);
         }
+        return answer.toString();
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
-        T.solution(str);
+
+        System.out.println(T.solution(str));
     }
 }

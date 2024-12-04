@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.TreeSet;
 import java.util.Collections;
 
-public class Main {
+public class Main_6th {
 
     public int solution(int n, int k, int[] arr) {
 
@@ -18,18 +18,16 @@ public class Main {
             }
         }
 
-//        tSet.remove(143);
-//        System.out.println(tSet.size());
-//        System.out.println("first >> " + tSet.first());
-//        System.out.println("last >> " + tSet.last());
-
-        int rank = 1;
-        for (int num : tSet) {
-            if (rank == k) {
-                answer = num;
-                break;
+        //tSet.remove(143);
+        //System.out.println("size >> " + tSet.size());
+        //System.out.println("first >> " + tSet.first());
+        //System.out.println("last >> " + tSet.last());
+        int order = 1;
+        for (int x : tSet) {
+            if (order == k) {
+                answer = x;
             }
-            rank++;
+            order++;
         }
         return answer;
     }
@@ -37,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

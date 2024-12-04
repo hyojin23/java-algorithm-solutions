@@ -6,8 +6,7 @@ import java.util.LinkedList;
 
 class Patient {
 
-    int order;
-    int danger;
+    int order, danger;
 
     Patient(int order, int danger) {
         this.order = order;
@@ -19,27 +18,23 @@ public class Main {
 
     public int solution(int n, int m, Queue<Patient> q) {
 
-        int answer = 0;
+        int cnt = 0;
         while (!q.isEmpty()) {
-            Patient me = q.poll();
-            boolean notMyTurn = false;
+            Patient p = q.poll();
             for (Patient other : q) {
-                if (other.danger > me.danger) {
-                    notMyTurn = true;
+                if (other.danger > p.danger) {
+                    q.offer(p);
                     break;
                 }
             }
-            if (notMyTurn) {
-                q.offer(me);
-            }
-            else {
-                answer++;
-                if (me.order == m) {
-                    return answer;
+            if (!q.contains(p)) {
+                cnt++;
+                if (p.order == m) {
+                    return cnt;
                 }
             }
         }
-        return answer;
+        return cnt;
     }
 
 

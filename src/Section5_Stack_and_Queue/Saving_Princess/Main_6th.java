@@ -4,23 +4,30 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_6th {
 
     public int solution(int n, int k) {
 
         Queue<Integer> q = new LinkedList<>();
         int answer = 0;
+
         for (int i = 1; i <= n; i++) {
             q.offer(i);
         }
-        while (!q.isEmpty()) {
-            for (int i = 0; i < k - 1; i++) {
-                q.offer(q.poll());
+
+        int cnt = 0;
+        while (!q.isEmpty() && q.size() != 1) {
+            int prince = q.poll();
+            cnt++;
+            if (cnt == k) {
+                cnt = 0;
             }
-            q.poll();
-            if (q.size() == 1) {
-                answer = q.peek();
+            else {
+                q.offer(prince);
             }
+        }
+        if (!q.isEmpty()) {
+            answer = q.poll();
         }
         return answer;
     }
@@ -28,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
