@@ -2,7 +2,7 @@ package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Recursive_Function;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     public void DFS(int n) {
 
@@ -18,10 +18,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+
         T.DFS(n);
     }
 }

@@ -3,14 +3,14 @@ package Section6_Sorting_and_Searching.Music_Video;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_6th {
 
-    public int recordingCnt(int videoTime, int[] arr) {
+    public int videoCount(int mid, int[] arr) {
 
         int cnt = 1;
         int sum = 0;
         for (int x : arr) {
-            if (sum + x > videoTime) {
+            if (sum + x > mid) {
                 cnt++;
                 sum = x;
             }
@@ -26,11 +26,13 @@ public class Main {
         int lt = Arrays.stream(arr).max().getAsInt();
         int rt = Arrays.stream(arr).sum();
         int answer = 0;
+
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
-            if (recordingCnt(mid, arr) <= m) {
-                rt = mid - 1;
+            int cnt = videoCount(mid, arr);
+            if (cnt <= m) {
                 answer = mid;
+                rt = mid - 1;
             }
             else {
                 lt = mid + 1;
@@ -42,15 +44,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int m = sc.nextInt();
         int[] arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         System.out.println(T.solution(n, m, arr));
     }
 }

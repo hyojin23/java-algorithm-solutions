@@ -5,26 +5,27 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Main {
+public class Main_6th {
 
     public List<Integer> solution(int n, int[] arr) {
 
-        List<Integer> list = new ArrayList<>();
+        List<Integer> answer = new ArrayList<>();
+
         int[] sortArr = arr.clone();
         Arrays.sort(sortArr);
 
         for (int i = 0; i < n; i++) {
-            if (arr[i] != sortArr[i]) {
-                list.add(i + 1);
+            if (sortArr[i] != arr[i]) {
+                answer.add(i + 1);
             }
         }
-        return list;
+        return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

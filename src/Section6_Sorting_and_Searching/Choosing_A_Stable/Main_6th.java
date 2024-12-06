@@ -3,30 +3,34 @@ package Section6_Sorting_and_Searching.Choosing_A_Stable;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_6th {
 
-    public int horseArngCnt(int dis, int[] arr) {
+    public int horseCount(int dis, int[] arr) {
 
-        int lastHorsePos = arr[0];
+        int pos = arr[0];
         int cnt = 1;
         for (int x : arr) {
-            if (x >= lastHorsePos + dis) {
+            if (x >= pos + dis) {
                 cnt++;
-                lastHorsePos = x;
+                pos = x;
             }
         }
         return cnt;
     }
 
+
     public int solution(int n, int c, int[] arr) {
 
         Arrays.sort(arr);
+
         int lt = 1;
-        int rt = Arrays.stream(arr).max().getAsInt() - Arrays.stream(arr).min().getAsInt();
+        int rt = arr[n - 1] - arr[0];
         int answer = 0;
+
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
-            if (horseArngCnt(mid, arr) >= c) {
+            int cnt = horseCount(mid, arr);
+            if (cnt >= c) {
                 answer = mid;
                 lt = mid + 1;
             }
@@ -40,7 +44,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

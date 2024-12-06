@@ -1,8 +1,8 @@
-package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Recursive_Function;
+package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Print_Binary_Using_Recursive_Functions;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     public void DFS(int n) {
 
@@ -10,18 +10,19 @@ public class Main {
             return;
         }
         else {
-            DFS(n - 1);
-            System.out.print(n + " ");
+            DFS(n / 2);
+            System.out.print(n % 2);
         }
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
+
         T.DFS(n);
     }
 }

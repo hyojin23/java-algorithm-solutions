@@ -6,7 +6,7 @@ class Node {
     Node lt, rt;
 
     Node(int val) {
-        this.data = val;
+        data = val;
         lt = null;
         rt = null;
     }
@@ -22,15 +22,17 @@ public class Main {
             return;
         }
         else {
-            System.out.print(root.data + " ");
+            //System.out.print(root.data + " ");    전위순회
             DFS(root.lt);
-//            System.out.print(root.data + " ");
+            //System.out.print(root.data + " ");    중위순회
             DFS(root.rt);
-//            System.out.print(root.data + " ");
+            System.out.print(root.data + " ");      //후위순회
         }
     }
 
+
     public static void main(String[] args) {
+
         Main tree = new Main();
         tree.root = new Node(1);
         tree.root.lt = new Node(2);
