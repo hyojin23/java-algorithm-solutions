@@ -27,22 +27,21 @@ public class Main {
         while (!q.isEmpty()) {
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                Node node = q.poll();
-                if (node.lt == null && node.rt == null) {
+                Node cur = q.poll();
+                if (cur.lt == null && cur.rt == null) {
                     return L;
                 }
-                if (node.lt != null) {
-                    q.offer(node.lt);
+                if (cur.lt != null) {
+                    q.offer(cur.lt);
                 }
-                if (node.rt != null) {
-                    q.offer(node.rt);
+                if (cur.rt != null) {
+                    q.offer(cur.rt);
                 }
             }
             L++;
         }
         return L;
     }
-
 
     public static void main(String[] args) {
 
