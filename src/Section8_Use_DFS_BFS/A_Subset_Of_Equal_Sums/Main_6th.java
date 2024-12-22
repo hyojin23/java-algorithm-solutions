@@ -2,18 +2,16 @@ package Section8_Use_DFS_BFS.A_Subset_Of_Equal_Sums;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     static int n, total;
     static int[] arr;
     static String answer = "NO";
-    static boolean findAnswer = false;
+    boolean flag = false;
 
-    public void DFS(int sum, int L) {
+    public void DFS(int L, int sum) {
 
-        if (findAnswer) {
-            return;
-        }
+        if (flag) return;
 
         if (sum > total / 2) {
             return;
@@ -22,23 +20,25 @@ public class Main {
         if (L == n) {
             if (total - sum == sum) {
                 answer = "YES";
-                findAnswer = true;
+                flag = true;
             }
         }
         else {
-            DFS(sum + arr[L], L + 1);
-            DFS(sum, L + 1);
+
+            DFS(L + 1, sum + arr[L]);
+            DFS(L + 1, sum);
         }
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
             total += arr[i];

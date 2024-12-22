@@ -6,41 +6,43 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_6th {
 
-    static int n, m;
-    static int[] ch, dis;
     static List<List<Integer>> graph;
+    static int[] ch, answer;
 
     public void BFS(int v) {
 
         Queue<Integer> q = new LinkedList<>();
+        ch[v] = 1;
         q.offer(v);
+        int L = 0;
         while (!q.isEmpty()) {
             int len = q.size();
-            for  (int i = 0; i < len; i++) {
+            for (int i = 0; i < len; i++) {
                 int cur = q.poll();
+                answer[cur] = L;
                 for (int x : graph.get(cur)) {
                     if (ch[x] == 0) {
                         ch[x] = 1;
-                        dis[x] = dis[cur] + 1;
                         q.offer(x);
                     }
                 }
             }
+            L++;
         }
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        Main_6th T = new Main_6th();
+        Scanner sc =  new Scanner(System.in);
 
-        n = sc.nextInt();
-        m = sc.nextInt();
-        dis = new int[n + 1];
-        ch = new int[n + 1];
+        int n = sc.nextInt();
+        int m = sc.nextInt();
         graph = new ArrayList<>();
+        answer = new int[n + 1];
+        ch = new int[n + 1];
 
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
@@ -52,10 +54,9 @@ public class Main {
             graph.get(a).add(b);
         }
 
-        ch[1] = 1;
         T.BFS(1);
         for (int i = 2; i <= n; i++) {
-            System.out.println(i + " : " + dis[i]);
+            System.out.println(i + " : " + answer[i]);
         }
     }
 }

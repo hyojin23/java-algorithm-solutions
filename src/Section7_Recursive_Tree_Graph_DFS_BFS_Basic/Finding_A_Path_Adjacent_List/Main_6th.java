@@ -4,11 +4,12 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class Main_6th {
 
-    static int n, m, answer;
+    static int n, m;
     static List<List<Integer>> graph;
     static int[] ch;
+    static int answer = 0;
 
     public void DFS(int v) {
 
@@ -26,15 +27,17 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
-        graph = new ArrayList<>();
+
         ch = new int[n + 1];
+        graph = new ArrayList<>();
 
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
