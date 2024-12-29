@@ -2,7 +2,7 @@ package Section8_Use_DFS_BFS.The_Number_Of_Combination;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     static int[][] arr;
 
@@ -23,12 +23,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int r = sc.nextInt();
+
         arr = new int[n + 1][r + 1];
+
         System.out.println(T.DFS(n, r));
     }
 }

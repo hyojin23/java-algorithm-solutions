@@ -4,48 +4,51 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-class Problem {
+class Problem_6th {
+
     int s, t;
 
-    Problem(int s, int t) {
+    Problem_6th(int s, int t) {
         this.s = s;
         this.t = t;
     }
 }
 
-public class Main {
+public class Main_6th {
 
     static int n, m;
-    static List<Problem> list;
     static int answer = Integer.MIN_VALUE;
+    static List<Problem_6th> list;
 
-    public void DFS(int L, int totalScore, int totalTime) {
+    public void DFS(int L, int score, int time) {
 
-        if (totalTime > m) {
+        if (time > m) {
             return;
         }
 
         if (L == n) {
-            answer = Math.max(answer, totalScore);
+            answer = Math.max(answer, score);
         }
         else {
-            DFS(L + 1, totalScore + list.get(L).s, totalTime + list.get(L).t);
-            DFS(L + 1, totalScore, totalTime);
+            DFS(L + 1, score + list.get(L).s, time + list.get(L).t);
+            DFS(L + 1, score, time);
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
         list = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int t = sc.nextInt();
-            list.add(new Problem(s, t));
+            list.add(new Problem_6th(s, t));
         }
 
         T.DFS(0, 0, 0);
