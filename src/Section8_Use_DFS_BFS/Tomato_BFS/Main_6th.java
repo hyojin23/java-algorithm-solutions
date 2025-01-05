@@ -4,35 +4,36 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-class Tomato {
+class Tomato_6th {
+
     int x, y;
 
-    Tomato(int x, int y) {
+    Tomato_6th(int x, int y) {
         this.x = x;
         this.y = y;
     }
 }
 
-public class Main {
+public class Main_6th {
 
     static int n, m;
     static int[][] board, dis;
+    int[] dx = {-1, 0, 1, 0};
+    int[] dy = {0, 1, 0, -1};
 
-    public void BFS(Queue<Tomato> q) {
+    public void BFS(Queue<Tomato_6th> q) {
 
-        int[] dx = {-1, 0, 1, 0};
-        int[] dy = {0, 1, 0, -1};
         while (!q.isEmpty()) {
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                Tomato cur = q.poll();
+                Tomato_6th t =  q.poll();
                 for (int j = 0; j < 4; j++) {
-                    int nx = cur.x + dx[j];
-                    int ny = cur.y + dy[j];
+                    int nx = t.x + dx[j];
+                    int ny = t.y + dy[j];
                     if (nx >= 0 && nx < n && ny >= 0 && ny < m && board[nx][ny] == 0) {
                         board[nx][ny] = 1;
-                        dis[nx][ny] = dis[cur.x][cur.y] + 1;
-                        q.offer(new Tomato(nx, ny));
+                        q.offer(new Tomato_6th(nx, ny));
+                        dis[nx][ny] = dis[t.x][t.y] + 1;
                     }
                 }
             }
@@ -42,40 +43,41 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         m = sc.nextInt();
         n = sc.nextInt();
         board = new int[n][m];
         dis = new int[n][m];
-        Queue<Tomato> q = new LinkedList<>();
+        Queue<Tomato_6th> q = new LinkedList<>();
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 board[i][j] = sc.nextInt();
                 if (board[i][j] == 1) {
-                   q.offer(new Tomato(i, j));
+                    q.offer(new Tomato_6th(i, j));
                 }
             }
         }
-        T.BFS(q);
 
-        boolean isNotRippen = false;
+        T.BFS(q);
         int answer = Integer.MIN_VALUE;
+        boolean allRipen = true;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (board[i][j] == 0) {
-                    isNotRippen = true;
-                    break;
+                answer = Math.max(dis[i][j], answer);
+                if (board[i][j] == 0 && dis[i][j] == 0) {
+                    allRipen = false;
                 }
-                answer = Math.max(answer, dis[i][j]);
             }
         }
-        if (isNotRippen) {
-            System.out.println(-1);
+
+        if (allRipen) {
+            System.out.println(answer);
         }
         else {
-            System.out.println(answer);
+            System.out.println(-1);
         }
     }
 }
