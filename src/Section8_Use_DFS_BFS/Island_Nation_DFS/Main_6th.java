@@ -2,9 +2,9 @@ package Section8_Use_DFS_BFS.Island_Nation_DFS;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
-    static int n, answer;
+    static int n;
     static int[][] board;
     int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
     int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
@@ -23,17 +23,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         board = new int[n][n];
+
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j  < n; j++) {
+            for (int j = 0; j < n; j++) {
                 board[i][j] = sc.nextInt();
             }
         }
 
+        int answer = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == 1) {

@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class Time implements Comparable<Time> {
+class Time_6th implements Comparable<Time_6th> {
 
     int s, e;
 
-    Time(int s, int e) {
+    Time_6th(int s, int e) {
         this.s = s;
         this.e = e;
     }
 
     @Override
-    public int compareTo(Time ob) {
+    public int compareTo(Time_6th ob) {
         if (this.e == ob.e) {
             return this.s - ob.s;
         }
@@ -25,34 +25,38 @@ class Time implements Comparable<Time> {
     }
 }
 
-public class Main {
+public class Main_6th {
 
-    public int solution(List<Time> list) {
+    public int solution(List<Time_6th> list) {
 
-        Collections.sort(list);
-        int lastTime = Integer.MIN_VALUE;
         int answer = 0;
-        for (Time t : list) {
-            if (t.s >= lastTime) {
+        Collections.sort(list);
+        int lastEnd = Integer.MIN_VALUE;
+
+        for (Time_6th t : list) {
+            if (t.s >= lastEnd) {
                 answer++;
-                lastTime = t.e;
+                lastEnd = t.e;
             }
         }
         return answer;
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
-        List<Time> list = new ArrayList<>();
 
         int n = sc.nextInt();
+        List<Time_6th> list = new ArrayList<>();
+
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int e = sc.nextInt();
-            list.add(new Time(s, e));
+            list.add(new Time_6th(s, e));
         }
+
         System.out.println(T.solution(list));
     }
 }
