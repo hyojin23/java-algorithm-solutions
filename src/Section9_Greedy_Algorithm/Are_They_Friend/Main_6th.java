@@ -2,7 +2,7 @@ package Section9_Greedy_Algorithm.Are_They_Friend;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_6th {
 
     static int[] unf;
 
@@ -23,15 +23,15 @@ public class Main {
         }
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int m = sc.nextInt();
         unf = new int[n + 1];
+
         for (int i = 1; i <= n; i++) {
             unf[i] = i;
         }
@@ -43,8 +43,12 @@ public class Main {
         }
 
         int a = sc.nextInt();
-        int b= sc.nextInt();
-        if (Find(a) == Find(b)) {
+        int b = sc.nextInt();
+
+        int fa = Find(a);
+        int fb = Find(b);
+
+        if (fa == fb) {
             System.out.println("YES");
         }
         else {
