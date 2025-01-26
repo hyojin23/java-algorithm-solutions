@@ -22,28 +22,29 @@ class Edge implements Comparable<Edge> {
 
 public class Main {
 
-    static List<List<Edge>> graph;
     static int[] ch;
 
-    public int solution(int v) {
+    public int solution(int vex, int cost, List<List<Edge>> graph) {
 
+        int sum =0;
         PriorityQueue<Edge> pq = new PriorityQueue<>();
-        pq.offer(new Edge(v, 0));
-        int sum = 0;
+        pq.offer(new Edge(vex, cost));
         while (!pq.isEmpty()) {
-            Edge cur = pq.poll();
-            if (ch[cur.vex] == 0) {
-                ch[cur.vex] = 1;
-                sum += cur.cost;
-                for (Edge edge : graph.get(cur.vex)) {
-                    if (ch[edge.vex] == 0) {
-                        pq.offer(edge);
+            Edge edge = pq.poll();
+            if (ch[edge.vex] == 0) {
+                sum += edge.cost;
+                ch[edge.vex] = 1;
+                int nowVex = edge.vex;
+                for (Edge e : graph.get(nowVex)) {
+                    if (ch[e.vex] == 0) {
+                        pq.offer(new Edge(e.vex, e.cost));
                     }
                 }
             }
         }
         return sum;
     }
+
 
     public static void main(String[] args) {
 
@@ -52,11 +53,10 @@ public class Main {
 
         int v = sc.nextInt();
         int e = sc.nextInt();
-        graph = new ArrayList<>();
         ch = new int[v + 1];
-
+        List<List<Edge>> graph = new ArrayList<>();
         for (int i = 0; i <= v; i++) {
-            graph.add(new ArrayList<>());
+            graph.add(new ArrayList());
         }
 
         for (int i = 0; i < e; i++) {
@@ -66,7 +66,6 @@ public class Main {
             graph.get(a).add(new Edge(b, c));
             graph.get(b).add(new Edge(a, c));
         }
-
-        System.out.println(T.solution(1));
+        System.out.println(T.solution(1, 0, graph));
     }
 }
