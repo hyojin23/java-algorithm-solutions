@@ -2,44 +2,45 @@ package Section1_String.The_Shortest_Character_Path;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     public int[] solution(String s, char t) {
 
-        int n = s.length();
-        int[] answer = new int[n];
-        int dis = 100;
-        for (int i = 0; i < n; i++) {
+        int len = s.length();
+        int[] dis = new int[len];
+        int pos = 100;
+        for (int i = 0; i < len; i++) {
             if (s.charAt(i) == t) {
-                dis = 0;
+                pos = 0;
+                dis[i] = pos;
             }
             else {
-                dis++;
+                dis[i] = ++pos;
             }
-            answer[i] = dis;
         }
 
-        dis = 100;
-        for (int i = n - 1; i >= 0; i--) {
+        pos = 100;
+
+        for (int i = len - 1; i >= 0; i--) {
             if (s.charAt(i) == t) {
-                dis = 0;
+                pos = 0;
             }
             else {
-                dis++;
+                dis[i] = Math.min(dis[i], ++pos);
             }
-            answer[i] = Math.min(answer[i], dis);
         }
-        return answer;
+        return dis;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         String s = sc.next();
         char t = sc.next().charAt(0);
+
         for (int x : T.solution(s, t)) {
             System.out.print(x + " ");
         }

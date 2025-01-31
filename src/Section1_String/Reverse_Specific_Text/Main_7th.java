@@ -2,20 +2,26 @@ package Section1_String.Reverse_Specific_Text;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     public String solution(String str) {
 
-        int lt = 0, rt = str.length() - 1;
+        int lt = 0;
+        int rt = str.length() - 1;
         char[] arr = str.toCharArray();
+
         while (lt < rt) {
-            if (!Character.isAlphabetic(arr[lt])) {
+            if (!Character.isAlphabetic(arr[lt]) && !Character.isAlphabetic(arr[rt])) {
                 lt++;
-            }
-            if (!Character.isAlphabetic(arr[rt])) {
                 rt--;
             }
-            if (Character.isAlphabetic(arr[lt]) && Character.isAlphabetic(arr[rt])) {
+            else if (!Character.isAlphabetic(arr[lt])) {
+                lt++;
+            }
+            else if (!Character.isAlphabetic(arr[rt])) {
+                rt--;
+            }
+            else {
                 char tmp = arr[lt];
                 arr[lt] = arr[rt];
                 arr[rt] = tmp;
@@ -29,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();

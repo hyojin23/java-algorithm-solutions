@@ -6,15 +6,16 @@ public class Main {
 
     static int n;
     static int[] arr;
+
     public void DFS(int L) {
 
         if (L == n) {
-           for (int i = 0; i < n; i++) {
-               if (arr[i] == 1) {
-                   System.out.print((i + 1) + " ");
-               }
-           }
-           System.out.println();
+            for (int i = 0; i < n; i++) {
+                if (arr[i] == 1) {
+                    System.out.print((i + 1) + " ");
+                }
+            }
+            System.out.println();
         }
         else {
             arr[L] = 1;
@@ -32,6 +33,7 @@ public class Main {
 
         n = sc.nextInt();
         arr = new int[n];
+
         T.DFS(0);
     }
 }

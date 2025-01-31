@@ -6,11 +6,22 @@ public class Main {
 
     public String solution(String str) {
 
-        str = str.replaceAll("[^A-Z]", "");
-        int len = str.length();
-        for (int i = 0; i < len / 2; i++) {
-            if (str.charAt(i) != str.charAt(len - 1 - i)) {
-                return "NO";
+        int lt = 0, rt = str.length() - 1;
+        while (lt < rt) {
+            if (!Character.isAlphabetic(str.charAt(lt))) {
+                lt++;
+            }
+            if (!Character.isAlphabetic(str.charAt(rt))) {
+                rt--;
+            }
+            if (Character.isAlphabetic(str.charAt(lt)) && Character.isAlphabetic(str.charAt(rt))) {
+                if (str.charAt(lt) != str.charAt(rt)) {
+                    return "NO";
+                }
+                else {
+                    lt++;
+                    rt--;
+                }
             }
         }
         return "YES";
