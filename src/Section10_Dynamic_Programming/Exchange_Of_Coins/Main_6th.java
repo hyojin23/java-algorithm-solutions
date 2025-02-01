@@ -3,16 +3,17 @@ package Section10_Dynamic_Programming.Exchange_Of_Coins;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_6th {
 
     public int solution(int n, int m, int[] coins) {
 
         int[] dy = new int[m + 1];
         Arrays.fill(dy, Integer.MAX_VALUE);
         dy[0] = 0;
-        for (int c : coins) {
-            for (int i = c; i <= m; i++) {
-                dy[i] = Math.min(dy[i - c] + 1, dy[i]);
+
+        for (int coin : coins) {
+            for (int i = coin; i <= m; i++) {
+                dy[i] = Math.min(dy[i - coin] + 1, dy[i]);
             }
         }
         return dy[m];
@@ -21,15 +22,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_6th T = new Main_6th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int[] coins = new int[n];
+
         for (int i = 0; i < n; i++) {
             coins[i] = sc.nextInt();
         }
+
         int m = sc.nextInt();
+
         System.out.println(T.solution(n, m, coins));
     }
 }

@@ -1,28 +1,24 @@
 package Section1_String.Reverse_The_Word;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Main {
 
-    public List<String> solution(String[] arr) {
-
-        List<String> list = new ArrayList<>();
-        for (String word : arr) {
-            int lt = 0;
-            int rt = word.length() - 1;
-            char[] wordArr = word.toCharArray();
+    public String[] solution(int n, String[] arr) {
+        String[] answer = new String[n];
+        for (int i = 0; i < n; i++) {
+            int lt = 0, rt = arr[i].length() - 1;
+            char[] chArr = arr[i].toCharArray();
             while (lt < rt) {
-                char tmp = wordArr[lt];
-                wordArr[lt] = wordArr[rt];
-                wordArr[rt] = tmp;
+                char tmp = chArr[lt];
+                chArr[lt] = chArr[rt];
+                chArr[rt] = tmp;
                 lt++;
                 rt--;
             }
-            list.add(String.valueOf(wordArr));
+            answer[i] = String.valueOf(chArr);
         }
-        return list;
+        return answer;
     }
 
 
@@ -33,13 +29,11 @@ public class Main {
 
         int n = sc.nextInt();
         String[] arr = new String[n];
-
         for (int i = 0; i < n; i++) {
             arr[i] = sc.next();
         }
-
-        for (String s : T.solution(arr)) {
-            System.out.println(s);
+        for (String word : T.solution(n, arr)) {
+            System.out.println(word);
         }
     }
 }
