@@ -4,32 +4,33 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class Main_7th {
 
-    public boolean isPrime(int num) {
-        if (num == 1) {
+    public boolean isPrime(int n) {
+        if (n == 1) {
             return false;
         }
-        for (int i = 2; i < num; i++) {
-            if (num % i == 0) {
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
                 return false;
             }
         }
         return true;
     }
 
+
     public List<Integer> solution(int n, int[] arr) {
 
         List<Integer> list = new ArrayList<>();
         for (int x : arr) {
-            int res = 0;
+            int result = 0;
             while (x > 0) {
                 int remain = x % 10;
+                result = result * 10 + remain;
                 x = x / 10;
-                res = res * 10 + remain;
             }
-            if (isPrime(res)) {
-                list.add(res);
+            if (isPrime(result)) {
+                list.add(result);
             }
         }
         return list;
@@ -38,14 +39,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int[] arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         for (int x : T.solution(n, arr)) {
             System.out.print(x + " ");
         }
