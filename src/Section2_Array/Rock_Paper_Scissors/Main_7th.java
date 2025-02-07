@@ -2,21 +2,21 @@ package Section2_Array.Rock_Paper_Scissors;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
-    public void solution(int n, int[] a, int[] b) {
+    public void solution(int n, int[] arr1, int[] arr2) {
 
         for (int i = 0; i < n; i++) {
-            if (a[i] == b[i]) {
+            if (arr1[i] == arr2[i]) {
                 System.out.println("D");
             }
-            else if (a[i] == 1 && b[i] == 3) {
+            else if (arr1[i] == 1 && arr2[i] == 3) {
                 System.out.println("A");
             }
-            else if (a[i] == 2 && b[i] == 1) {
+            else if (arr1[i] == 2 && arr2[i] == 1) {
                 System.out.println("A");
             }
-            else if (a[i] == 3 && b[i] == 2) {
+            else if (arr1[i] == 3 && arr2[i] == 2) {
                 System.out.println("A");
             }
             else {
@@ -28,18 +28,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        int[] a = new int[n];
-        int[] b = new int[n];
+        int[] arr1 = new int[n];
+        int[] arr2 = new int[n];
+
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
+            arr1[i] = sc.nextInt();
         }
+
         for (int i = 0; i < n; i++) {
-            b[i] = sc.nextInt();
+            arr2[i] = sc.nextInt();
         }
-        T.solution(n, a, b);
+
+        T.solution(n, arr1, arr2);
     }
 }
