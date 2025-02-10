@@ -2,7 +2,7 @@ package Section2_Array.Decide_Temporary_Class_President;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     public int solution(int n, int[][] arr) {
 
@@ -29,14 +29,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int[][] arr = new int[n][5];
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < 5; j++) {
-               arr[i][j] = sc.nextInt();
+                arr[i][j] = sc.nextInt();
             }
         }
         System.out.println(T.solution(n, arr));
