@@ -2,37 +2,37 @@ package Section3_Two_Pointers_and_Sliding_Window.Maximum_Length_Continuous_Parti
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     public int solution(int n, int k, int[] arr) {
 
-        int lt = 0;
+        int answer = Integer.MIN_VALUE;
         int cnt = 0;
-        int max = Integer.MIN_VALUE;
+        int lt = 0;
         for (int rt = 0; rt < n; rt++) {
             if (arr[rt] == 0) {
                 cnt++;
             }
             while (cnt > k) {
-                if (arr[lt] == 0) {
+                if (arr[lt++] == 0) {
                     cnt--;
                 }
-                lt++;
             }
-            max = Math.max(max, rt - lt + 1);
+            answer = Math.max(answer, rt - lt + 1);
         }
-        return max;
+        return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int k = sc.nextInt();
         int[] arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }

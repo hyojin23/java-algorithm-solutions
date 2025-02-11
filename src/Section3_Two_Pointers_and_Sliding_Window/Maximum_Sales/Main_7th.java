@@ -2,33 +2,35 @@ package Section3_Two_Pointers_and_Sliding_Window.Maximum_Sales;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     public int solution(int n, int k, int[] arr) {
 
         int sum = 0;
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < k - 1; i++) {
+        for (int i = 0; i < k; i++) {
             sum += arr[i];
         }
+
+        int answer = sum;
         int lt = 0;
-        for (int rt = k - 1; rt < n; rt++) {
+        for (int rt = k; rt < n; rt++) {
             sum += arr[rt];
-            max = Math.max(sum, max);
             sum -= arr[lt++];
+            answer = Math.max(answer, sum);
         }
-        return max;
+        return answer;
     }
 
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int k = sc.nextInt();
         int[] arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
