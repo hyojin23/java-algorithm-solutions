@@ -6,24 +6,25 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Main {
+public class Main_7th {
 
     public List<Integer> solution(int n, int k, int[] arr) {
 
-        List<Integer> list = new ArrayList<>();
         Map<Integer, Integer> map = new HashMap<>();
-        int lt = 0;
-        for (int i = 0; i < k - 1; i++) {
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < k; i++) {
             map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
         }
-        for (int rt = k - 1; rt < n; rt++) {
-            map.put(arr[rt], map.getOrDefault(arr[rt], 0) + 1);
-            list.add(map.size());
-            map.put(arr[lt], map.get(arr[lt]) - 1);
-            if (map.get(arr[lt]) == 0) {
-                map.remove(arr[lt]);
+        list.add(map.size());
+
+        for (int i = k; i < n; i++) {
+            map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+            map.put(arr[i - k], map.get(arr[i - k]) - 1);
+            if (map.get(arr[i - k]) == 0) {
+                map.remove(arr[i - k]);
             }
-            lt++;
+            list.add(map.size());
         }
         return list;
     }
@@ -31,15 +32,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int k = sc.nextInt();
         int[] arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+
         for (int x : T.solution(n, k, arr)) {
             System.out.print(x + " ");
         }

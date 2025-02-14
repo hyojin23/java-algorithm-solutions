@@ -6,20 +6,26 @@ import java.util.HashMap;
 
 public class Main {
 
-    public String solution(String word1, String word2) {
+    public String solution(String str1, String str2) {
 
         Map<Character, Integer> map = new HashMap<>();
-
-        for (char c : word1.toCharArray()) {
+        for (char c : str1.toCharArray()) {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
-
-        for (char c : word2.toCharArray()) {
-            if (map.getOrDefault(c, 0) == 0) {
-                return "NO";
+        for (char c : str2.toCharArray()) {
+            if (map.containsKey(c)) {
+                if (map.get(c) == 0) {
+                    return "NO";
+                }
+                else {
+                    map.put(c, map.get(c) - 1);
+                }
+                if (map.get(c) == 0) {
+                    map.remove(c);
+                }
             }
             else {
-                map.put(c, map.get(c) - 1);
+                return "NO";
             }
         }
         return "YES";
@@ -31,9 +37,9 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        String word1 = sc.next();
-        String word2 = sc.next();
+        String str1 = sc.nextLine();
+        String str2 = sc.nextLine();
 
-        System.out.println(T.solution(word1, word2));
+        System.out.println(T.solution(str1, str2));
     }
 }

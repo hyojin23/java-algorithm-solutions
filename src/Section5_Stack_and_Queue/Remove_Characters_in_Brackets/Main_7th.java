@@ -3,11 +3,12 @@ package Section5_Stack_and_Queue.Remove_Characters_in_Brackets;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class Main_7th {
 
     public void solution(String str) {
 
         Stack<Character> stack = new Stack<>();
+
         for (char c : str.toCharArray()) {
             if (c == ')') {
                 while (stack.pop() != '(');
@@ -24,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         String str = sc.next();
