@@ -8,25 +8,23 @@ public class Main {
     public int solution(String str) {
 
         Stack<Character> stack = new Stack<>();
-        int sum = 0;
-        int len = str.length();
-        char[] strArr = str.toCharArray();
-        for (int i = 0; i < len; i++) {
-            if (strArr[i] == ')') {
-                if (strArr[i - 1] == '(') {
-                    stack.pop();
-                    sum += stack.size();
+        int answer = 0;
+        int n = str.length();
+        for (int i = 0; i < n; i++) {
+            if (str.charAt(i) == ')') {
+                stack.pop();
+                if (str.charAt(i - 1) == '(') {
+                    answer += stack.size();
                 }
                 else {
-                    stack.pop();
-                    sum += 1;
+                    answer++;
                 }
             }
-            else if (strArr[i] == '(') {
-                stack.push(strArr[i]);
+            else {
+                stack.push('(');
             }
         }
-        return sum;
+        return answer;
     }
 
 

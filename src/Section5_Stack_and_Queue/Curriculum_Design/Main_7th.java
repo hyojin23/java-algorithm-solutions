@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_7th {
 
     public String solution(String must, String plan) {
 
@@ -12,16 +12,18 @@ public class Main {
         for (char c : must.toCharArray()) {
             q.offer(c);
         }
+
         for (char c : plan.toCharArray()) {
             if (q.contains(c)) {
-                if (q.peek() != c) {
-                    return "NO";
+                if (q.peek() == c) {
+                    q.poll();
                 }
                 else {
-                    q.poll();
+                    return "NO";
                 }
             }
         }
+
         if (!q.isEmpty()) {
             return "NO";
         }
@@ -31,11 +33,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         String must = sc.next();
         String plan = sc.next();
+
         System.out.println(T.solution(must, plan));
-    }
+     }
 }

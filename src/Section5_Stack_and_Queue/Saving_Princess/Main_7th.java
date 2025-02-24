@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_7th {
 
     public int solution(int n, int k) {
 
@@ -19,7 +19,7 @@ public class Main {
             }
             q.poll();
             if (q.size() == 1) {
-                answer = q.poll();
+                answer = q.peek();
             }
         }
         return answer;
@@ -28,11 +28,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
         int k = sc.nextInt();
+
         System.out.println(T.solution(n, k));
     }
 }
