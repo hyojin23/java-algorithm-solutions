@@ -3,19 +3,19 @@ package Section6_Sorting_and_Searching.Music_Video;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class Main {
+public class Main_7th {
 
-    public int videoCnt(int mid, int[] arr) {
+    public int recordingCnt(int videoTime, int[] arr) {
 
         int cnt = 1;
         int sum = 0;
         for (int x : arr) {
-            if (mid >= sum + x) {
-                sum += x;
+            if (sum + x > videoTime) {
+                cnt++;
+                sum = x;
             }
             else {
-                sum = x;
-                cnt++;
+                sum += x;
             }
         }
         return cnt;
@@ -23,17 +23,17 @@ public class Main {
 
     public int solution(int n, int m, int[] arr) {
 
-        int lt = arr[n - 1];
+        int lt = Arrays.stream(arr).max().getAsInt();
         int rt = Arrays.stream(arr).sum();
         int answer = 0;
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
-            if (videoCnt(mid, arr) > m) {
-                lt = mid + 1;
-            }
-            else if (videoCnt(mid, arr) <= m) {
-                answer = mid;
+            if (recordingCnt(mid, arr) <= m) {
                 rt = mid - 1;
+                answer = mid;
+            }
+            else {
+                lt = mid + 1;
             }
         }
         return answer;
@@ -42,7 +42,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();

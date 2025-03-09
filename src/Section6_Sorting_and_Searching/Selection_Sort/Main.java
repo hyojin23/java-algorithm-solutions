@@ -1,6 +1,7 @@
 package Section6_Sorting_and_Searching.Selection_Sort;
 
 import java.util.Scanner;
+
 public class Main {
 
     public int[] solution(int n, int[] arr) {
