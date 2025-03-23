@@ -5,20 +5,12 @@ import java.util.LinkedList;
 
 class Node {
 
-    int data;
     Node lt, rt;
+    int data;
 
     Node(int val) {
         data = val;
-        lt = null;
-        rt = null;
     }
-
-    @Override
-    public String toString() {
-        return "" + data;
-    }
-
 }
 
 public class Main {
@@ -30,24 +22,23 @@ public class Main {
         Queue<Node> q = new LinkedList<>();
         q.offer(root);
         int L = 0;
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int len = q.size();
-            System.out.print(L + " : ");
+//            System.out.print(L + " : ");
             for (int i = 0; i < len; i++) {
-                Node cur = q.poll();
-                System.out.print(cur.data + " ");
-                if (cur.lt != null) {
-                    q.offer(cur.lt);
+                Node node = q.poll();
+                System.out.print(node.data + " ");
+                if (node.lt != null) {
+                    q.offer(node.lt);
                 }
-                if (cur.rt != null) {
-                    q.offer(cur.rt);
+                if (node.rt != null) {
+                    q.offer(node.rt);
                 }
             }
-            System.out.println();
+//            System.out.println();
             L++;
         }
     }
-
 
     public static void main(String[] args) {
 
@@ -57,9 +48,8 @@ public class Main {
         tree.root.rt = new Node(3);
         tree.root.lt.lt = new Node(4);
         tree.root.lt.rt = new Node(5);
-        tree.root.rt.lt = new Node (6);
+        tree.root.rt.lt = new Node(6);
         tree.root.rt.rt = new Node(7);
-
         tree.BFS(tree.root);
     }
 }

@@ -2,8 +2,8 @@ package Section7_Recursive_Tree_Graph_DFS_BFS_Basic.Shortest_Path_To_Tree_End_No
 
 class Node {
 
-    int data;
     Node lt, rt;
+    int data;
 
     Node(int val) {
         data = val;
@@ -15,16 +15,14 @@ class Node {
 public class Main {
 
     Node root;
-    static int answer = Integer.MAX_VALUE;
 
-    public void DFS(Node root, int L) {
+    public int DFS(Node node, int L) {
 
-        if (root.lt == null && root.rt == null) {
-            answer = Math.min(answer, L);
+        if (node.lt == null && node.rt == null) {
+            return L;
         }
         else {
-            DFS(root.lt, L + 1);
-            DFS(root.rt, L + 1);
+            return Math.min(DFS(node.lt, L + 1), DFS(node.rt, L + 1));
         }
     }
 
@@ -36,8 +34,6 @@ public class Main {
         tree.root.rt = new Node(3);
         tree.root.lt.lt = new Node(4);
         tree.root.lt.rt = new Node(5);
-
-        tree.DFS(tree.root, 0);
-        System.out.println(answer);
+        System.out.println(tree.DFS(tree.root, 0));
     }
 }

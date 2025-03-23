@@ -4,28 +4,28 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-public class Main {
+public class Main_7th {
+
+    int[] ch = new int[10001];
+    int[] jump = {1, -1, 5};
 
     public int BFS(int s, int e) {
 
-        int[] jumps = {1, -1, 5};
-        int[] ch = new int[10001];
         Queue<Integer> q = new LinkedList<>();
         q.offer(s);
-        ch[s] = 1;
         int L = 0;
         while (!q.isEmpty()) {
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                int pos = q.poll();
-                for (int j = 0; j < jumps.length; j++) {
-                    int np = pos + jumps[j];
-                    if (np == e) {
+                int cur = q.poll();
+                for (int j = 0; j <jump.length; j++) {
+                    int ns = cur + jump[j];
+                    if (ns == e) {
                         return L + 1;
                     }
-                    if (np > 0 && ch[np] == 0) {
-                        q.offer(np);
-                        ch[np] = 1;
+                    if (ns >= 1 && ns <= 10000 && ch[ns] == 0) {
+                        q.offer(ns);
+                        ch[ns] = 1;
                     }
                 }
             }
@@ -34,10 +34,9 @@ public class Main {
         return L;
     }
 
-
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int s = sc.nextInt();
