@@ -4,23 +4,23 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class Main_7th {
 
-    static List<List<Integer>> graph;
     static int n, m, answer;
+    static List<List<Integer>> graph;
     static int[] ch;
-    List<Integer> list = new ArrayList<>();
 
     public void DFS(int v) {
+
         if (v == n) {
             answer++;
         }
         else {
-            for (int toV : graph.get(v)) {
-                if (ch[toV] == 0) {
-                    ch[toV] = 1;
-                    DFS(toV);
-                    ch[toV] = 0;
+            for (int x : graph.get(v)) {
+                if (ch[x] == 0) {
+                    ch[x] = 1;
+                    DFS(x);
+                    ch[x] = 0;
                 }
             }
         }
@@ -28,7 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
@@ -39,11 +39,13 @@ public class Main {
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
         }
+
         for (int i = 0; i < m; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
             graph.get(a).add(b);
         }
+
         ch[1] = 1;
         T.DFS(1);
         System.out.println(answer);

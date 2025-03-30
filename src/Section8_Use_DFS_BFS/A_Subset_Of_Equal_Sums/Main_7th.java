@@ -2,16 +2,16 @@ package Section8_Use_DFS_BFS.A_Subset_Of_Equal_Sums;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     static int n, total;
     static int[] arr;
     static String answer = "NO";
-    boolean isAnswer = false;
+    static boolean findAnswer = false;
 
     public void DFS(int sum, int L) {
 
-        if (isAnswer) {
+        if (findAnswer) {
             return;
         }
 
@@ -22,7 +22,7 @@ public class Main {
         if (L == n) {
             if (total - sum == sum) {
                 answer = "YES";
-                isAnswer = true;
+                findAnswer = true;
             }
         }
         else {
@@ -34,15 +34,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         arr = new int[n];
-        for (int i= 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
             total += arr[i];
         }
+
         T.DFS(0, 0);
         System.out.println(answer);
     }
