@@ -2,12 +2,12 @@ package Section8_Use_DFS_BFS.Find_Permutations;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     static int n, m;
     static int[] arr, ch, pm;
-
     public void DFS(int L) {
+
         if (L == m) {
             for (int x : pm) {
                 System.out.print(x + " ");
@@ -17,8 +17,8 @@ public class Main {
         else {
             for (int i = 0; i < n; i++) {
                 if (ch[i] == 0) {
-                    pm[L] = arr[i];
                     ch[i] = 1;
+                    pm[L] = arr[i];
                     DFS(L + 1);
                     ch[i] = 0;
                 }
@@ -26,9 +26,10 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
@@ -36,6 +37,7 @@ public class Main {
         arr = new int[n];
         ch = new int[n];
         pm = new int[m];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }

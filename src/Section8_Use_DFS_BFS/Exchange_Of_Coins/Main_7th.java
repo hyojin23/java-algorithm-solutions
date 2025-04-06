@@ -4,18 +4,18 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Main {
+public class Main_7th {
 
     static int n, m, answer = Integer.MAX_VALUE;
     static Integer[] coins;
 
     public void DFS(int L, int sum) {
 
-        if (sum > m) {
+        if (L >= answer) {
             return;
         }
 
-        if (L > answer) {
+        if (sum > m) {
             return;
         }
 
@@ -23,15 +23,16 @@ public class Main {
             answer = L;
         }
         else {
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < coins.length; i++) {
                 DFS(L + 1, sum + coins[i]);
             }
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();

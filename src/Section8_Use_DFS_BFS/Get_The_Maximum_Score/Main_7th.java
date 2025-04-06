@@ -4,49 +4,50 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-class Problem {
-
+class Problem_7th {
     int s, t;
 
-    Problem(int s, int t) {
+    Problem_7th(int s, int t) {
         this.s = s;
         this.t = t;
     }
 }
 
-public class Main {
+public class Main_7th {
 
-    static int n, m, answer = Integer.MIN_VALUE;
-    static List<Problem> list;
+    static int n, m;
+    static List<Problem_7th> list;
+    static int answer = Integer.MIN_VALUE;
 
-    public void DFS(int totScore, int totTime, int L) {
+    public void DFS(int L, int totalScore, int totalTime) {
 
-        if (totTime > m) {
+        if (totalTime > m) {
             return;
         }
 
         if (L == n) {
-            answer = Math.max(answer, totScore);
+            answer = Math.max(answer, totalScore);
         }
         else {
-            DFS(totScore + list.get(L).s, totTime + list.get(L).t, L + 1);
-            DFS(totScore, totTime, L + 1);
+            DFS(L + 1, totalScore + list.get(L).s, totalTime + list.get(L).t);
+            DFS(L + 1, totalScore, totalTime);
         }
     }
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
-        list = new ArrayList<>();
 
         n = sc.nextInt();
         m = sc.nextInt();
+        list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int s = sc.nextInt();
             int t = sc.nextInt();
-            list.add(new Problem(s, t));
+            list.add(new Problem_7th(s, t));
         }
+
         T.DFS(0, 0, 0);
         System.out.println(answer);
     }
