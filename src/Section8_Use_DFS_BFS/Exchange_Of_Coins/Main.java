@@ -15,7 +15,7 @@ public class Main {
             return;
         }
 
-        if (L > answer) {
+        if (L >= answer) {
             return;
         }
 

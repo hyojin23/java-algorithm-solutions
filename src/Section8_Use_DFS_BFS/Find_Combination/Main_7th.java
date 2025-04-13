@@ -2,7 +2,7 @@ package Section8_Use_DFS_BFS.Find_Combination;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
     static int n, m;
     static int[] combi;
@@ -23,14 +23,16 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
         m = sc.nextInt();
         combi = new int[m];
+
         T.DFS(0, 1);
     }
 }

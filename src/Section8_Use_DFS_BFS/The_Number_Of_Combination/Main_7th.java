@@ -2,33 +2,33 @@ package Section8_Use_DFS_BFS.The_Number_Of_Combination;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main_7th {
 
-    static int n, r;
     static int[][] arr;
 
-    public int combi(int n, int r) {
+    public int DFS(int n, int r) {
 
         if (arr[n][r] > 0) {
             return arr[n][r];
         }
 
         if (n == r || r == 0) {
-            return 1;
+            return arr[n][r] = 1;
         }
         else {
-            return arr[n][r] = combi(n - 1, r - 1) + combi(n - 1, r);
+            return arr[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r);
         }
     }
 
+
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
-        n = sc.nextInt();
-        r = sc.nextInt();
+        int n = sc.nextInt();
+        int r = sc.nextInt();
         arr = new int[n + 1][r + 1];
-        System.out.println(T.combi(n, r));
+        System.out.println(T.DFS(n, r));
     }
 }
