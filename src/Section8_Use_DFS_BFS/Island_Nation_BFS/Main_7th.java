@@ -4,38 +4,37 @@ import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
 
-class Island {
+class Point_7th {
 
     int x, y;
 
-    Island(int x, int y) {
+    Point_7th(int x, int y) {
         this.x = x;
         this.y = y;
     }
 }
 
-public class Main {
+public class Main_7th {
 
+    static int n, answer;
     static int[][] board;
-    static int n;
+    int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
+    int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
 
     public void BFS(int x, int y) {
-        Queue<Island> q = new LinkedList<>();
-        q.offer(new Island(x, y));
 
-        int[] dx = {-1, -1, 0, 1, 1, 1, 0, -1};
-        int[] dy = {0, 1, 1, 1, 0, -1, -1, -1};
-
+        Queue<Point_7th> q = new LinkedList<>();
+        q.offer(new Point_7th(x, y));
         while (!q.isEmpty()) {
             int len = q.size();
             for (int i = 0; i < len; i++) {
-                Island land = q.poll();
+                Point_7th cur = q.poll();
                 for (int j = 0; j < 8; j++) {
-                    int nx = land.x + dx[j];
-                    int ny = land.y + dy[j];
+                    int nx = cur.x + dx[j];
+                    int ny = cur.y + dy[j];
                     if (nx >= 0 && nx < n && ny >= 0 && ny < n && board[nx][ny] == 1) {
                         board[nx][ny] = 0;
-                        q.offer(new Island(nx, ny));
+                        q.offer(new Point_7th(nx, ny));
                     }
                 }
             }
@@ -44,7 +43,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         n = sc.nextInt();
@@ -54,13 +53,11 @@ public class Main {
                 board[i][j] = sc.nextInt();
             }
         }
-
-        int answer = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == 1) {
-                    board[i][j] = 0;
                     answer++;
+                    board[i][j] = 0;
                     T.BFS(i, j);
                 }
             }

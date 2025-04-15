@@ -17,22 +17,22 @@ class Point {
 public class Main {
 
     static List<Point> hsList, pzList;
-    static int n, m, answer = Integer.MAX_VALUE;
+    static int n, m;
     static int[] combi;
-    static int[][] city;
+    static int answer = Integer.MAX_VALUE;
 
     public void DFS(int L, int s) {
 
         if (L == m) {
-            int cityPzDis = 0;
+            int cityDis = 0;
             for (Point hs : hsList) {
-                int pzDis = Integer.MAX_VALUE;
-                for (int i = 0; i < m; i++) {
-                    pzDis = Math.min(Math.abs(hs.x - pzList.get(combi[i]).x) + Math.abs(hs.y - pzList.get(combi[i]).y), pzDis);
+                int hsDis = Integer.MAX_VALUE;
+                for (Point pz : pzList) {
+                    hsDis = Math.min(hsDis, Math.abs(hs.x - pz.x) + Math.abs(hs.y - pz.y));
                 }
-                cityPzDis += pzDis;
+                cityDis += hsDis;
             }
-            answer = Math.min(cityPzDis, answer);
+            answer = Math.min(answer, cityDis);
         }
         else {
             for (int i = s; i < pzList.size(); i++) {
@@ -50,18 +50,17 @@ public class Main {
 
         n = sc.nextInt();
         m = sc.nextInt();
-        city = new int[n][n];
         combi = new int[m];
         hsList = new ArrayList<>();
         pzList = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                city[i][j] = sc.nextInt();
-                if (city[i][j] == 1) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                int a = sc.nextInt();
+                if (a == 1) {
                     hsList.add(new Point(i, j));
                 }
-                if (city[i][j] == 2) {
+                if (a == 2) {
                     pzList.add(new Point(i, j));
                 }
             }
