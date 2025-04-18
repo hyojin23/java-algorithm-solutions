@@ -27,8 +27,8 @@ public class Main {
             int cityDis = 0;
             for (Point hs : hsList) {
                 int hsDis = Integer.MAX_VALUE;
-                for (Point pz : pzList) {
-                    hsDis = Math.min(hsDis, Math.abs(hs.x - pz.x) + Math.abs(hs.y - pz.y));
+                for (int x : combi) {
+                    hsDis = Math.min(hsDis, Math.abs(hs.x - pzList.get(x).x) + Math.abs(hs.y - pzList.get(x).y));
                 }
                 cityDis += hsDis;
             }

@@ -3,36 +3,37 @@ package Section9_Greedy_Algorithm.Schedule_Of_Maximum_Income;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.PriorityQueue;
+import java.util.Collections;
 
-class Schedule implements Comparable<Schedule> {
+class Schedule_7th implements Comparable<Schedule_7th> {
 
     int m, d;
 
-    Schedule(int m, int d) {
+    Schedule_7th(int m, int d) {
         this.m = m;
         this.d = d;
     }
 
     @Override
-    public int compareTo(Schedule ob) {
+    public int compareTo(Schedule_7th ob) {
         return ob.d - this.d;
     }
 }
 
-public class Main {
+public class Main_7th {
 
-    public int solution(int n, int maxDay, List<Schedule> list) {
+    public int solution(int n, List<Schedule_7th> list) {
 
         Collections.sort(list);
+        int lastDay = list.get(0).d;
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         int answer = 0;
 
         int j = 0;
-        for (int i = maxDay; i >= 1; i--) {
-            for ( ; j < n ; j++) {
-                if (list.get(j).d >= i) {
+        for (int i = lastDay; i >= 1; i--) {
+            for (; j < n; j++) {
+                if (list.get(j).d == i) {
                     pq.offer(list.get(j).m);
                 }
                 else {
@@ -49,18 +50,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Main T = new Main();
+        Main_7th T = new Main_7th();
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-        List<Schedule> list = new ArrayList<>();
-        int maxDay = Integer.MIN_VALUE;
+        List<Schedule_7th> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             int m = sc.nextInt();
             int d = sc.nextInt();
-            maxDay = Math.max(maxDay, d);
-            list.add(new Schedule(m, d));
+            list.add(new Schedule_7th(m, d));
         }
-        System.out.println(T.solution(n, maxDay, list));
+        System.out.println(T.solution(n, list));
     }
 }
