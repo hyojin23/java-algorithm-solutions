@@ -24,22 +24,23 @@ class Edge implements Comparable<Edge> {
 public class Main {
 
     static List<List<Edge>> graph;
-    static int[] dis, ch;
+    static int[] dis;
 
     public void solution(int n, int m) {
 
         Arrays.fill(dis, Integer.MAX_VALUE);
+        dis[1] = 0;
         PriorityQueue<Edge> pq = new PriorityQueue<>();
         pq.offer(new Edge(1, 0));
         while (!pq.isEmpty()) {
             Edge edge = pq.poll();
-            if (edge.cost < dis[edge.vex]) {
-                dis[edge.vex] = edge.cost;
-                ch[edge.vex] = 1;
+            if (edge.cost > dis[edge.vex]) {
+                continue;
             }
             for (Edge eg : graph.get(edge.vex)) {
-                if (ch[eg.vex] == 0) {
-                    int nc = dis[edge.vex] + eg.cost;
+                int nc = dis[edge.vex] + eg.cost;
+                if (nc < dis[eg.vex]) {
+                    dis[eg.vex] = nc;
                     pq.offer(new Edge(eg.vex, nc));
                 }
             }
@@ -54,7 +55,6 @@ public class Main {
         int n = sc.nextInt();
         int m = sc.nextInt();
         dis = new int[n + 1];
-        ch = new int[n + 1];
         graph = new ArrayList<>();
         for (int i = 0; i <= n; i++) {
             graph.add(new ArrayList<>());
