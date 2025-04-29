@@ -6,25 +6,32 @@ import java.util.Arrays;
 public class Main {
 
     static int[][] S;
-    static int N;
+    static int N, answer = Integer.MAX_VALUE;
     static int[] combi;
     static char[] people;
 
     public void combi(int L, int s) {
 
         if (L == N / 2) {
+            int sScore = 0;
+            int lScore = 0;
+
             Arrays.fill(people, 'L');
             for (int x : combi) {
-                System.out.print(x + " ");
                 people[x] = 'S';
             }
-            System.out.println(Arrays.toString(people));
-            System.out.println();
             for (int i = 0; i < N; i++) {
-                if (people[i] == 'S') {
+                for (int j = 0; j < N; j++) {
+                    if (people[i] == 'S' && people[j] == 'S') {
+                        sScore += S[i][j];
+                    }
+                    if (people[i] == 'L' && people[j] == 'L') {
+                        lScore += S[i][j];
+                    }
 
                 }
             }
+            answer = Math.min(answer, Math.abs(sScore - lScore));
         }
         else {
             for (int i = s; i < N; i++) {
@@ -50,6 +57,6 @@ public class Main {
             }
         }
         T.combi(0, 0);
-
+        System.out.println(answer);
     }
 }
