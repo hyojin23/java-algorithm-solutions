@@ -28,21 +28,18 @@ public class Main {
         int[] dz = {0, 0, 0, 0, 1, -1};
 
         Queue<Point> q = new LinkedList<>();
+        building[z][x][y] = '#';
         q.offer(new Point(x, y, z));
         while (!q.isEmpty()) {
             Point p = q.poll();
-            System.out.println("답 >> " + building[p.z][p.x][p.y]);
             if (building[p.z][p.x][p.y] == 'E') {
                 return "Escaped in " + time[p.z][p.x][p.y] + " minute(s).";
             }
-            System.out.println(p.x + " " + p.y + " " + p.z);
             for (int i = 0; i < 6; i++) {
                 int nx = p.x + dx[i];
                 int ny = p.y + dy[i];
                 int nz = p.z + dz[i];
-                System.out.println("ff >> " + nx + " " + ny + " " + nz);
                 if (nx >= 0 && nx < R && ny >= 0 && ny < C && nz >= 0 && nz < L && building[nz][nx][ny] != '#') {
-                    System.out.println(building[nz][nx][ny]);
                     if (building[nz][nx][ny] == '.') {
                         building[nz][nx][ny] = '#';
                     }
@@ -59,31 +56,34 @@ public class Main {
         Main T = new Main();
         Scanner sc = new Scanner(System.in);
 
-        L = sc.nextInt();
-        R = sc.nextInt();
-        C = sc.nextInt();
-        sc.nextLine();
-        building = new char[L][R][C];
-        time = new int[L][R][C];
-        for (int i = 0; i < L; i++) {
-            for (int j = 0; j < R; j++) {
-                String str = sc.nextLine();
-                for (int k = 0; k < C; k++) {
-                    building[i][j][k] = str.charAt(k);
-                }
-            }
+        while (true) {
+            L = sc.nextInt();
+            R = sc.nextInt();
+            C = sc.nextInt();
             sc.nextLine();
+            if (L == 0 && R == 0 && C == 0) {
+                break;
+            }
+            building = new char[L][R][C];
+            time = new int[L][R][C];
+            int startX = 0;
+            int startY = 0;
+            int startZ = 0;
+            for (int i = 0; i < L; i++) {
+                for (int j = 0; j < R; j++) {
+                    String str = sc.nextLine();
+                    for (int k = 0; k < C; k++) {
+                        building[i][j][k] = str.charAt(k);
+                        if (building[i][j][k] == 'S') {
+                            startZ = i;
+                            startX = j;
+                            startY = k;
+                        }
+                    }
+                }
+                sc.nextLine();
+            }
+            System.out.println(T.BFS(startX, startY, startZ));
         }
-
-//        for (int i = 0; i < L; i++) {
-//            for (int j = 0; j < R; j++) {
-//                for (int k = 0; k < C; k++) {
-//                    System.out.print(building[i][j][k] + " ");
-//                }
-//                System.out.println();
-//            }
-//            System.out.println();
-//        }
-        System.out.println(T.BFS(0, 0, 0));
     }
 }
