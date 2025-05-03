@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int N, M, H, answer = -1;
+    static int N, M, H, answer = Integer.MAX_VALUE;
     static int[][] ladder;
-    boolean solved = false;
+    static boolean solved = false;
 
     public boolean chkLadder() {
         for (int i = 1; i <= N; i++) {
@@ -28,16 +28,12 @@ public class Main {
 
     public void DFS(int cnt, int row) {
 
-        if (solved) {
-            return;
-        }
-
         if (cnt > 3) {
             return;
         }
 
         if (chkLadder()) {
-            answer = cnt;
+            answer = Math.min(answer, cnt);
             solved = true;
         }
 //        else {
@@ -73,10 +69,15 @@ public class Main {
         T.DFS(0, 1);
 //        for (int i = 1; i <= H; i++) {
 //            for (int j = 1; j <= N; j++) {
-//                System.out.print(ladder[i][j] + "");
+//                System.out.print(ladder[i][j] + " ");
 //            }
 //            System.out.println();
 //        }
-        System.out.println(answer);
+        if (solved) {
+            System.out.println(answer);
+        }
+        else {
+            System.out.println(-1);
+        }
     }
 }

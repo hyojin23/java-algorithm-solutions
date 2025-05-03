@@ -1,3 +1,5 @@
+package Recommended_Problems.DFS_BFS.BOJ16956;
+
 import java.util.Scanner;
 import java.util.Queue;
 import java.util.LinkedList;
