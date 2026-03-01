@@ -1,45 +1,58 @@
 package BOJ.BOJ1027;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    public int solution(int N, int[] arr) {
+    public static int solution(int N, int[] h) {
 
-        int answer = Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
         for (int i = 0; i < N; i++) {
-            int cnt = 0;
-            double min = 0;
-            for (int j = i - 1; j >= 0; j--) {
-                double slope = (double) (arr[i] - arr[j]) / (i - j);
-                if (j == i - 1 || slope < min) {
-                    cnt++;
-                    min = slope;
-                }
-            }
+            long maxDy = Long.MIN_VALUE;
+            long maxDx = 1;
+            int visibleCnt = 0;
             for (int j = i + 1; j < N; j++) {
-                double slope = (double) (arr[i] - arr[j]) / (i - j);
-                if (j == i + 1 || slope > min) {
-                    cnt++;
-                    min = slope;
+                long dy1 = h[j] - h[i];
+                long dx1 = j - i;
+
+                if (maxDy == Long.MIN_VALUE || maxDy * dx1 < maxDx * dy1) {
+                    visibleCnt++;
+                    maxDx = dx1;
+                    maxDy = dy1;
                 }
             }
-            answer = Math.max(answer, cnt);
+
+            maxDy = Long.MIN_VALUE;
+            maxDx = 1;
+            for (int j = i - 1; j >= 0; j--) {
+                long dy1 = h[j] - h[i];
+                long dx1 = j - i;
+
+                if (maxDy == Long.MIN_VALUE || maxDy * dx1 > maxDx * dy1) {
+                    visibleCnt++;
+                    maxDx = dx1;
+                    maxDy = dy1;
+                }
+            }
+            max = Math.max(max, visibleCnt);
         }
-        return answer;
+        return max;
     }
 
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
-
-        int N = sc.nextInt();
-        int[] arr = new int[N];
+        int[] h = new int[N];
         for (int i = 0; i < N; i++) {
-            arr[i] = sc.nextInt();
+            h[i] = Integer.parseInt(st.nextToken());
         }
-        System.out.println(T.solution(N, arr));
+
+        System.out.println(solution(N, h));
     }
 }

@@ -1,8 +1,11 @@
 package BOJ.BOJ12865;
 
-import java.util.Scanner;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 class Item {
 
@@ -16,30 +19,37 @@ class Item {
 
 public class Main {
 
-    public int solution(int N, int K, List<Item> list) {
-        int[] bag = new int[K + 1];
-        for (Item item : list) {
+    public static int solution(int K, List<Item> items) {
+
+        int[] dp = new int[K + 1];
+
+        for (Item item : items) {
             for (int i = K; i >= item.w; i--) {
-                bag[i] = Math.max(bag[i], bag[i - item.w] + item.v);
+                dp[i] = Math.max(dp[i], dp[i - item.w] + item.v);
             }
         }
-        return bag[K];
+
+        return dp[K];
     }
 
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        List<Item> items = new ArrayList<>();
 
-        int N = sc.nextInt();
-        int K = sc.nextInt();
-        List<Item> list = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            int W = sc.nextInt();
-            int V = sc.nextInt();
-            list.add(new Item(W, V));
+            st = new StringTokenizer(br.readLine());
+
+            int w = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+
+            items.add(new Item(w, v));
         }
-        System.out.println(T.solution(N, K, list));
+
+        System.out.println(solution(K, items));
     }
 }
