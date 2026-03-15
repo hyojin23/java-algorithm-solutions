@@ -1,54 +1,42 @@
 package BOJ.BOJ14501;
 
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-
-class Counseling {
-
-    int d, t, p;
-
-    Counseling(int d, int t, int p) {
-        this.d = d;
-        this.t = t;
-        this.p = p;
-    }
-}
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    static int N, answer;
-    static List<Counseling> list;
-    static boolean[] visited;
+    public static int solution(int N, int[] T, int[] P) {
 
-    public void DFS(int day, int sum) {
+        int[] dp = new int[N + 6];
 
-        if (day >= N) {
-            answer = Math.max(answer, sum);
-            return;
+        for (int i = N; i >= 1; i--) {
+            if (i + T[i] <= N + 1) {
+                dp[i] = Math.max(dp[i + 1], dp[i + T[i]] + P[i]);
+            }
+            else {
+                dp[i] = dp[i + 1];
+            }
         }
-        if (day + list.get(day).t <= N) {
-           DFS(day + list.get(day).t, sum + list.get(day).p);
-        }
-        DFS(day + 1, sum);
+
+        return dp[1];
     }
 
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        int[] T = new int[N + 1];
+        int[] P = new int[N + 1];
 
-        N = sc.nextInt();
-        list = new ArrayList<>();
-        visited = new boolean[N];
-        for (int i = 0; i < N; i++) {
-            int t = sc.nextInt();
-            int p = sc.nextInt();
-            int day = i + 1;
-            list.add(new Counseling(day, t, p));
+        for (int i = 1; i <= N; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            T[i] = Integer.parseInt(st.nextToken());
+            P[i] = Integer.parseInt(st.nextToken());
         }
-        T.DFS(0, 0);
-        System.out.println(answer);
+
+        System.out.println(solution(N, T, P));
     }
 }

@@ -1,35 +1,34 @@
 package BOJ.BOJ1697;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.Queue;
 import java.util.LinkedList;
 
 public class Main {
 
-    static int[] ch, dis;
+    public static int solution(int N, int K) {
 
-    public int BFS(int N, int K) {
-
-        int[] dx = {1, -1, 2};
+        boolean[] visited = new boolean[100_001];
+        int[] time = new int[100_001];
         Queue<Integer> q = new LinkedList<>();
-        ch[N] = 1;
+        visited[N] = true;
         q.offer(N);
+
         while (!q.isEmpty()) {
             int cur = q.poll();
-            for (int i = 0; i < 3; i++) {
-                int nx;
-                if (i == 2) {
-                    nx = cur * dx[i];
-                }
-                else {
-                    nx = cur + dx[i];
-                }
-                if (nx >= 0 && nx <= 100000 && ch[nx] == 0) {
-                    ch[nx] = 1;
-                    dis[nx] = dis[cur] + 1;
-                    if (nx == K) {
-                        return dis[nx];
-                    }
+
+            if (cur == K) {
+                return time[cur];
+            }
+
+            int[] next = {cur - 1, cur + 1, cur * 2};
+            for (int nx : next) {
+                if (nx >= 0 && nx <= 100_000 && !visited[nx]) {
+                    time[nx] = time[cur] + 1;
+                    visited[nx] = true;
                     q.offer(nx);
                 }
             }
@@ -38,15 +37,14 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int N = sc.nextInt();
-        int K = sc.nextInt();
-        ch = new int[100001];
-        dis = new int[100001];
-        System.out.println(T.BFS(N, K));
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        System.out.println(solution(N, K));
     }
 }

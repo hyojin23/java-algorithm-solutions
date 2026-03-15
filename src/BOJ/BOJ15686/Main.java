@@ -1,6 +1,8 @@
 package BOJ.BOJ15686;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -16,55 +18,60 @@ class Point {
 
 public class Main {
 
-    static int N, M, cityMinChDis = Integer.MAX_VALUE;
-    static List<Point> hsList;
-    static List<Point> chList;
+    static int N, M, answer = Integer.MAX_VALUE;
+    static List<Point> hsList, chcknList;
     static int[] combi;
 
-    public void combi(int L, int s) {
+    public static void combination(int s, int L) {
 
         if (L == M) {
-            int cityChDis = 0;
+            int cityCkDis = 0;
             for (Point hs : hsList) {
-                int chDis = Integer.MAX_VALUE;
-                for (int i : combi) {
-                    int dis = Math.abs(hs.x - chList.get(i).x) + Math.abs(hs.y - chList.get(i).y);
-                    chDis = Math.min(chDis, dis);
+                int ckDis = Integer.MAX_VALUE;
+                for (int i = 0; i < M; i++) {
+                    Point ck = chcknList.get(combi[i]);
+                    ckDis = Math.min(ckDis, Math.abs(hs.x - ck.x) + Math.abs(hs.y - ck.y));
                 }
-                cityChDis += chDis;
+                cityCkDis += ckDis;
             }
-            cityMinChDis = Math.min(cityMinChDis, cityChDis);
+            answer = Math.min(answer, cityCkDis);
         }
         else {
-            for (int i = s; i < chList.size(); i++) {
+            for (int i = s; i < chcknList.size(); i++) {
                 combi[L] = i;
-                combi(L + 1, i + 1);
+                combination(i + 1, L + 1);
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = sc.nextInt();
-        M = sc.nextInt();
-        combi = new int[M];
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+
+        int[][] city = new int[N][N];
+
         hsList = new ArrayList<>();
-        chList = new ArrayList<>();
+        chcknList = new ArrayList<>();
+        combi = new int[M];
+
         for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
-                int a = sc.nextInt();
-                if (a == 1) {
+                city[i][j] = Integer.parseInt(st.nextToken());
+                if (city[i][j] == 1) {
                     hsList.add(new Point(i, j));
                 }
-                if (a == 2) {
-                    chList.add(new Point(i, j));
+                else if (city[i][j] == 2) {
+                    chcknList.add(new Point(i, j));
                 }
             }
         }
-        T.combi(0, 0);
-        System.out.println(cityMinChDis);
+
+        combination(0, 0);
+        System.out.println(answer);
     }
 }
