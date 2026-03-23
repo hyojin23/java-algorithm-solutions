@@ -1,46 +1,48 @@
 package BOJ.BOJ17298;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.Stack;
 
 public class Main {
 
-    public void solution(int N, int[] arr) {
+    public static int[] solution(int N, int[] A) {
 
-        Stack<Integer> stack = new Stack<>();
-        StringBuilder sb = new StringBuilder();
         int[] answer = new int[N];
+        Stack<Integer> stack = new Stack<>();
+
         for (int i = 0; i < N; i++) {
-            while (!stack.isEmpty()) {
-                if (arr[i] > arr[stack.peek()]) {
-                    answer[stack.pop()] = arr[i];
-                }
-                else {
-                    break;
-                }
+            while (!stack.isEmpty() && A[stack.peek()] < A[i]) {
+                answer[stack.pop()] = A[i];
             }
-            stack.add(i);
+            stack.push(i);
         }
+
         while (!stack.isEmpty()) {
             answer[stack.pop()] = -1;
         }
-        for (int x : answer) {
-            sb.append(x + " ");
-        }
-        System.out.println(sb);
+
+        return answer;
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[] A = new int[N];
 
-        int N = sc.nextInt();
-        int[] arr = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            arr[i] = sc.nextInt();
+            A[i] = Integer.parseInt(st.nextToken());
         }
-        T.solution(N, arr);
+
+        StringBuilder sb = new StringBuilder();
+        for (int x : solution(N, A)) {
+            sb.append(x).append(" ");
+        }
+        System.out.println(sb);
     }
 }
