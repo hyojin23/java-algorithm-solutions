@@ -1,112 +1,105 @@
 package BOJ.BOJ2573;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ArrayList;
 
 class Point {
+    int x, y;
 
-    int x, y, h;
-
-    Point(int x, int y, int h) {
+    Point(int x, int y) {
         this.x = x;
         this.y = y;
-        this.h = h;
     }
 }
 
 public class Main {
-
     static int N, M;
-    static int[][] board, ch;
+    static int[][] board;
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
 
-    public int solution(Queue<Point> q) {
-
-        int L = 0;
-        while (!q.isEmpty()) {
-            ch = new int[N][M];
-            if (isDivided(board)) {
-                return L;
+    public static int solution() {
+        int year = 0;
+        while (true) {
+            int cnt = countIce();
+            if (cnt == 0) {
+                return 0;
             }
-            int len = q.size();
-            List<Point> list = new ArrayList<>();
-            for (int i = 0; i < len; i++) {
-                Point cur = q.poll();
-                for (int j = 0; j < 4; j++) {
-                    int nx = cur.x + dx[j];
-                    int ny = cur.y + dy[j];
-                    if (board[nx][ny] == 0) {
-                        cur.h--;
+            if (cnt >= 2) {
+                return year;
+            } //얼음 녹이기
+            int[][] zeroCnt = new int[N][M];
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    if (board[i][j] > 0) {
+                        for (int k = 0; k < 4; k++) {
+                            int nx = i + dx[k];
+                            int ny = j + dy[k];
+                            if (nx >= 0 && nx < N && ny >= 0 && ny < M && board[nx][ny] == 0) {
+                                zeroCnt[i][j]++;
+                            }
+                        }
                     }
                 }
-                if (cur.h > 0) {
-                    q.offer(cur);
-                    list.add(new Point(cur.x, cur.y, cur.h));
-                }
-                else {
-                    list.add(new Point(cur.x, cur.y, 0));
+            }
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    board[i][j] = Math.max(board[i][j] - zeroCnt[i][j], 0);
                 }
             }
-            for (Point p : list) {
-                board[p.x][p.y] = p.h;
-            }
-            L++;
+            year++;
         }
-        return 0;
     }
 
-    public boolean isDivided(int[][] board) {
-
+    public static int countIce() {
+        boolean[][] visited = new boolean[N][M];
         int cnt = 0;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] > 0 && ch[i][j] == 0) {
-                    ch[i][j] = 1;
-                    DFS(i, j);
-                    cnt++;
-                }
-                if (cnt >= 2) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public void DFS(int x, int y) {
-        for (int i = 0; i < 4; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (nx >= 0 && nx < N && ny >= 0 && ny < M && board[nx][ny] > 0 && ch[nx][ny] == 0) {
-                ch[nx][ny] = 1;
-                DFS(nx, ny);
-            }
-        }
-    }
-
-
-    public static void main(String[] args) {
-
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
-
-        N = sc.nextInt();
-        M = sc.nextInt();
-        board = new int[N][M];
-        ch = new int[N][M];
-        Queue<Point> q = new LinkedList<>();
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                board[i][j] = sc.nextInt();
-                if (board[i][j] > 0) {
-                    q.add(new Point(i, j, board[i][j]));
+                if (!visited[i][j] && board[i][j] > 0) {
+                    cnt++;
+                    bfs(i, j, visited);
                 }
             }
         }
-        System.out.println(T.solution(q));
+        return cnt;
+    }
+
+    public static void bfs(int x, int y, boolean[][] visited) {
+        visited[x][y] = true;
+        Queue<Point> q = new LinkedList<>();
+        q.offer(new Point(x, y));
+        while (!q.isEmpty()) {
+            Point cur = q.poll();
+            for (int i = 0; i < 4; i++) {
+                int nx = cur.x + dx[i];
+                int ny = cur.y + dy[i];
+                if (nx >= 0 && nx < N && ny >= 0 && ny < M && board[nx][ny] > 0) {
+                    if (!visited[nx][ny]) {
+                        visited[nx][ny] = true;
+                        q.offer(new Point(nx, ny));
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        board = new int[N][M];
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < M; j++) {
+                board[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+        System.out.println(solution());
     }
 }

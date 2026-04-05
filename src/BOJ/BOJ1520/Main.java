@@ -1,52 +1,61 @@
 package BOJ.BOJ1520;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+import java.util.Arrays;
 
 public class Main {
-
-    static int M, N, cnt;
-    static int[][] board, dp;
+    static int M, N;
+    static int[][] board;
     static int[] dx = {-1, 0, 1, 0};
     static int[] dy = {0, 1, 0, -1};
+    static int[][] dp;
 
-    public int DFS(int x, int y) {
-
-        if (x == M - 1 && y == N - 1) {
-            return 1;
-        }
+    public static int dfs(int x, int y) {
 
         if (dp[x][y] != -1) {
             return dp[x][y];
         }
+
+        dp[x][y] = 0;
+
+        if (x == M - 1 && y == N - 1) {
+            return dp[x][y] = 1;
+        }
         else {
-            dp[x][y] = 0;
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
                 if (nx >= 0 && nx < M && ny >= 0 && ny < N && board[nx][ny] < board[x][y]) {
-                    dp[x][y] += DFS(nx, ny);
+                    dp[x][y] += dfs(nx, ny);
                 }
             }
         }
+
         return dp[x][y];
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
-
-        M = sc.nextInt();
-        N = sc.nextInt();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
         board = new int[M][N];
-        dp = new int[M][N];
         for (int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
-                board[i][j] = sc.nextInt();
-                dp[i][j] = -1;
+                board[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-        T.DFS(0, 0);
-        System.out.println(dp[0][0]);
+
+        dp = new int[M][N];
+        for (int i = 0; i < M; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+
+        System.out.println(dfs(0, 0));
     }
 }
