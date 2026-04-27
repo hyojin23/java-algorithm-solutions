@@ -1,75 +1,89 @@
 package BOJ.BOJ2206;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
 import java.util.Queue;
 import java.util.LinkedList;
 
 class Point {
 
-    int x, y, breakWallCnt, dis;
+    int x, y, dis;
+    boolean isWallBroken;
 
-    Point(int x, int y, int breakWallCnt, int dis) {
+    Point(int x, int y, int dis, boolean isWallBroken) {
         this.x = x;
         this.y = y;
-        this.breakWallCnt = breakWallCnt;
         this.dis = dis;
+        this.isWallBroken = isWallBroken;
     }
 }
 
 public class Main {
 
+    static int[][] board;
     static int N, M;
-    static int[][] board, dis;
-    static boolean[][][] visited;
 
-    public int BFS(int x, int y, int breakWallCnt, int dis) {
+    public static int bfs(int x, int y) {
 
-        Queue<Point> q = new LinkedList<>();
-        visited[x][y][breakWallCnt] = true;
-        q.offer(new Point(x, y, breakWallCnt, dis));
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
+        boolean[][][] visited = new boolean[N][M][2];
+        visited[0][0][0] = true;
+        Queue<Point> q = new LinkedList<>();
+        q.offer(new Point(x, y, 1, false));
+
         while (!q.isEmpty()) {
             Point cur = q.poll();
             if (cur.x == N - 1 && cur.y == M - 1) {
                 return cur.dis;
             }
+
             for (int i = 0; i < 4; i++) {
                 int nx = cur.x + dx[i];
                 int ny = cur.y + dy[i];
-                if (nx >= 0 && nx < N && ny >= 0 && ny < M && !visited[nx][ny][cur.breakWallCnt]) {
-                    if (board[nx][ny] == 0) {
-                        visited[nx][ny][cur.breakWallCnt] = true;
-                        q.offer(new Point(nx, ny, cur.breakWallCnt, cur.dis + 1));
+                if (nx < 0 || nx >= N || ny < 0 || ny >= M) {
+                    continue;
+                }
+
+                if (cur.isWallBroken && board[nx][ny] == 1) {
+                    continue;
+                }
+
+                if (board[nx][ny] == 0) {
+                    int wall = cur.isWallBroken ? 1 : 0;
+                    if (!visited[nx][ny][wall]) {
+                        visited[nx][ny][wall] = true;
+                        q.offer(new Point(nx, ny, cur.dis + 1, cur.isWallBroken));
                     }
-                    else if (cur.breakWallCnt == 0) {
-                        visited[nx][ny][cur.breakWallCnt] = true;
-                        int newCnt = cur.breakWallCnt + 1;
-                        q.offer(new Point(nx, ny, newCnt, cur.dis + 1));
-                    }
+                }
+                else if (!cur.isWallBroken && board[nx][ny] == 1 && !visited[nx][ny][1]){
+                    visited[nx][ny][1] = true;
+                    q.offer(new Point(nx, ny, cur.dis + 1, true));
                 }
             }
         }
+
         return -1;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Main T = new Main();
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        N = sc.nextInt();
-        M = sc.nextInt();
-        sc.nextLine();
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
         board = new int[N][M];
-        dis = new int[N][M];
-        visited = new boolean[N][M][2];
+
         for (int i = 0; i < N; i++) {
-            String str = sc.nextLine();
+            String str = br.readLine();
             for (int j = 0; j < M; j++) {
-                board[i][j] = str.charAt(j) - 48;
+                board[i][j] = str.charAt(j) - '0';
             }
         }
-        System.out.println(T.BFS(0, 0, 0, 1));
+
+        System.out.println(bfs(0, 0));
     }
 }
